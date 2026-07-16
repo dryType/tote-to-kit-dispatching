@@ -2,75 +2,100 @@
     "products": {
         "PROD_A": {
             "required_parts": {
-                "PART_01": 3,
-                "PART_02": 5,
-                "PART_03": 1,
-                "PART_04": 5,
-                "PART_05": 1
+                "PART_01": 0,
+                "PART_02": 0,
+                "PART_03": 0,
+                "PART_04": 0,
+                "PART_05": 0
             }
         },
         "PROD_B": {
             "required_parts": {
-                "PART_01": 3,
-                "PART_02": 5,
-                "PART_03": 1,
-                "PART_04": 5,
-                "PART_05": 1
+                "PART_01": 0,
+                "PART_02": 0,
+                "PART_03": 0,
+                "PART_04": 0,
+                "PART_05": 0
             }
         },
         "PROD_C": {
             "required_parts": {
-                "PART_01": 3,
-                "PART_02": 5,
-                "PART_03": 1,
-                "PART_04": 5,
-                "PART_05": 1
+                "PART_01": 0,
+                "PART_02": 0,
+                "PART_03": 0,
+                "PART_04": 0,
+                "PART_05": 0
             }
         },
         "PROD_D": {
             "required_parts": {
-                "PART_01": 3,
-                "PART_02": 5,
-                "PART_03": 1,
-                "PART_04": 5,
-                "PART_05": 1
+                "PART_01": 0,
+                "PART_02": 0,
+                "PART_03": 0,
+                "PART_04": 0,
+                "PART_05": 0
             }
         },
         "PROD_E": {
             "required_parts": {
-                "PART_01": 3,
-                "PART_02": 5,
-                "PART_03": 1,
-                "PART_04": 5,
-                "PART_05": 1
+                "PART_01": 0,
+                "PART_02": 0,
+                "PART_03": 0,
+                "PART_04": 0,
+                "PART_05": 0
             }
         }
     },
     "parts": {
         "PART_01": {
-            "lot_size": 10,
-            "v_carton": 150.0,
-            "v_part": 10.0
+            "lot_size": 0,
+            "v_carton": 0,
+            "v_part": 0
         },
         "PART_02": {
-            "lot_size": 20,
-            "v_carton": 300.0,
-            "v_part": 12.0
+            "lot_size": 0,
+            "v_carton": 0,
+            "v_part": 0
         },
         "PART_03": {
-            "lot_size": 5,
-            "v_carton": 80.0,
-            "v_part": 14.0
+            "lot_size": 0,
+            "v_carton": 0,
+            "v_part": 0
         },
         "PART_04": {
-            "lot_size": 30,
-            "v_carton": 450.0,
-            "v_part": 8.0
+            "lot_size": 0,
+            "v_carton": 0,
+            "v_part": 0
         },
-         "PART_05": {
-            "lot_size": 10,
-            "v_carton": 150.0,
-            "v_part": 10.0
+        "PART_05": {
+            "lot_size": 0,
+            "v_carton": 0,
+            "v_part": 0
+        },
+        "PART_06": {
+            "lot_size": 0,
+            "v_carton": 0,
+            "v_part": 0
+        },
+        "PART_07": {
+            "lot_size": 0,
+            "v_carton": 0,
+            "v_part": 0
+        },
+        "PART_08": {
+            "lot_size": 0,
+            "v_carton": 0,
+            "v_part": 0
+        },
+        "PART_09": {
+            "lot_size": 0,
+            "v_carton": 0,
+            "v_part": 0
+        },
+        "PART_10": {
+            "lot_size": 0,
+            "v_carton": 0,
+            "v_part": 0
         }
     }
 }
