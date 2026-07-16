@@ -1,0 +1,116 @@
+{
+    "storage_locations": [
+        {
+            "location_id": "rack_1_a",
+            "position_x": 0,
+            "position_y": 0
+        },
+        {
+            "location_id": "rack_1_b",
+            "position_x": 0,
+            "position_y": 10
+        },
+        {
+            "location_id": "rack_1_c",
+            "position_x": 0,
+            "position_y": 20
+        },
+        {
+            "location_id": "rack_2_a",
+            "position_x": 5,
+            "position_y": 0
+        },
+        {
+            "location_id": "rack_2_b",
+            "position_x": 5,
+            "position_y": 10
+        },
+        {
+            "location_id": "rack_2_c",
+            "position_x": 5,
+            "position_y": 20
+        },
+        {
+            "location_id": "rack_3_a",
+            "position_x": 10,
+            "position_y": 0
+        },
+        {
+            "location_id": "rack_3_b",
+            "position_x": 10,
+            "position_y": 10
+        },
+        {
+            "location_id": "rack_3_c",
+            "position_x": 10,
+            "position_y": 20
+        },
+        {
+            "location_id": "rack_4_a",
+            "position_x": 15,
+            "position_y": 0
+        },
+        {
+            "location_id": "rack_4_b",
+            "position_x": 15,
+            "position_y": 10
+        },
+        {
+            "location_id": "rack_4_c",
+            "position_x": 15,
+            "position_y": 20
+        },
+        {
+            "location_id": "rack_5_a",
+            "position_x": 20,
+            "position_y": 0
+        },
+        {
+            "location_id": "rack_5_b",
+            "position_x": 20,
+            "position_y": 10
+        },
+        {
+            "location_id": "rack_5_c",
+            "position_x": 20,
+            "position_y": 20
+        },
+        {
+            "location_id": "rack_6_a",
+            "position_x": 25,
+            "position_y": 0
+        },
+        {
+            "location_id": "rack_6_b",
+            "position_x": 25,
+            "position_y": 10
+        },
+        {
+            "location_id": "rack_6_c",
+            "position_x": 25,
+            "position_y": 20
+        }
+    ],
+    "kitting_stations": [
+        {
+            "station_id": "station_1",
+            "position_x": 2.5,
+            "position_y": 40
+        },
+        {
+            "station_id": "station_2",
+            "position_x": 9.5,
+            "position_y": 40
+        },
+        {
+            "station_id": "station_3",
+            "position_x": 15.5,
+            "position_y": 40
+        },
+        {
+            "station_id": "station_4",
+            "position_x": 22.5,
+            "position_y": 40
+        }
+    ]
+}
