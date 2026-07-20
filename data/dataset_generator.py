@@ -23,7 +23,7 @@ import math
 import random
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Tuple
+from typing import Any, Dict, Iterable, List, Set, Tuple
 
 BASE_DIR = Path(__file__).resolve().parent
 SCENARIO_MODULE_NAME = "scenario_custom"
