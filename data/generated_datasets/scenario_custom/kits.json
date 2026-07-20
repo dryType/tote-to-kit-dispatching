@@ -1,0 +1,970 @@
+{
+  "meta": {
+    "source_scenario": "C:\\Users\\an\\Desktop\\projects\\tote-to-kit-dispatching\\data\\scenario_custom.py",
+    "layout_path": "C:\\Users\\an\\Desktop\\projects\\tote-to-kit-dispatching\\data\\master_data\\layout.json",
+    "bom_path": "C:\\Users\\an\\Desktop\\projects\\tote-to-kit-dispatching\\data\\master_data\\boms\\bom_custom.json",
+    "prod_plan_path": "C:\\Users\\an\\Desktop\\projects\\tote-to-kit-dispatching\\data\\master_data\\prod_plans\\prod_plan_custom.json"
+  },
+  "kits": [
+    {
+      "kit_id": "KIT_0001_01",
+      "source_plan_index": 1,
+      "line": "LINE_01",
+      "start_time_sec": 0,
+      "product": "PROD_A",
+      "qty": 68,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "remaining_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0002_01",
+      "source_plan_index": 2,
+      "line": "LINE_02",
+      "start_time_sec": 0,
+      "product": "PROD_B",
+      "qty": 57,
+      "station_id": "station_2",
+      "station_position_x": 9.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "remaining_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0003_01",
+      "source_plan_index": 3,
+      "line": "LINE_03",
+      "start_time_sec": 0,
+      "product": "PROD_C",
+      "qty": 50,
+      "station_id": "station_3",
+      "station_position_x": 15.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "remaining_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0004_01",
+      "source_plan_index": 4,
+      "line": "LINE_04",
+      "start_time_sec": 0,
+      "product": "PROD_D",
+      "qty": 43,
+      "station_id": "station_4",
+      "station_position_x": 22.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "remaining_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0005_01",
+      "source_plan_index": 5,
+      "line": "LINE_05",
+      "start_time_sec": 0,
+      "product": "PROD_E",
+      "qty": 34,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "remaining_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0006_01",
+      "source_plan_index": 6,
+      "line": "LINE_01",
+      "start_time_sec": 2400,
+      "product": "PROD_B",
+      "qty": 57,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "remaining_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0007_01",
+      "source_plan_index": 7,
+      "line": "LINE_02",
+      "start_time_sec": 2400,
+      "product": "PROD_C",
+      "qty": 50,
+      "station_id": "station_2",
+      "station_position_x": 9.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "remaining_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0008_01",
+      "source_plan_index": 8,
+      "line": "LINE_03",
+      "start_time_sec": 2400,
+      "product": "PROD_D",
+      "qty": 43,
+      "station_id": "station_3",
+      "station_position_x": 15.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "remaining_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0009_01",
+      "source_plan_index": 9,
+      "line": "LINE_04",
+      "start_time_sec": 2400,
+      "product": "PROD_E",
+      "qty": 34,
+      "station_id": "station_4",
+      "station_position_x": 22.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "remaining_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0010_01",
+      "source_plan_index": 10,
+      "line": "LINE_05",
+      "start_time_sec": 2400,
+      "product": "PROD_A",
+      "qty": 68,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "remaining_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0011_01",
+      "source_plan_index": 11,
+      "line": "LINE_01",
+      "start_time_sec": 4800,
+      "product": "PROD_C",
+      "qty": 50,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "remaining_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0012_01",
+      "source_plan_index": 12,
+      "line": "LINE_02",
+      "start_time_sec": 4800,
+      "product": "PROD_D",
+      "qty": 43,
+      "station_id": "station_2",
+      "station_position_x": 9.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "remaining_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0013_01",
+      "source_plan_index": 13,
+      "line": "LINE_03",
+      "start_time_sec": 4800,
+      "product": "PROD_E",
+      "qty": 34,
+      "station_id": "station_3",
+      "station_position_x": 15.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "remaining_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0014_01",
+      "source_plan_index": 14,
+      "line": "LINE_04",
+      "start_time_sec": 4800,
+      "product": "PROD_A",
+      "qty": 68,
+      "station_id": "station_4",
+      "station_position_x": 22.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "remaining_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0015_01",
+      "source_plan_index": 15,
+      "line": "LINE_05",
+      "start_time_sec": 4800,
+      "product": "PROD_B",
+      "qty": 57,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "remaining_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0016_01",
+      "source_plan_index": 16,
+      "line": "LINE_01",
+      "start_time_sec": 7200,
+      "product": "PROD_D",
+      "qty": 43,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "remaining_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0017_01",
+      "source_plan_index": 17,
+      "line": "LINE_02",
+      "start_time_sec": 7200,
+      "product": "PROD_E",
+      "qty": 34,
+      "station_id": "station_2",
+      "station_position_x": 9.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "remaining_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0018_01",
+      "source_plan_index": 18,
+      "line": "LINE_03",
+      "start_time_sec": 7200,
+      "product": "PROD_A",
+      "qty": 68,
+      "station_id": "station_3",
+      "station_position_x": 15.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "remaining_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0019_01",
+      "source_plan_index": 19,
+      "line": "LINE_04",
+      "start_time_sec": 7200,
+      "product": "PROD_B",
+      "qty": 57,
+      "station_id": "station_4",
+      "station_position_x": 22.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "remaining_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0020_01",
+      "source_plan_index": 20,
+      "line": "LINE_05",
+      "start_time_sec": 7200,
+      "product": "PROD_C",
+      "qty": 50,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "remaining_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0021_01",
+      "source_plan_index": 21,
+      "line": "LINE_01",
+      "start_time_sec": 9600,
+      "product": "PROD_E",
+      "qty": 34,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "remaining_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0022_01",
+      "source_plan_index": 22,
+      "line": "LINE_02",
+      "start_time_sec": 9600,
+      "product": "PROD_A",
+      "qty": 68,
+      "station_id": "station_2",
+      "station_position_x": 9.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "remaining_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0023_01",
+      "source_plan_index": 23,
+      "line": "LINE_03",
+      "start_time_sec": 9600,
+      "product": "PROD_B",
+      "qty": 57,
+      "station_id": "station_3",
+      "station_position_x": 15.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "remaining_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0024_01",
+      "source_plan_index": 24,
+      "line": "LINE_04",
+      "start_time_sec": 9600,
+      "product": "PROD_C",
+      "qty": 50,
+      "station_id": "station_4",
+      "station_position_x": 22.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "remaining_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0025_01",
+      "source_plan_index": 25,
+      "line": "LINE_05",
+      "start_time_sec": 9600,
+      "product": "PROD_D",
+      "qty": 43,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "remaining_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0026_01",
+      "source_plan_index": 26,
+      "line": "LINE_01",
+      "start_time_sec": 12000,
+      "product": "PROD_A",
+      "qty": 68,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "remaining_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0027_01",
+      "source_plan_index": 27,
+      "line": "LINE_02",
+      "start_time_sec": 12000,
+      "product": "PROD_B",
+      "qty": 57,
+      "station_id": "station_2",
+      "station_position_x": 9.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "remaining_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0028_01",
+      "source_plan_index": 28,
+      "line": "LINE_03",
+      "start_time_sec": 12000,
+      "product": "PROD_C",
+      "qty": 50,
+      "station_id": "station_3",
+      "station_position_x": 15.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "remaining_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0029_01",
+      "source_plan_index": 29,
+      "line": "LINE_04",
+      "start_time_sec": 12000,
+      "product": "PROD_D",
+      "qty": 43,
+      "station_id": "station_4",
+      "station_position_x": 22.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "remaining_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    },
+    {
+      "kit_id": "KIT_0030_01",
+      "source_plan_index": 30,
+      "line": "LINE_05",
+      "start_time_sec": 12000,
+      "product": "PROD_E",
+      "qty": 34,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "remaining_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "status": "waiting",
+      "kit_dimensions_cm": {
+        "width": 120,
+        "depth": 120,
+        "layers": 3,
+        "layer_height_cm": 35
+      },
+      "kit_total_capacity_cm3": 1512000,
+      "remaining_volume_cm3": 1512000
+    }
+  ]
+}

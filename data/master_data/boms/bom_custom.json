@@ -74,53 +74,53 @@
     "parts": {
         "PART_01": {
             "lot_size": 10,
-            "v_part": 100,
-            "v_carton": 1000
+            "v_part": 800,
+            "v_carton": 8000
         },
         "PART_02": {
             "lot_size": 20,
-            "v_part": 50,
-            "v_carton": 1000
+            "v_part": 450,
+            "v_carton": 9000
         },
         "PART_03": {
             "lot_size": 50,
-            "v_part": 20,
-            "v_carton": 1000
+            "v_part": 240,
+            "v_carton": 12000
         },
         "PART_04": {
             "lot_size": 100,
-            "v_part": 10,
-            "v_carton": 1000
+            "v_part": 120,
+            "v_carton": 12000
         },
         "PART_05": {
             "lot_size": 15,
-            "v_part": 200,
-            "v_carton": 3000
+            "v_part": 600,
+            "v_carton": 9000
         },
         "PART_06": {
             "lot_size": 30,
-            "v_part": 80,
-            "v_carton": 2400
+            "v_part": 300,
+            "v_carton": 9000
         },
         "PART_07": {
             "lot_size": 5,
-            "v_part": 1000,
-            "v_carton": 5000
+            "v_part": 2000,
+            "v_carton": 10000
         },
         "PART_08": {
             "lot_size": 12,
-            "v_part": 300,
-            "v_carton": 3600
+            "v_part": 800,
+            "v_carton": 9600
         },
         "PART_09": {
             "lot_size": 40,
-            "v_part": 40,
-            "v_carton": 1600
+            "v_part": 250,
+            "v_carton": 10000
         },
         "PART_10": {
             "lot_size": 25,
-            "v_part": 150,
-            "v_carton": 3750
+            "v_part": 400,
+            "v_carton": 10000
         }
     }
 }

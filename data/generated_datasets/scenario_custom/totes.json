@@ -1,0 +1,7469 @@
+{
+  "meta": {
+    "source_scenario": "C:\\Users\\an\\Desktop\\projects\\tote-to-kit-dispatching\\data\\scenario_custom.py",
+    "layout_path": "C:\\Users\\an\\Desktop\\projects\\tote-to-kit-dispatching\\data\\master_data\\layout.json",
+    "bom_path": "C:\\Users\\an\\Desktop\\projects\\tote-to-kit-dispatching\\data\\master_data\\boms\\bom_custom.json",
+    "prod_plan_path": "C:\\Users\\an\\Desktop\\projects\\tote-to-kit-dispatching\\data\\master_data\\prod_plans\\prod_plan_custom.json",
+    "part_margin": 0.05,
+    "tote_single_part_ratio": 0.6,
+    "tote_mixed_part_ratio": 0.35,
+    "tote_residual_ratio": 0.05,
+    "tote_volume_cm3": 57600
+  },
+  "totes": [
+    {
+      "tote_id": "TOTE_0001",
+      "tote_type": "single",
+      "location_id": "rack_1_a",
+      "position_x": 0,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0002",
+      "tote_type": "single",
+      "location_id": "rack_1_b",
+      "position_x": 0,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0003",
+      "tote_type": "single",
+      "location_id": "rack_1_c",
+      "position_x": 0,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0004",
+      "tote_type": "single",
+      "location_id": "rack_2_a",
+      "position_x": 5,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0005",
+      "tote_type": "single",
+      "location_id": "rack_2_b",
+      "position_x": 5,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0006",
+      "tote_type": "single",
+      "location_id": "rack_2_c",
+      "position_x": 5,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0007",
+      "tote_type": "single",
+      "location_id": "rack_3_a",
+      "position_x": 10,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0008",
+      "tote_type": "single",
+      "location_id": "rack_3_b",
+      "position_x": 10,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0009",
+      "tote_type": "single",
+      "location_id": "rack_3_c",
+      "position_x": 10,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0010",
+      "tote_type": "single",
+      "location_id": "rack_4_a",
+      "position_x": 15,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0011",
+      "tote_type": "single",
+      "location_id": "rack_4_b",
+      "position_x": 15,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0012",
+      "tote_type": "single",
+      "location_id": "rack_4_c",
+      "position_x": 15,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0013",
+      "tote_type": "single",
+      "location_id": "rack_5_a",
+      "position_x": 20,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0014",
+      "tote_type": "single",
+      "location_id": "rack_5_b",
+      "position_x": 20,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0015",
+      "tote_type": "single",
+      "location_id": "rack_5_c",
+      "position_x": 20,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0016",
+      "tote_type": "single",
+      "location_id": "rack_6_a",
+      "position_x": 25,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0017",
+      "tote_type": "single",
+      "location_id": "rack_6_b",
+      "position_x": 25,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0018",
+      "tote_type": "single",
+      "location_id": "rack_6_c",
+      "position_x": 25,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0019",
+      "tote_type": "single",
+      "location_id": "rack_1_a",
+      "position_x": 0,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0020",
+      "tote_type": "single",
+      "location_id": "rack_1_b",
+      "position_x": 0,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0021",
+      "tote_type": "single",
+      "location_id": "rack_1_c",
+      "position_x": 0,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0022",
+      "tote_type": "single",
+      "location_id": "rack_2_a",
+      "position_x": 5,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0023",
+      "tote_type": "single",
+      "location_id": "rack_2_b",
+      "position_x": 5,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0024",
+      "tote_type": "single",
+      "location_id": "rack_2_c",
+      "position_x": 5,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0025",
+      "tote_type": "single",
+      "location_id": "rack_3_a",
+      "position_x": 10,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0026",
+      "tote_type": "single",
+      "location_id": "rack_3_b",
+      "position_x": 10,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0027",
+      "tote_type": "single",
+      "location_id": "rack_3_c",
+      "position_x": 10,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0028",
+      "tote_type": "single",
+      "location_id": "rack_4_a",
+      "position_x": 15,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0029",
+      "tote_type": "single",
+      "location_id": "rack_4_b",
+      "position_x": 15,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0030",
+      "tote_type": "single",
+      "location_id": "rack_4_c",
+      "position_x": 15,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0031",
+      "tote_type": "single",
+      "location_id": "rack_5_a",
+      "position_x": 20,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0032",
+      "tote_type": "single",
+      "location_id": "rack_5_b",
+      "position_x": 20,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0033",
+      "tote_type": "single",
+      "location_id": "rack_5_c",
+      "position_x": 20,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0034",
+      "tote_type": "single",
+      "location_id": "rack_6_a",
+      "position_x": 25,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0035",
+      "tote_type": "single",
+      "location_id": "rack_6_b",
+      "position_x": 25,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0036",
+      "tote_type": "single",
+      "location_id": "rack_6_c",
+      "position_x": 25,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0037",
+      "tote_type": "single",
+      "location_id": "rack_1_a",
+      "position_x": 0,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0038",
+      "tote_type": "single",
+      "location_id": "rack_1_b",
+      "position_x": 0,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 14,
+          "lot_size": 10,
+          "carton_count": 2,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 16000,
+          "dead_space_volume_cm3": 4800
+        }
+      ],
+      "used_volume_cm3": 16000,
+      "remaining_capacity_cm3": 41600
+    },
+    {
+      "tote_id": "TOTE_0039",
+      "tote_type": "single",
+      "location_id": "rack_1_c",
+      "position_x": 0,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0040",
+      "tote_type": "single",
+      "location_id": "rack_2_a",
+      "position_x": 5,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0041",
+      "tote_type": "single",
+      "location_id": "rack_2_b",
+      "position_x": 5,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0042",
+      "tote_type": "single",
+      "location_id": "rack_2_c",
+      "position_x": 5,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0043",
+      "tote_type": "single",
+      "location_id": "rack_3_a",
+      "position_x": 10,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0044",
+      "tote_type": "single",
+      "location_id": "rack_3_b",
+      "position_x": 10,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0045",
+      "tote_type": "single",
+      "location_id": "rack_3_c",
+      "position_x": 10,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0046",
+      "tote_type": "single",
+      "location_id": "rack_4_a",
+      "position_x": 15,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0047",
+      "tote_type": "single",
+      "location_id": "rack_4_b",
+      "position_x": 15,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0048",
+      "tote_type": "single",
+      "location_id": "rack_4_c",
+      "position_x": 15,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0049",
+      "tote_type": "single",
+      "location_id": "rack_5_a",
+      "position_x": 20,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0050",
+      "tote_type": "single",
+      "location_id": "rack_5_b",
+      "position_x": 20,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0051",
+      "tote_type": "single",
+      "location_id": "rack_5_c",
+      "position_x": 20,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0052",
+      "tote_type": "single",
+      "location_id": "rack_6_a",
+      "position_x": 25,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0053",
+      "tote_type": "single",
+      "location_id": "rack_6_b",
+      "position_x": 25,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0054",
+      "tote_type": "single",
+      "location_id": "rack_6_c",
+      "position_x": 25,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0055",
+      "tote_type": "single",
+      "location_id": "rack_1_a",
+      "position_x": 0,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0056",
+      "tote_type": "single",
+      "location_id": "rack_1_b",
+      "position_x": 0,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0057",
+      "tote_type": "single",
+      "location_id": "rack_1_c",
+      "position_x": 0,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0058",
+      "tote_type": "single",
+      "location_id": "rack_2_a",
+      "position_x": 5,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0059",
+      "tote_type": "single",
+      "location_id": "rack_2_b",
+      "position_x": 5,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0060",
+      "tote_type": "single",
+      "location_id": "rack_2_c",
+      "position_x": 5,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0061",
+      "tote_type": "single",
+      "location_id": "rack_3_a",
+      "position_x": 10,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0062",
+      "tote_type": "single",
+      "location_id": "rack_3_b",
+      "position_x": 10,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0063",
+      "tote_type": "single",
+      "location_id": "rack_3_c",
+      "position_x": 10,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0064",
+      "tote_type": "single",
+      "location_id": "rack_4_a",
+      "position_x": 15,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0065",
+      "tote_type": "single",
+      "location_id": "rack_4_b",
+      "position_x": 15,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0066",
+      "tote_type": "single",
+      "location_id": "rack_4_c",
+      "position_x": 15,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0067",
+      "tote_type": "single",
+      "location_id": "rack_5_a",
+      "position_x": 20,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0068",
+      "tote_type": "single",
+      "location_id": "rack_5_b",
+      "position_x": 20,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0069",
+      "tote_type": "single",
+      "location_id": "rack_5_c",
+      "position_x": 20,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0070",
+      "tote_type": "single",
+      "location_id": "rack_6_a",
+      "position_x": 25,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0071",
+      "tote_type": "single",
+      "location_id": "rack_6_b",
+      "position_x": 25,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0072",
+      "tote_type": "single",
+      "location_id": "rack_6_c",
+      "position_x": 25,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0073",
+      "tote_type": "single",
+      "location_id": "rack_1_a",
+      "position_x": 0,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0074",
+      "tote_type": "single",
+      "location_id": "rack_1_b",
+      "position_x": 0,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0075",
+      "tote_type": "single",
+      "location_id": "rack_1_c",
+      "position_x": 0,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0076",
+      "tote_type": "single",
+      "location_id": "rack_2_a",
+      "position_x": 5,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 60,
+          "lot_size": 20,
+          "carton_count": 3,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 27000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 27000,
+      "remaining_capacity_cm3": 30600
+    },
+    {
+      "tote_id": "TOTE_0077",
+      "tote_type": "single",
+      "location_id": "rack_2_b",
+      "position_x": 5,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0078",
+      "tote_type": "single",
+      "location_id": "rack_2_c",
+      "position_x": 5,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0079",
+      "tote_type": "single",
+      "location_id": "rack_3_a",
+      "position_x": 10,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0080",
+      "tote_type": "single",
+      "location_id": "rack_3_b",
+      "position_x": 10,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0081",
+      "tote_type": "single",
+      "location_id": "rack_3_c",
+      "position_x": 10,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0082",
+      "tote_type": "single",
+      "location_id": "rack_4_a",
+      "position_x": 15,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0083",
+      "tote_type": "single",
+      "location_id": "rack_4_b",
+      "position_x": 15,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0084",
+      "tote_type": "single",
+      "location_id": "rack_4_c",
+      "position_x": 15,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0085",
+      "tote_type": "single",
+      "location_id": "rack_5_a",
+      "position_x": 20,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0086",
+      "tote_type": "single",
+      "location_id": "rack_5_b",
+      "position_x": 20,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0087",
+      "tote_type": "single",
+      "location_id": "rack_5_c",
+      "position_x": 20,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0088",
+      "tote_type": "single",
+      "location_id": "rack_6_a",
+      "position_x": 25,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0089",
+      "tote_type": "single",
+      "location_id": "rack_6_b",
+      "position_x": 25,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0090",
+      "tote_type": "single",
+      "location_id": "rack_6_c",
+      "position_x": 25,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0091",
+      "tote_type": "single",
+      "location_id": "rack_1_a",
+      "position_x": 0,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0092",
+      "tote_type": "single",
+      "location_id": "rack_1_b",
+      "position_x": 0,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0093",
+      "tote_type": "single",
+      "location_id": "rack_1_c",
+      "position_x": 0,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0094",
+      "tote_type": "single",
+      "location_id": "rack_2_a",
+      "position_x": 5,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0095",
+      "tote_type": "single",
+      "location_id": "rack_2_b",
+      "position_x": 5,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0096",
+      "tote_type": "single",
+      "location_id": "rack_2_c",
+      "position_x": 5,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0097",
+      "tote_type": "single",
+      "location_id": "rack_3_a",
+      "position_x": 10,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0098",
+      "tote_type": "single",
+      "location_id": "rack_3_b",
+      "position_x": 10,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0099",
+      "tote_type": "single",
+      "location_id": "rack_3_c",
+      "position_x": 10,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0100",
+      "tote_type": "single",
+      "location_id": "rack_4_a",
+      "position_x": 15,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0101",
+      "tote_type": "single",
+      "location_id": "rack_4_b",
+      "position_x": 15,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0102",
+      "tote_type": "single",
+      "location_id": "rack_4_c",
+      "position_x": 15,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0103",
+      "tote_type": "single",
+      "location_id": "rack_5_a",
+      "position_x": 20,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0104",
+      "tote_type": "single",
+      "location_id": "rack_5_b",
+      "position_x": 20,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 30,
+          "lot_size": 50,
+          "carton_count": 1,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 12000,
+          "dead_space_volume_cm3": 4800
+        }
+      ],
+      "used_volume_cm3": 12000,
+      "remaining_capacity_cm3": 45600
+    },
+    {
+      "tote_id": "TOTE_0105",
+      "tote_type": "single",
+      "location_id": "rack_5_c",
+      "position_x": 20,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0106",
+      "tote_type": "single",
+      "location_id": "rack_6_a",
+      "position_x": 25,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0107",
+      "tote_type": "single",
+      "location_id": "rack_6_b",
+      "position_x": 25,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0108",
+      "tote_type": "single",
+      "location_id": "rack_6_c",
+      "position_x": 25,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0109",
+      "tote_type": "single",
+      "location_id": "rack_1_a",
+      "position_x": 0,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0110",
+      "tote_type": "single",
+      "location_id": "rack_1_b",
+      "position_x": 0,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0111",
+      "tote_type": "single",
+      "location_id": "rack_1_c",
+      "position_x": 0,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0112",
+      "tote_type": "single",
+      "location_id": "rack_2_a",
+      "position_x": 5,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0113",
+      "tote_type": "single",
+      "location_id": "rack_2_b",
+      "position_x": 5,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0114",
+      "tote_type": "single",
+      "location_id": "rack_2_c",
+      "position_x": 5,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0115",
+      "tote_type": "single",
+      "location_id": "rack_3_a",
+      "position_x": 10,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0116",
+      "tote_type": "single",
+      "location_id": "rack_3_b",
+      "position_x": 10,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0117",
+      "tote_type": "single",
+      "location_id": "rack_3_c",
+      "position_x": 10,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0118",
+      "tote_type": "single",
+      "location_id": "rack_4_a",
+      "position_x": 15,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0119",
+      "tote_type": "single",
+      "location_id": "rack_4_b",
+      "position_x": 15,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0120",
+      "tote_type": "single",
+      "location_id": "rack_4_c",
+      "position_x": 15,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0121",
+      "tote_type": "single",
+      "location_id": "rack_5_a",
+      "position_x": 20,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0122",
+      "tote_type": "single",
+      "location_id": "rack_5_b",
+      "position_x": 20,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0123",
+      "tote_type": "single",
+      "location_id": "rack_5_c",
+      "position_x": 20,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0124",
+      "tote_type": "single",
+      "location_id": "rack_6_a",
+      "position_x": 25,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0125",
+      "tote_type": "single",
+      "location_id": "rack_6_b",
+      "position_x": 25,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0126",
+      "tote_type": "single",
+      "location_id": "rack_6_c",
+      "position_x": 25,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0127",
+      "tote_type": "single",
+      "location_id": "rack_1_a",
+      "position_x": 0,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0128",
+      "tote_type": "single",
+      "location_id": "rack_1_b",
+      "position_x": 0,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0129",
+      "tote_type": "single",
+      "location_id": "rack_1_c",
+      "position_x": 0,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0130",
+      "tote_type": "single",
+      "location_id": "rack_2_a",
+      "position_x": 5,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 320,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 9600
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0131",
+      "tote_type": "single",
+      "location_id": "rack_2_b",
+      "position_x": 5,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0132",
+      "tote_type": "single",
+      "location_id": "rack_2_c",
+      "position_x": 5,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0133",
+      "tote_type": "single",
+      "location_id": "rack_3_a",
+      "position_x": 10,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0134",
+      "tote_type": "single",
+      "location_id": "rack_3_b",
+      "position_x": 10,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0135",
+      "tote_type": "single",
+      "location_id": "rack_3_c",
+      "position_x": 10,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0136",
+      "tote_type": "single",
+      "location_id": "rack_4_a",
+      "position_x": 15,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0137",
+      "tote_type": "single",
+      "location_id": "rack_4_b",
+      "position_x": 15,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0138",
+      "tote_type": "single",
+      "location_id": "rack_4_c",
+      "position_x": 15,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0139",
+      "tote_type": "single",
+      "location_id": "rack_5_a",
+      "position_x": 20,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0140",
+      "tote_type": "single",
+      "location_id": "rack_5_b",
+      "position_x": 20,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0141",
+      "tote_type": "single",
+      "location_id": "rack_5_c",
+      "position_x": 20,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0142",
+      "tote_type": "single",
+      "location_id": "rack_6_a",
+      "position_x": 25,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0143",
+      "tote_type": "single",
+      "location_id": "rack_6_b",
+      "position_x": 25,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0144",
+      "tote_type": "single",
+      "location_id": "rack_6_c",
+      "position_x": 25,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0145",
+      "tote_type": "single",
+      "location_id": "rack_1_a",
+      "position_x": 0,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0146",
+      "tote_type": "single",
+      "location_id": "rack_1_b",
+      "position_x": 0,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0147",
+      "tote_type": "single",
+      "location_id": "rack_1_c",
+      "position_x": 0,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0148",
+      "tote_type": "single",
+      "location_id": "rack_2_a",
+      "position_x": 5,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0149",
+      "tote_type": "single",
+      "location_id": "rack_2_b",
+      "position_x": 5,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0150",
+      "tote_type": "single",
+      "location_id": "rack_2_c",
+      "position_x": 5,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0151",
+      "tote_type": "single",
+      "location_id": "rack_3_a",
+      "position_x": 10,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0152",
+      "tote_type": "single",
+      "location_id": "rack_3_b",
+      "position_x": 10,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0153",
+      "tote_type": "single",
+      "location_id": "rack_3_c",
+      "position_x": 10,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0154",
+      "tote_type": "single",
+      "location_id": "rack_4_a",
+      "position_x": 15,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0155",
+      "tote_type": "single",
+      "location_id": "rack_4_b",
+      "position_x": 15,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0156",
+      "tote_type": "single",
+      "location_id": "rack_4_c",
+      "position_x": 15,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0157",
+      "tote_type": "single",
+      "location_id": "rack_5_a",
+      "position_x": 20,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0158",
+      "tote_type": "single",
+      "location_id": "rack_5_b",
+      "position_x": 20,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0159",
+      "tote_type": "single",
+      "location_id": "rack_5_c",
+      "position_x": 20,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0160",
+      "tote_type": "single",
+      "location_id": "rack_6_a",
+      "position_x": 25,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0161",
+      "tote_type": "single",
+      "location_id": "rack_6_b",
+      "position_x": 25,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0162",
+      "tote_type": "single",
+      "location_id": "rack_6_c",
+      "position_x": 25,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0163",
+      "tote_type": "single",
+      "location_id": "rack_1_a",
+      "position_x": 0,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0164",
+      "tote_type": "single",
+      "location_id": "rack_1_b",
+      "position_x": 0,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0165",
+      "tote_type": "single",
+      "location_id": "rack_1_c",
+      "position_x": 0,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0166",
+      "tote_type": "single",
+      "location_id": "rack_2_a",
+      "position_x": 5,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0167",
+      "tote_type": "single",
+      "location_id": "rack_2_b",
+      "position_x": 5,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0168",
+      "tote_type": "single",
+      "location_id": "rack_2_c",
+      "position_x": 5,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0169",
+      "tote_type": "single",
+      "location_id": "rack_3_a",
+      "position_x": 10,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0170",
+      "tote_type": "single",
+      "location_id": "rack_3_b",
+      "position_x": 10,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0171",
+      "tote_type": "single",
+      "location_id": "rack_3_c",
+      "position_x": 10,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0172",
+      "tote_type": "single",
+      "location_id": "rack_4_a",
+      "position_x": 15,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0173",
+      "tote_type": "single",
+      "location_id": "rack_4_b",
+      "position_x": 15,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 9,
+          "lot_size": 15,
+          "carton_count": 1,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 9000,
+          "dead_space_volume_cm3": 3600
+        }
+      ],
+      "used_volume_cm3": 9000,
+      "remaining_capacity_cm3": 48600
+    },
+    {
+      "tote_id": "TOTE_0174",
+      "tote_type": "single",
+      "location_id": "rack_4_c",
+      "position_x": 15,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_06",
+          "quantity": 180,
+          "lot_size": 30,
+          "carton_count": 6,
+          "v_part": 300,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0175",
+      "tote_type": "single",
+      "location_id": "rack_5_a",
+      "position_x": 20,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_06",
+          "quantity": 180,
+          "lot_size": 30,
+          "carton_count": 6,
+          "v_part": 300,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0176",
+      "tote_type": "single",
+      "location_id": "rack_5_b",
+      "position_x": 20,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_06",
+          "quantity": 180,
+          "lot_size": 30,
+          "carton_count": 6,
+          "v_part": 300,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0177",
+      "tote_type": "single",
+      "location_id": "rack_5_c",
+      "position_x": 20,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_06",
+          "quantity": 180,
+          "lot_size": 30,
+          "carton_count": 6,
+          "v_part": 300,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0178",
+      "tote_type": "single",
+      "location_id": "rack_6_a",
+      "position_x": 25,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_06",
+          "quantity": 180,
+          "lot_size": 30,
+          "carton_count": 6,
+          "v_part": 300,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0179",
+      "tote_type": "single",
+      "location_id": "rack_6_b",
+      "position_x": 25,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_06",
+          "quantity": 144,
+          "lot_size": 30,
+          "carton_count": 5,
+          "v_part": 300,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 45000,
+          "dead_space_volume_cm3": 1800
+        }
+      ],
+      "used_volume_cm3": 45000,
+      "remaining_capacity_cm3": 12600
+    },
+    {
+      "tote_id": "TOTE_0180",
+      "tote_type": "single",
+      "location_id": "rack_6_c",
+      "position_x": 25,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_07",
+          "quantity": 25,
+          "lot_size": 5,
+          "carton_count": 5,
+          "v_part": 2000,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0181",
+      "tote_type": "single",
+      "location_id": "rack_1_a",
+      "position_x": 0,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_07",
+          "quantity": 25,
+          "lot_size": 5,
+          "carton_count": 5,
+          "v_part": 2000,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0182",
+      "tote_type": "single",
+      "location_id": "rack_1_b",
+      "position_x": 0,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_07",
+          "quantity": 25,
+          "lot_size": 5,
+          "carton_count": 5,
+          "v_part": 2000,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0183",
+      "tote_type": "single",
+      "location_id": "rack_1_c",
+      "position_x": 0,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_07",
+          "quantity": 25,
+          "lot_size": 5,
+          "carton_count": 5,
+          "v_part": 2000,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0184",
+      "tote_type": "single",
+      "location_id": "rack_2_a",
+      "position_x": 5,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_07",
+          "quantity": 25,
+          "lot_size": 5,
+          "carton_count": 5,
+          "v_part": 2000,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0185",
+      "tote_type": "single",
+      "location_id": "rack_2_b",
+      "position_x": 5,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_07",
+          "quantity": 25,
+          "lot_size": 5,
+          "carton_count": 5,
+          "v_part": 2000,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0186",
+      "tote_type": "single",
+      "location_id": "rack_2_c",
+      "position_x": 5,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_07",
+          "quantity": 25,
+          "lot_size": 5,
+          "carton_count": 5,
+          "v_part": 2000,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0187",
+      "tote_type": "single",
+      "location_id": "rack_3_a",
+      "position_x": 10,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_07",
+          "quantity": 25,
+          "lot_size": 5,
+          "carton_count": 5,
+          "v_part": 2000,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0188",
+      "tote_type": "single",
+      "location_id": "rack_3_b",
+      "position_x": 10,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_07",
+          "quantity": 16,
+          "lot_size": 5,
+          "carton_count": 4,
+          "v_part": 2000,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 40000,
+          "dead_space_volume_cm3": 8000
+        }
+      ],
+      "used_volume_cm3": 40000,
+      "remaining_capacity_cm3": 17600
+    },
+    {
+      "tote_id": "TOTE_0189",
+      "tote_type": "single",
+      "location_id": "rack_3_c",
+      "position_x": 10,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_08",
+          "quantity": 72,
+          "lot_size": 12,
+          "carton_count": 6,
+          "v_part": 800,
+          "v_carton": 9600,
+          "used_carton_volume_cm3": 57600,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 57600,
+      "remaining_capacity_cm3": 0
+    },
+    {
+      "tote_id": "TOTE_0190",
+      "tote_type": "single",
+      "location_id": "rack_4_a",
+      "position_x": 15,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_08",
+          "quantity": 72,
+          "lot_size": 12,
+          "carton_count": 6,
+          "v_part": 800,
+          "v_carton": 9600,
+          "used_carton_volume_cm3": 57600,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 57600,
+      "remaining_capacity_cm3": 0
+    },
+    {
+      "tote_id": "TOTE_0191",
+      "tote_type": "single",
+      "location_id": "rack_4_b",
+      "position_x": 15,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_08",
+          "quantity": 72,
+          "lot_size": 12,
+          "carton_count": 6,
+          "v_part": 800,
+          "v_carton": 9600,
+          "used_carton_volume_cm3": 57600,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 57600,
+      "remaining_capacity_cm3": 0
+    },
+    {
+      "tote_id": "TOTE_0192",
+      "tote_type": "single",
+      "location_id": "rack_4_c",
+      "position_x": 15,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_08",
+          "quantity": 72,
+          "lot_size": 12,
+          "carton_count": 6,
+          "v_part": 800,
+          "v_carton": 9600,
+          "used_carton_volume_cm3": 57600,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 57600,
+      "remaining_capacity_cm3": 0
+    },
+    {
+      "tote_id": "TOTE_0193",
+      "tote_type": "single",
+      "location_id": "rack_5_a",
+      "position_x": 20,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_08",
+          "quantity": 72,
+          "lot_size": 12,
+          "carton_count": 6,
+          "v_part": 800,
+          "v_carton": 9600,
+          "used_carton_volume_cm3": 57600,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 57600,
+      "remaining_capacity_cm3": 0
+    },
+    {
+      "tote_id": "TOTE_0194",
+      "tote_type": "single",
+      "location_id": "rack_5_b",
+      "position_x": 20,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_08",
+          "quantity": 21,
+          "lot_size": 12,
+          "carton_count": 2,
+          "v_part": 800,
+          "v_carton": 9600,
+          "used_carton_volume_cm3": 19200,
+          "dead_space_volume_cm3": 2400
+        }
+      ],
+      "used_volume_cm3": 19200,
+      "remaining_capacity_cm3": 38400
+    },
+    {
+      "tote_id": "TOTE_0195",
+      "tote_type": "single",
+      "location_id": "rack_5_c",
+      "position_x": 20,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_09",
+          "quantity": 200,
+          "lot_size": 40,
+          "carton_count": 5,
+          "v_part": 250,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0196",
+      "tote_type": "single",
+      "location_id": "rack_6_a",
+      "position_x": 25,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_09",
+          "quantity": 200,
+          "lot_size": 40,
+          "carton_count": 5,
+          "v_part": 250,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0197",
+      "tote_type": "single",
+      "location_id": "rack_6_b",
+      "position_x": 25,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_09",
+          "quantity": 200,
+          "lot_size": 40,
+          "carton_count": 5,
+          "v_part": 250,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0198",
+      "tote_type": "single",
+      "location_id": "rack_6_c",
+      "position_x": 25,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_09",
+          "quantity": 200,
+          "lot_size": 40,
+          "carton_count": 5,
+          "v_part": 250,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0199",
+      "tote_type": "single",
+      "location_id": "rack_1_a",
+      "position_x": 0,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_09",
+          "quantity": 200,
+          "lot_size": 40,
+          "carton_count": 5,
+          "v_part": 250,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0200",
+      "tote_type": "single",
+      "location_id": "rack_1_b",
+      "position_x": 0,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_09",
+          "quantity": 200,
+          "lot_size": 40,
+          "carton_count": 5,
+          "v_part": 250,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0201",
+      "tote_type": "single",
+      "location_id": "rack_1_c",
+      "position_x": 0,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_09",
+          "quantity": 200,
+          "lot_size": 40,
+          "carton_count": 5,
+          "v_part": 250,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0202",
+      "tote_type": "single",
+      "location_id": "rack_2_a",
+      "position_x": 5,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_09",
+          "quantity": 200,
+          "lot_size": 40,
+          "carton_count": 5,
+          "v_part": 250,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0203",
+      "tote_type": "single",
+      "location_id": "rack_2_b",
+      "position_x": 5,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_09",
+          "quantity": 32,
+          "lot_size": 40,
+          "carton_count": 1,
+          "v_part": 250,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 10000,
+          "dead_space_volume_cm3": 2000
+        }
+      ],
+      "used_volume_cm3": 10000,
+      "remaining_capacity_cm3": 47600
+    },
+    {
+      "tote_id": "TOTE_0204",
+      "tote_type": "single",
+      "location_id": "rack_2_c",
+      "position_x": 5,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_10",
+          "quantity": 125,
+          "lot_size": 25,
+          "carton_count": 5,
+          "v_part": 400,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0205",
+      "tote_type": "single",
+      "location_id": "rack_3_a",
+      "position_x": 10,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_10",
+          "quantity": 125,
+          "lot_size": 25,
+          "carton_count": 5,
+          "v_part": 400,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0206",
+      "tote_type": "single",
+      "location_id": "rack_3_b",
+      "position_x": 10,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_10",
+          "quantity": 125,
+          "lot_size": 25,
+          "carton_count": 5,
+          "v_part": 400,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0207",
+      "tote_type": "single",
+      "location_id": "rack_3_c",
+      "position_x": 10,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_10",
+          "quantity": 125,
+          "lot_size": 25,
+          "carton_count": 5,
+          "v_part": 400,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0208",
+      "tote_type": "single",
+      "location_id": "rack_4_a",
+      "position_x": 15,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_10",
+          "quantity": 125,
+          "lot_size": 25,
+          "carton_count": 5,
+          "v_part": 400,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0209",
+      "tote_type": "single",
+      "location_id": "rack_4_b",
+      "position_x": 15,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_10",
+          "quantity": 125,
+          "lot_size": 25,
+          "carton_count": 5,
+          "v_part": 400,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0210",
+      "tote_type": "single",
+      "location_id": "rack_4_c",
+      "position_x": 15,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_10",
+          "quantity": 30,
+          "lot_size": 25,
+          "carton_count": 2,
+          "v_part": 400,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 20000,
+          "dead_space_volume_cm3": 8000
+        }
+      ],
+      "used_volume_cm3": 20000,
+      "remaining_capacity_cm3": 37600
+    },
+    {
+      "tote_id": "TOTE_0211",
+      "tote_type": "mixed",
+      "location_id": "rack_5_a",
+      "position_x": 20,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0212",
+      "tote_type": "mixed",
+      "location_id": "rack_5_b",
+      "position_x": 20,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0213",
+      "tote_type": "mixed",
+      "location_id": "rack_5_c",
+      "position_x": 20,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0214",
+      "tote_type": "mixed",
+      "location_id": "rack_6_a",
+      "position_x": 25,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0215",
+      "tote_type": "mixed",
+      "location_id": "rack_6_b",
+      "position_x": 25,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0216",
+      "tote_type": "mixed",
+      "location_id": "rack_6_c",
+      "position_x": 25,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0217",
+      "tote_type": "mixed",
+      "location_id": "rack_1_a",
+      "position_x": 0,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0218",
+      "tote_type": "mixed",
+      "location_id": "rack_1_b",
+      "position_x": 0,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0219",
+      "tote_type": "mixed",
+      "location_id": "rack_1_c",
+      "position_x": 0,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0220",
+      "tote_type": "mixed",
+      "location_id": "rack_2_a",
+      "position_x": 5,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0221",
+      "tote_type": "mixed",
+      "location_id": "rack_2_b",
+      "position_x": 5,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0222",
+      "tote_type": "mixed",
+      "location_id": "rack_2_c",
+      "position_x": 5,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0223",
+      "tote_type": "mixed",
+      "location_id": "rack_3_a",
+      "position_x": 10,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0224",
+      "tote_type": "mixed",
+      "location_id": "rack_3_b",
+      "position_x": 10,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0225",
+      "tote_type": "mixed",
+      "location_id": "rack_3_c",
+      "position_x": 10,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0226",
+      "tote_type": "mixed",
+      "location_id": "rack_4_a",
+      "position_x": 15,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0227",
+      "tote_type": "mixed",
+      "location_id": "rack_4_b",
+      "position_x": 15,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0228",
+      "tote_type": "mixed",
+      "location_id": "rack_4_c",
+      "position_x": 15,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0229",
+      "tote_type": "mixed",
+      "location_id": "rack_5_a",
+      "position_x": 20,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0230",
+      "tote_type": "mixed",
+      "location_id": "rack_5_b",
+      "position_x": 20,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0231",
+      "tote_type": "mixed",
+      "location_id": "rack_5_c",
+      "position_x": 20,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0232",
+      "tote_type": "mixed",
+      "location_id": "rack_6_a",
+      "position_x": 25,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 49,
+          "lot_size": 10,
+          "carton_count": 5,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 40000,
+          "dead_space_volume_cm3": 800
+        }
+      ],
+      "used_volume_cm3": 40000,
+      "remaining_capacity_cm3": 17600
+    },
+    {
+      "tote_id": "TOTE_0233",
+      "tote_type": "mixed",
+      "location_id": "rack_6_b",
+      "position_x": 25,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0234",
+      "tote_type": "mixed",
+      "location_id": "rack_6_c",
+      "position_x": 25,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0235",
+      "tote_type": "mixed",
+      "location_id": "rack_1_a",
+      "position_x": 0,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 70,
+          "lot_size": 10,
+          "carton_count": 7,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 56000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 56000,
+      "remaining_capacity_cm3": 1600
+    },
+    {
+      "tote_id": "TOTE_0236",
+      "tote_type": "mixed",
+      "location_id": "rack_1_b",
+      "position_x": 0,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_01",
+          "quantity": 7,
+          "lot_size": 10,
+          "carton_count": 1,
+          "v_part": 800,
+          "v_carton": 8000,
+          "used_carton_volume_cm3": 8000,
+          "dead_space_volume_cm3": 2400
+        }
+      ],
+      "used_volume_cm3": 8000,
+      "remaining_capacity_cm3": 49600
+    },
+    {
+      "tote_id": "TOTE_0237",
+      "tote_type": "mixed",
+      "location_id": "rack_1_c",
+      "position_x": 0,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0238",
+      "tote_type": "mixed",
+      "location_id": "rack_2_a",
+      "position_x": 5,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0239",
+      "tote_type": "mixed",
+      "location_id": "rack_2_b",
+      "position_x": 5,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0240",
+      "tote_type": "mixed",
+      "location_id": "rack_2_c",
+      "position_x": 5,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0241",
+      "tote_type": "mixed",
+      "location_id": "rack_3_a",
+      "position_x": 10,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0242",
+      "tote_type": "mixed",
+      "location_id": "rack_3_b",
+      "position_x": 10,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0243",
+      "tote_type": "mixed",
+      "location_id": "rack_3_c",
+      "position_x": 10,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0244",
+      "tote_type": "mixed",
+      "location_id": "rack_4_a",
+      "position_x": 15,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0245",
+      "tote_type": "mixed",
+      "location_id": "rack_4_b",
+      "position_x": 15,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0246",
+      "tote_type": "mixed",
+      "location_id": "rack_4_c",
+      "position_x": 15,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0247",
+      "tote_type": "mixed",
+      "location_id": "rack_5_a",
+      "position_x": 20,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0248",
+      "tote_type": "mixed",
+      "location_id": "rack_5_b",
+      "position_x": 20,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0249",
+      "tote_type": "mixed",
+      "location_id": "rack_5_c",
+      "position_x": 20,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0250",
+      "tote_type": "mixed",
+      "location_id": "rack_6_a",
+      "position_x": 25,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0251",
+      "tote_type": "mixed",
+      "location_id": "rack_6_b",
+      "position_x": 25,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0252",
+      "tote_type": "mixed",
+      "location_id": "rack_6_c",
+      "position_x": 25,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0253",
+      "tote_type": "mixed",
+      "location_id": "rack_1_a",
+      "position_x": 0,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0254",
+      "tote_type": "mixed",
+      "location_id": "rack_1_b",
+      "position_x": 0,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0255",
+      "tote_type": "mixed",
+      "location_id": "rack_1_c",
+      "position_x": 0,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0256",
+      "tote_type": "mixed",
+      "location_id": "rack_2_a",
+      "position_x": 5,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0257",
+      "tote_type": "mixed",
+      "location_id": "rack_2_b",
+      "position_x": 5,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0258",
+      "tote_type": "mixed",
+      "location_id": "rack_2_c",
+      "position_x": 5,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 105,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 6750
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0259",
+      "tote_type": "mixed",
+      "location_id": "rack_3_a",
+      "position_x": 10,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0260",
+      "tote_type": "mixed",
+      "location_id": "rack_3_b",
+      "position_x": 10,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0261",
+      "tote_type": "mixed",
+      "location_id": "rack_3_c",
+      "position_x": 10,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 120,
+          "lot_size": 20,
+          "carton_count": 6,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0262",
+      "tote_type": "mixed",
+      "location_id": "rack_4_a",
+      "position_x": 15,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_02",
+          "quantity": 15,
+          "lot_size": 20,
+          "carton_count": 1,
+          "v_part": 450,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 9000,
+          "dead_space_volume_cm3": 2250
+        }
+      ],
+      "used_volume_cm3": 9000,
+      "remaining_capacity_cm3": 48600
+    },
+    {
+      "tote_id": "TOTE_0263",
+      "tote_type": "mixed",
+      "location_id": "rack_4_b",
+      "position_x": 15,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0264",
+      "tote_type": "mixed",
+      "location_id": "rack_4_c",
+      "position_x": 15,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0265",
+      "tote_type": "mixed",
+      "location_id": "rack_5_a",
+      "position_x": 20,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0266",
+      "tote_type": "mixed",
+      "location_id": "rack_5_b",
+      "position_x": 20,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0267",
+      "tote_type": "mixed",
+      "location_id": "rack_5_c",
+      "position_x": 20,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0268",
+      "tote_type": "mixed",
+      "location_id": "rack_6_a",
+      "position_x": 25,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0269",
+      "tote_type": "mixed",
+      "location_id": "rack_6_b",
+      "position_x": 25,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0270",
+      "tote_type": "mixed",
+      "location_id": "rack_6_c",
+      "position_x": 25,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0271",
+      "tote_type": "mixed",
+      "location_id": "rack_1_a",
+      "position_x": 0,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0272",
+      "tote_type": "mixed",
+      "location_id": "rack_1_b",
+      "position_x": 0,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0273",
+      "tote_type": "mixed",
+      "location_id": "rack_1_c",
+      "position_x": 0,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0274",
+      "tote_type": "mixed",
+      "location_id": "rack_2_a",
+      "position_x": 5,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0275",
+      "tote_type": "mixed",
+      "location_id": "rack_2_b",
+      "position_x": 5,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0276",
+      "tote_type": "mixed",
+      "location_id": "rack_2_c",
+      "position_x": 5,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0277",
+      "tote_type": "mixed",
+      "location_id": "rack_3_a",
+      "position_x": 10,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0278",
+      "tote_type": "mixed",
+      "location_id": "rack_3_b",
+      "position_x": 10,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 167,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 7920
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0279",
+      "tote_type": "mixed",
+      "location_id": "rack_3_c",
+      "position_x": 10,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0280",
+      "tote_type": "mixed",
+      "location_id": "rack_4_a",
+      "position_x": 15,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 200,
+          "lot_size": 50,
+          "carton_count": 4,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0281",
+      "tote_type": "mixed",
+      "location_id": "rack_4_b",
+      "position_x": 15,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_03",
+          "quantity": 53,
+          "lot_size": 50,
+          "carton_count": 2,
+          "v_part": 240,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 24000,
+          "dead_space_volume_cm3": 11280
+        }
+      ],
+      "used_volume_cm3": 24000,
+      "remaining_capacity_cm3": 33600
+    },
+    {
+      "tote_id": "TOTE_0282",
+      "tote_type": "mixed",
+      "location_id": "rack_4_c",
+      "position_x": 15,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0283",
+      "tote_type": "mixed",
+      "location_id": "rack_5_a",
+      "position_x": 20,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0284",
+      "tote_type": "mixed",
+      "location_id": "rack_5_b",
+      "position_x": 20,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0285",
+      "tote_type": "mixed",
+      "location_id": "rack_5_c",
+      "position_x": 20,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0286",
+      "tote_type": "mixed",
+      "location_id": "rack_6_a",
+      "position_x": 25,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0287",
+      "tote_type": "mixed",
+      "location_id": "rack_6_b",
+      "position_x": 25,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0288",
+      "tote_type": "mixed",
+      "location_id": "rack_6_c",
+      "position_x": 25,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0289",
+      "tote_type": "mixed",
+      "location_id": "rack_1_a",
+      "position_x": 0,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0290",
+      "tote_type": "mixed",
+      "location_id": "rack_1_b",
+      "position_x": 0,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0291",
+      "tote_type": "mixed",
+      "location_id": "rack_1_c",
+      "position_x": 0,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0292",
+      "tote_type": "mixed",
+      "location_id": "rack_2_a",
+      "position_x": 5,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0293",
+      "tote_type": "mixed",
+      "location_id": "rack_2_b",
+      "position_x": 5,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0294",
+      "tote_type": "mixed",
+      "location_id": "rack_2_c",
+      "position_x": 5,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0295",
+      "tote_type": "mixed",
+      "location_id": "rack_3_a",
+      "position_x": 10,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0296",
+      "tote_type": "mixed",
+      "location_id": "rack_3_b",
+      "position_x": 10,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0297",
+      "tote_type": "mixed",
+      "location_id": "rack_3_c",
+      "position_x": 10,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 20,
+          "lot_size": 100,
+          "carton_count": 1,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 12000,
+          "dead_space_volume_cm3": 9600
+        }
+      ],
+      "used_volume_cm3": 12000,
+      "remaining_capacity_cm3": 45600
+    },
+    {
+      "tote_id": "TOTE_0298",
+      "tote_type": "mixed",
+      "location_id": "rack_4_a",
+      "position_x": 15,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0299",
+      "tote_type": "mixed",
+      "location_id": "rack_4_b",
+      "position_x": 15,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 400,
+          "lot_size": 100,
+          "carton_count": 4,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 48000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 48000,
+      "remaining_capacity_cm3": 9600
+    },
+    {
+      "tote_id": "TOTE_0300",
+      "tote_type": "mixed",
+      "location_id": "rack_4_c",
+      "position_x": 15,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_04",
+          "quantity": 60,
+          "lot_size": 100,
+          "carton_count": 1,
+          "v_part": 120,
+          "v_carton": 12000,
+          "used_carton_volume_cm3": 12000,
+          "dead_space_volume_cm3": 4800
+        }
+      ],
+      "used_volume_cm3": 12000,
+      "remaining_capacity_cm3": 45600
+    },
+    {
+      "tote_id": "TOTE_0301",
+      "tote_type": "mixed",
+      "location_id": "rack_5_a",
+      "position_x": 20,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0302",
+      "tote_type": "mixed",
+      "location_id": "rack_5_b",
+      "position_x": 20,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0303",
+      "tote_type": "mixed",
+      "location_id": "rack_5_c",
+      "position_x": 20,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0304",
+      "tote_type": "mixed",
+      "location_id": "rack_6_a",
+      "position_x": 25,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0305",
+      "tote_type": "mixed",
+      "location_id": "rack_6_b",
+      "position_x": 25,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0306",
+      "tote_type": "mixed",
+      "location_id": "rack_6_c",
+      "position_x": 25,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0307",
+      "tote_type": "mixed",
+      "location_id": "rack_1_a",
+      "position_x": 0,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0308",
+      "tote_type": "mixed",
+      "location_id": "rack_1_b",
+      "position_x": 0,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0309",
+      "tote_type": "mixed",
+      "location_id": "rack_1_c",
+      "position_x": 0,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0310",
+      "tote_type": "mixed",
+      "location_id": "rack_2_a",
+      "position_x": 5,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0311",
+      "tote_type": "mixed",
+      "location_id": "rack_2_b",
+      "position_x": 5,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0312",
+      "tote_type": "mixed",
+      "location_id": "rack_2_c",
+      "position_x": 5,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0313",
+      "tote_type": "mixed",
+      "location_id": "rack_3_a",
+      "position_x": 10,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0314",
+      "tote_type": "mixed",
+      "location_id": "rack_3_b",
+      "position_x": 10,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0315",
+      "tote_type": "mixed",
+      "location_id": "rack_3_c",
+      "position_x": 10,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0316",
+      "tote_type": "mixed",
+      "location_id": "rack_4_a",
+      "position_x": 15,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0317",
+      "tote_type": "mixed",
+      "location_id": "rack_4_b",
+      "position_x": 15,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0318",
+      "tote_type": "mixed",
+      "location_id": "rack_4_c",
+      "position_x": 15,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0319",
+      "tote_type": "mixed",
+      "location_id": "rack_5_a",
+      "position_x": 20,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0320",
+      "tote_type": "mixed",
+      "location_id": "rack_5_b",
+      "position_x": 20,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0321",
+      "tote_type": "mixed",
+      "location_id": "rack_5_c",
+      "position_x": 20,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0322",
+      "tote_type": "mixed",
+      "location_id": "rack_6_a",
+      "position_x": 25,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0323",
+      "tote_type": "mixed",
+      "location_id": "rack_6_b",
+      "position_x": 25,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0324",
+      "tote_type": "mixed",
+      "location_id": "rack_6_c",
+      "position_x": 25,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0325",
+      "tote_type": "mixed",
+      "location_id": "rack_1_a",
+      "position_x": 0,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 50,
+          "lot_size": 15,
+          "carton_count": 4,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 36000,
+          "dead_space_volume_cm3": 6000
+        }
+      ],
+      "used_volume_cm3": 36000,
+      "remaining_capacity_cm3": 21600
+    },
+    {
+      "tote_id": "TOTE_0326",
+      "tote_type": "mixed",
+      "location_id": "rack_1_b",
+      "position_x": 0,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0327",
+      "tote_type": "mixed",
+      "location_id": "rack_1_c",
+      "position_x": 0,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0328",
+      "tote_type": "mixed",
+      "location_id": "rack_2_a",
+      "position_x": 5,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 90,
+          "lot_size": 15,
+          "carton_count": 6,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0329",
+      "tote_type": "mixed",
+      "location_id": "rack_2_b",
+      "position_x": 5,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_05",
+          "quantity": 46,
+          "lot_size": 15,
+          "carton_count": 4,
+          "v_part": 600,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 36000,
+          "dead_space_volume_cm3": 8400
+        }
+      ],
+      "used_volume_cm3": 36000,
+      "remaining_capacity_cm3": 21600
+    },
+    {
+      "tote_id": "TOTE_0330",
+      "tote_type": "mixed",
+      "location_id": "rack_2_c",
+      "position_x": 5,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_06",
+          "quantity": 180,
+          "lot_size": 30,
+          "carton_count": 6,
+          "v_part": 300,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0331",
+      "tote_type": "mixed",
+      "location_id": "rack_3_a",
+      "position_x": 10,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_06",
+          "quantity": 180,
+          "lot_size": 30,
+          "carton_count": 6,
+          "v_part": 300,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0332",
+      "tote_type": "mixed",
+      "location_id": "rack_3_b",
+      "position_x": 10,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_06",
+          "quantity": 180,
+          "lot_size": 30,
+          "carton_count": 6,
+          "v_part": 300,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 54000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0333",
+      "tote_type": "mixed",
+      "location_id": "rack_3_c",
+      "position_x": 10,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_06",
+          "quantity": 69,
+          "lot_size": 30,
+          "carton_count": 3,
+          "v_part": 300,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 27000,
+          "dead_space_volume_cm3": 6300
+        },
+        {
+          "part_id": "PART_06",
+          "quantity": 87,
+          "lot_size": 30,
+          "carton_count": 3,
+          "v_part": 300,
+          "v_carton": 9000,
+          "used_carton_volume_cm3": 27000,
+          "dead_space_volume_cm3": 900
+        }
+      ],
+      "used_volume_cm3": 54000,
+      "remaining_capacity_cm3": 3600
+    },
+    {
+      "tote_id": "TOTE_0334",
+      "tote_type": "mixed",
+      "location_id": "rack_4_a",
+      "position_x": 15,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_07",
+          "quantity": 25,
+          "lot_size": 5,
+          "carton_count": 5,
+          "v_part": 2000,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0335",
+      "tote_type": "mixed",
+      "location_id": "rack_4_b",
+      "position_x": 15,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_07",
+          "quantity": 25,
+          "lot_size": 5,
+          "carton_count": 5,
+          "v_part": 2000,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0336",
+      "tote_type": "mixed",
+      "location_id": "rack_4_c",
+      "position_x": 15,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_07",
+          "quantity": 25,
+          "lot_size": 5,
+          "carton_count": 5,
+          "v_part": 2000,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0337",
+      "tote_type": "mixed",
+      "location_id": "rack_5_a",
+      "position_x": 20,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_07",
+          "quantity": 25,
+          "lot_size": 5,
+          "carton_count": 5,
+          "v_part": 2000,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0338",
+      "tote_type": "mixed",
+      "location_id": "rack_5_b",
+      "position_x": 20,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_07",
+          "quantity": 25,
+          "lot_size": 5,
+          "carton_count": 5,
+          "v_part": 2000,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0339",
+      "tote_type": "mixed",
+      "location_id": "rack_5_c",
+      "position_x": 20,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_07",
+          "quantity": 19,
+          "lot_size": 5,
+          "carton_count": 4,
+          "v_part": 2000,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 40000,
+          "dead_space_volume_cm3": 2000
+        }
+      ],
+      "used_volume_cm3": 40000,
+      "remaining_capacity_cm3": 17600
+    },
+    {
+      "tote_id": "TOTE_0340",
+      "tote_type": "mixed",
+      "location_id": "rack_6_a",
+      "position_x": 25,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_08",
+          "quantity": 72,
+          "lot_size": 12,
+          "carton_count": 6,
+          "v_part": 800,
+          "v_carton": 9600,
+          "used_carton_volume_cm3": 57600,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 57600,
+      "remaining_capacity_cm3": 0
+    },
+    {
+      "tote_id": "TOTE_0341",
+      "tote_type": "mixed",
+      "location_id": "rack_6_b",
+      "position_x": 25,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_08",
+          "quantity": 72,
+          "lot_size": 12,
+          "carton_count": 6,
+          "v_part": 800,
+          "v_carton": 9600,
+          "used_carton_volume_cm3": 57600,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 57600,
+      "remaining_capacity_cm3": 0
+    },
+    {
+      "tote_id": "TOTE_0342",
+      "tote_type": "mixed",
+      "location_id": "rack_6_c",
+      "position_x": 25,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_08",
+          "quantity": 72,
+          "lot_size": 12,
+          "carton_count": 6,
+          "v_part": 800,
+          "v_carton": 9600,
+          "used_carton_volume_cm3": 57600,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 57600,
+      "remaining_capacity_cm3": 0
+    },
+    {
+      "tote_id": "TOTE_0343",
+      "tote_type": "mixed",
+      "location_id": "rack_1_a",
+      "position_x": 0,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_08",
+          "quantity": 6,
+          "lot_size": 12,
+          "carton_count": 1,
+          "v_part": 800,
+          "v_carton": 9600,
+          "used_carton_volume_cm3": 9600,
+          "dead_space_volume_cm3": 4800
+        },
+        {
+          "part_id": "PART_08",
+          "quantity": 33,
+          "lot_size": 12,
+          "carton_count": 3,
+          "v_part": 800,
+          "v_carton": 9600,
+          "used_carton_volume_cm3": 28800,
+          "dead_space_volume_cm3": 2400
+        }
+      ],
+      "used_volume_cm3": 38400,
+      "remaining_capacity_cm3": 19200
+    },
+    {
+      "tote_id": "TOTE_0344",
+      "tote_type": "mixed",
+      "location_id": "rack_1_b",
+      "position_x": 0,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_09",
+          "quantity": 200,
+          "lot_size": 40,
+          "carton_count": 5,
+          "v_part": 250,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0345",
+      "tote_type": "mixed",
+      "location_id": "rack_1_c",
+      "position_x": 0,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_09",
+          "quantity": 200,
+          "lot_size": 40,
+          "carton_count": 5,
+          "v_part": 250,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0346",
+      "tote_type": "mixed",
+      "location_id": "rack_2_a",
+      "position_x": 5,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_09",
+          "quantity": 200,
+          "lot_size": 40,
+          "carton_count": 5,
+          "v_part": 250,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0347",
+      "tote_type": "mixed",
+      "location_id": "rack_2_b",
+      "position_x": 5,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_09",
+          "quantity": 200,
+          "lot_size": 40,
+          "carton_count": 5,
+          "v_part": 250,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0348",
+      "tote_type": "mixed",
+      "location_id": "rack_2_c",
+      "position_x": 5,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_09",
+          "quantity": 151,
+          "lot_size": 40,
+          "carton_count": 4,
+          "v_part": 250,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 40000,
+          "dead_space_volume_cm3": 2250
+        }
+      ],
+      "used_volume_cm3": 40000,
+      "remaining_capacity_cm3": 17600
+    },
+    {
+      "tote_id": "TOTE_0349",
+      "tote_type": "mixed",
+      "location_id": "rack_3_a",
+      "position_x": 10,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_09",
+          "quantity": 137,
+          "lot_size": 40,
+          "carton_count": 4,
+          "v_part": 250,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 40000,
+          "dead_space_volume_cm3": 5750
+        }
+      ],
+      "used_volume_cm3": 40000,
+      "remaining_capacity_cm3": 17600
+    },
+    {
+      "tote_id": "TOTE_0350",
+      "tote_type": "mixed",
+      "location_id": "rack_3_b",
+      "position_x": 10,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_10",
+          "quantity": 125,
+          "lot_size": 25,
+          "carton_count": 5,
+          "v_part": 400,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0351",
+      "tote_type": "mixed",
+      "location_id": "rack_3_c",
+      "position_x": 10,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_10",
+          "quantity": 125,
+          "lot_size": 25,
+          "carton_count": 5,
+          "v_part": 400,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0352",
+      "tote_type": "mixed",
+      "location_id": "rack_4_a",
+      "position_x": 15,
+      "position_y": 0,
+      "contents": [
+        {
+          "part_id": "PART_10",
+          "quantity": 125,
+          "lot_size": 25,
+          "carton_count": 5,
+          "v_part": 400,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 50000,
+          "dead_space_volume_cm3": 0
+        }
+      ],
+      "used_volume_cm3": 50000,
+      "remaining_capacity_cm3": 7600
+    },
+    {
+      "tote_id": "TOTE_0353",
+      "tote_type": "mixed",
+      "location_id": "rack_4_b",
+      "position_x": 15,
+      "position_y": 10,
+      "contents": [
+        {
+          "part_id": "PART_10",
+          "quantity": 79,
+          "lot_size": 25,
+          "carton_count": 4,
+          "v_part": 400,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 40000,
+          "dead_space_volume_cm3": 8400
+        }
+      ],
+      "used_volume_cm3": 40000,
+      "remaining_capacity_cm3": 17600
+    },
+    {
+      "tote_id": "TOTE_0354",
+      "tote_type": "mixed",
+      "location_id": "rack_4_c",
+      "position_x": 15,
+      "position_y": 20,
+      "contents": [
+        {
+          "part_id": "PART_10",
+          "quantity": 66,
+          "lot_size": 25,
+          "carton_count": 3,
+          "v_part": 400,
+          "v_carton": 10000,
+          "used_carton_volume_cm3": 30000,
+          "dead_space_volume_cm3": 3600
+        }
+      ],
+      "used_volume_cm3": 30000,
+      "remaining_capacity_cm3": 27600
+    }
+  ]
+}

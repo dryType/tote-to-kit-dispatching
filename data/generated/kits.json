@@ -1,0 +1,700 @@
+{
+  "meta": {
+    "source_scenario": "C:\\Users\\an\\Desktop\\projects\\tote-to-kit-dispatching\\data\\scenario_custom.py",
+    "layout_path": "C:\\Users\\an\\Desktop\\projects\\tote-to-kit-dispatching\\data\\master_data\\layout.json",
+    "bom_path": "C:\\Users\\an\\Desktop\\projects\\tote-to-kit-dispatching\\data\\master_data\\boms\\bom_custom.json",
+    "prod_plan_path": "C:\\Users\\an\\Desktop\\projects\\tote-to-kit-dispatching\\data\\master_data\\prod_plans\\prod_plan_custom.json"
+  },
+  "kits": [
+    {
+      "kit_id": "KIT_0001",
+      "line": "LINE_01",
+      "start_time_sec": 0,
+      "product": "PROD_A",
+      "qty": 68,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "remaining_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0002",
+      "line": "LINE_02",
+      "start_time_sec": 0,
+      "product": "PROD_B",
+      "qty": 57,
+      "station_id": "station_2",
+      "station_position_x": 9.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "remaining_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0003",
+      "line": "LINE_03",
+      "start_time_sec": 0,
+      "product": "PROD_C",
+      "qty": 50,
+      "station_id": "station_3",
+      "station_position_x": 15.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "remaining_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0004",
+      "line": "LINE_04",
+      "start_time_sec": 0,
+      "product": "PROD_D",
+      "qty": 43,
+      "station_id": "station_4",
+      "station_position_x": 22.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "remaining_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0005",
+      "line": "LINE_05",
+      "start_time_sec": 0,
+      "product": "PROD_E",
+      "qty": 34,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "remaining_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0006",
+      "line": "LINE_01",
+      "start_time_sec": 2400,
+      "product": "PROD_B",
+      "qty": 57,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "remaining_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0007",
+      "line": "LINE_02",
+      "start_time_sec": 2400,
+      "product": "PROD_C",
+      "qty": 50,
+      "station_id": "station_2",
+      "station_position_x": 9.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "remaining_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0008",
+      "line": "LINE_03",
+      "start_time_sec": 2400,
+      "product": "PROD_D",
+      "qty": 43,
+      "station_id": "station_3",
+      "station_position_x": 15.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "remaining_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0009",
+      "line": "LINE_04",
+      "start_time_sec": 2400,
+      "product": "PROD_E",
+      "qty": 34,
+      "station_id": "station_4",
+      "station_position_x": 22.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "remaining_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0010",
+      "line": "LINE_05",
+      "start_time_sec": 2400,
+      "product": "PROD_A",
+      "qty": 68,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "remaining_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0011",
+      "line": "LINE_01",
+      "start_time_sec": 4800,
+      "product": "PROD_C",
+      "qty": 50,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "remaining_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0012",
+      "line": "LINE_02",
+      "start_time_sec": 4800,
+      "product": "PROD_D",
+      "qty": 43,
+      "station_id": "station_2",
+      "station_position_x": 9.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "remaining_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0013",
+      "line": "LINE_03",
+      "start_time_sec": 4800,
+      "product": "PROD_E",
+      "qty": 34,
+      "station_id": "station_3",
+      "station_position_x": 15.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "remaining_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0014",
+      "line": "LINE_04",
+      "start_time_sec": 4800,
+      "product": "PROD_A",
+      "qty": 68,
+      "station_id": "station_4",
+      "station_position_x": 22.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "remaining_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0015",
+      "line": "LINE_05",
+      "start_time_sec": 4800,
+      "product": "PROD_B",
+      "qty": 57,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "remaining_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0016",
+      "line": "LINE_01",
+      "start_time_sec": 7200,
+      "product": "PROD_D",
+      "qty": 43,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "remaining_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0017",
+      "line": "LINE_02",
+      "start_time_sec": 7200,
+      "product": "PROD_E",
+      "qty": 34,
+      "station_id": "station_2",
+      "station_position_x": 9.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "remaining_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0018",
+      "line": "LINE_03",
+      "start_time_sec": 7200,
+      "product": "PROD_A",
+      "qty": 68,
+      "station_id": "station_3",
+      "station_position_x": 15.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "remaining_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0019",
+      "line": "LINE_04",
+      "start_time_sec": 7200,
+      "product": "PROD_B",
+      "qty": 57,
+      "station_id": "station_4",
+      "station_position_x": 22.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "remaining_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0020",
+      "line": "LINE_05",
+      "start_time_sec": 7200,
+      "product": "PROD_C",
+      "qty": 50,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "remaining_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0021",
+      "line": "LINE_01",
+      "start_time_sec": 9600,
+      "product": "PROD_E",
+      "qty": 34,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "remaining_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0022",
+      "line": "LINE_02",
+      "start_time_sec": 9600,
+      "product": "PROD_A",
+      "qty": 68,
+      "station_id": "station_2",
+      "station_position_x": 9.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "remaining_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0023",
+      "line": "LINE_03",
+      "start_time_sec": 9600,
+      "product": "PROD_B",
+      "qty": 57,
+      "station_id": "station_3",
+      "station_position_x": 15.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "remaining_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0024",
+      "line": "LINE_04",
+      "start_time_sec": 9600,
+      "product": "PROD_C",
+      "qty": 50,
+      "station_id": "station_4",
+      "station_position_x": 22.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "remaining_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0025",
+      "line": "LINE_05",
+      "start_time_sec": 9600,
+      "product": "PROD_D",
+      "qty": 43,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "remaining_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0026",
+      "line": "LINE_01",
+      "start_time_sec": 12000,
+      "product": "PROD_A",
+      "qty": 68,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "remaining_parts": {
+        "PART_01": 204,
+        "PART_02": 340,
+        "PART_03": 680,
+        "PART_06": 272
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0027",
+      "line": "LINE_02",
+      "start_time_sec": 12000,
+      "product": "PROD_B",
+      "qty": 57,
+      "station_id": "station_2",
+      "station_position_x": 9.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "remaining_parts": {
+        "PART_01": 114,
+        "PART_02": 456,
+        "PART_04": 1425,
+        "PART_07": 57
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0028",
+      "line": "LINE_03",
+      "start_time_sec": 12000,
+      "product": "PROD_C",
+      "qty": 50,
+      "station_id": "station_3",
+      "station_position_x": 15.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "remaining_parts": {
+        "PART_01": 200,
+        "PART_03": 750,
+        "PART_05": 250,
+        "PART_08": 100
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0029",
+      "line": "LINE_04",
+      "start_time_sec": 12000,
+      "product": "PROD_D",
+      "qty": 43,
+      "station_id": "station_4",
+      "station_position_x": 22.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "remaining_parts": {
+        "PART_02": 258,
+        "PART_04": 1290,
+        "PART_05": 344,
+        "PART_09": 430
+      },
+      "status": "waiting"
+    },
+    {
+      "kit_id": "KIT_0030",
+      "line": "LINE_05",
+      "start_time_sec": 12000,
+      "product": "PROD_E",
+      "qty": 34,
+      "station_id": "station_1",
+      "station_position_x": 2.5,
+      "station_position_y": 40,
+      "required_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "remaining_parts": {
+        "PART_01": 170,
+        "PART_02": 136,
+        "PART_05": 408,
+        "PART_10": 204
+      },
+      "status": "waiting"
+    }
+  ]
+}
