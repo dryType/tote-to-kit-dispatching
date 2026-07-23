@@ -112,5 +112,73 @@
             "position_x": 22.5,
             "position_y": 40
         }
+    ],
+    "map_bounds":{
+        "min_x": 0,
+        "max_x": 35,
+        "min_y": 0,
+        "max_y": 40
+    },
+    "agv_depots": [
+        {
+            "depot_id": "depot_1",
+            "position_x": 30,
+            "position_y": 24
+        },
+        {
+            "depot_id": "depot_2",
+            "position_x": 30,
+            "position_y": 26
+        },
+        {
+            "depot_id": "depot_3",
+            "position_x": 30,
+            "position_y": 28
+        },
+        {
+            "depot_id": "depot_4",
+            "position_x": 30,
+            "position_y": 30
+        },
+        {
+            "depot_id": "depot_5",
+            "position_x": 30,
+            "position_y": 32
+        },
+        {
+            "depot_id": "depot_6",
+            "position_x": 30,
+            "position_y": 34
+        },
+        {
+            "depot_id": "depot_7",
+            "position_x": 32,
+            "position_y": 24
+        },
+        {
+            "depot_id": "depot_8",
+            "position_x": 32,
+            "position_y": 26
+        },
+        {
+            "depot_id": "depot_9",
+            "position_x": 32,
+            "position_y": 28
+        },
+        {
+            "depot_id": "depot_10",
+            "position_x": 32,
+            "position_y": 30
+        },
+        {
+            "depot_id": "depot_11",
+            "position_x": 32,
+            "position_y": 32
+        },
+        {
+            "depot_id": "depot_12",
+            "position_x": 32,
+            "position_y": 34
+        }
     ]
 }

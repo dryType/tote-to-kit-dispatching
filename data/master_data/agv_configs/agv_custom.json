@@ -1,52 +1,52 @@
 [
     {
         "agv_id": "AGV_01",
-        "initial_position_x": "0",
-        "initial_position_y": "0"
+        "initial_position_x": "30",
+        "initial_position_y": "24"
     },
     {
         "agv_id": "AGV_02",
-        "initial_position_x": "0",
-        "initial_position_y": "0"
+        "initial_position_x": "30",
+        "initial_position_y": "26"
     },
     {
         "agv_id": "AGV_03",
-        "initial_position_x": "0",
-        "initial_position_y": "0"
+        "initial_position_x": "30",
+        "initial_position_y": "28"
     },
     {
         "agv_id": "AGV_04",
-        "initial_position_x": "0",
-        "initial_position_y": "0"
+        "initial_position_x": "30",
+        "initial_position_y": "30"
     },
     {
         "agv_id": "AGV_05",
-        "initial_position_x": "0",
-        "initial_position_y": "0"
+        "initial_position_x": "30",
+        "initial_position_y": "32"
     },
     {
         "agv_id": "AGV_06",
-        "initial_position_x": "0",
-        "initial_position_y": "0"
+        "initial_position_x": "30",
+        "initial_position_y": "34"
     },
     {
         "agv_id": "AGV_07",
-        "initial_position_x": "0",
-        "initial_position_y": "0"
+        "initial_position_x": "32",
+        "initial_position_y": "24"
     },
     {
         "agv_id": "AGV_08",
-        "initial_position_x": "0",
-        "initial_position_y": "0"
+        "initial_position_x": "32",
+        "initial_position_y": "26"
     },
     {
         "agv_id": "AGV_09",
-        "initial_position_x": "0",
-        "initial_position_y": "0"
+        "initial_position_x": "32",
+        "initial_position_y": "28"
     },
     {
         "agv_id": "AGV_10",
-        "initial_position_x": "0",
-        "initial_position_y": "0"
+        "initial_position_x": "32",
+        "initial_position_y": "30"
     }
 ]
