@@ -2,12 +2,14 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any, Dict, List, Optional
 
 import simpy
 
 from config.constants import KitSpec, ToteSpec
-from simulation_engine.orderManager import OrderManager
+
+if TYPE_CHECKING:
+    from simulation_engine.orderManager import OrderManager
 
 
 @dataclass
@@ -179,6 +181,7 @@ class Kit:
     kit_total_capacity_cm3: int = KitSpec.TOTAL_CAPACITY_CM3
     required_volume_cm3: Optional[int] = None
     filled_parts: Dict[str, int] = field(default_factory=dict)
+    completed_time_sec: Optional[int] = None
 
     @classmethod
     def from_dict(cls, d: Dict[str, Any]) -> "Kit":
@@ -278,6 +281,12 @@ class Kit:
         self.assigned_station = station
         self.status = KitStatus.IN_PROGRESS
 
+    def complete_kit(self, now: float) -> None:
+        if not self.is_completed():
+            raise ValueError(f"Kit {self.kit_id} is not yet completed.")
+        self.status = KitStatus.COMPLETED
+        self.completed_time_sec = now
+
 
 class StationStatus:
     IDLE = "idle"
@@ -331,6 +340,7 @@ class KittingStation:
             )
         self.assigned_kit = kit
         self.status = StationStatus.KITTING
+        kit.assign_station(self)
 
     def complete_kit(self) -> Optional[Kit]:
         completed = self.assigned_kit

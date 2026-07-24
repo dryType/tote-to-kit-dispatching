@@ -41,7 +41,8 @@ class Dispatcher:
             return False
 
         tote_to_kit_candidates = generate_candidates(
-            self.world_state.stations, self.world_state.totes
+            list(self.world_state.stations.values()),
+            list(self.world_state.totes.values()),
         )
         if not tote_to_kit_candidates:
             return False

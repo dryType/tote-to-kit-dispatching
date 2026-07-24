@@ -3,7 +3,11 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, NamedTuple, Optional
+
+from attr import dataclass
+
+from simulation_engine.entities import AGV, Kit, KittingStation, Tote
 
 try:
     from simulation_engine import entities
@@ -100,7 +104,7 @@ def load_entities_from_dataset(
     }
 
 
-def load_entities_from_scenario(scenario_name: str) -> Dict[str, Any]:
+def load_entities_from_scenario(scenario_name: str) -> ScenarioEntities:
     dataset_dir = _scenario_dataset_dir(scenario_name)
     totes_path = dataset_dir / "totes.json"
     kits_path = dataset_dir / "kits.json"
@@ -116,12 +120,12 @@ def load_entities_from_scenario(scenario_name: str) -> Dict[str, Any]:
     if not layout_path.exists():
         raise FileNotFoundError(f"Layout file not found: {layout_path}")
 
-    return {
-        "totes": load_totes(totes_path),
-        "kits": load_kits(kits_path),
-        "stations": load_stations_from_layout(layout_path),
-        "agvs": load_agvs(agv_config_path),
-    }
+    return ScenarioEntities(
+        totes=load_totes(totes_path),
+        kits=load_kits(kits_path),
+        stations=load_stations_from_layout(layout_path),
+        agvs=load_agvs(agv_config_path),
+    )
 
 
 if __name__ == "__main__":
@@ -141,3 +145,10 @@ if __name__ == "__main__":
     print(
         f"Loaded {len(entities_map['stations'])} stations, {len(entities_map['agvs'])} agvs"
     )
+
+
+class ScenarioEntities(NamedTuple):
+    totes: List[Tote]
+    kits: List[Kit]
+    stations: List[KittingStation]
+    agvs: List[AGV]

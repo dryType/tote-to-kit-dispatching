@@ -15,7 +15,7 @@ from simulation_engine.metrics import Metrics
 
 def _calc_agv_travel_time(p1: Position, p2: Position) -> float:
     dist = abs(p2.x - p1.x) + abs(p2.y - p1.y)  # Manhattan distance
-    return dist / AGVSpec.AGV_SPEED
+    return dist / AGVSpec.SPEED_M_PER_S
 
 
 def agv_transport_process(
@@ -94,6 +94,7 @@ def kitting_process(
 
     if candidate.kit.is_completed():
         candidate.station.complete_kit()
+        candidate.kit.complete_kit(env.now)
         env.process(
             kit_replacement_process(env, candidate.station, dispatcher, metrics)
         )
@@ -109,6 +110,8 @@ def kit_replacement_process(
 ):
     new_kit = station.order_manager.pop_next_kit()
     if new_kit is None:
+        if station.order_manager.is_all_completed():
+            print(f"All kits completed at t={env.now}.")
         return
 
     yield env.timeout(KittingStationSpec.KIT_CHANGING_TIME_SEC)
