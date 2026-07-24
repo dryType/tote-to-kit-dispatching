@@ -1,5 +1,3 @@
-from typing import List
-
 import simpy
 
 from policy.base_policy import BasePolicy
@@ -13,9 +11,9 @@ from simulation_engine.state import WorldStateSnapshot
 class Simulator:
     def __init__(
         self,
-        agvs: List[AGV],
-        stations: List[KittingStation],
-        totes: List[Tote],
+        agvs: list[AGV],
+        stations: list[KittingStation],
+        totes: list[Tote],
         order_manager: OrderManager,
         policy: BasePolicy,
         sim_time_limit: float = 3600.0,
@@ -35,7 +33,7 @@ class Simulator:
 
             initial_kit = self.order_manager.pop_next_kit()
             if initial_kit is not None:
-                station.assign_kit(initial_kit)
+                station.assign_kit(initial_kit, 0)
 
         self.world_state = WorldStateSnapshot(
             now=0.0,

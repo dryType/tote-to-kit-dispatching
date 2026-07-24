@@ -1,5 +1,3 @@
-from typing import Optional
-
 import simpy
 
 from config.constants import AGVSpec, KittingStationSpec
@@ -23,7 +21,7 @@ def agv_transport_process(
     agv: AGV,
     candidate: DispatchCandidate,
     dispatcher: dispatcher.Dispatcher,
-    metrics: Optional[Metrics],
+    metrics: Metrics | None,
 ):
 
     # agv가 작업 할당받아 storage_bin으로 이동 시작
@@ -51,6 +49,16 @@ def agv_transport_process(
 
     # agv docking position 도착 & kitting 작업 대기
     agv.start_docking()
+
+    if metrics is not None:
+        metrics.record_kitting_started(
+            env.now,
+            agv_id=agv.agv_id,
+            tote_id=candidate.tote.tote_id,
+            station_id=candidate.station.station_id,
+            kit_id=candidate.kit.kit_id,
+        )
+
     yield from kitting_process(env, agv, candidate, dispatcher, metrics)
 
     # kitting 작업 완료. storage_bin으로 복귀
@@ -63,7 +71,7 @@ def agv_transport_process(
 
     agv.unload_tote()
     agv.update_position(agv.target_storage_position)
-    agv.finish_task()
+    agv.finish_task(env.now)
 
     dispatcher.notify()
 
@@ -73,7 +81,7 @@ def kitting_process(
     agv: AGV,
     candidate: DispatchCandidate,
     dispatcher: dispatcher.Dispatcher,
-    metrics: Optional[Metrics],
+    metrics: Metrics | None,
 ):
     total_transfer_time = 0
     for part_id, qty in candidate.matched_parts.items():
@@ -92,11 +100,24 @@ def kitting_process(
         candidate.kit.confirm_reserved_parts(part_id, qty)
         candidate.tote.pick_part(part_id, qty)
 
+    if metrics is not None:
+        metrics.record_kitting_completed(
+            env.now,
+            agv_id=agv.agv_id,
+            tote_id=candidate.tote.tote_id,
+            station_id=candidate.station.station_id,
+            kit_id=candidate.kit.kit_id,
+            transferred_parts=dict(candidate.matched_parts),
+            completed=candidate.kit.is_completed(),
+        )
+
     if candidate.kit.is_completed():
         candidate.station.complete_kit()
         candidate.kit.complete_kit(env.now)
         env.process(
-            kit_replacement_process(env, candidate.station, dispatcher, metrics)
+            kit_replacement_process(
+                env, candidate.station, dispatcher, metrics, candidate.kit.kit_id
+            )
         )
 
     dispatcher.notify()
@@ -106,14 +127,32 @@ def kit_replacement_process(
     env: simpy.Environment,
     station: KittingStation,
     dispatcher: dispatcher.Dispatcher,
-    metrics: Optional[Metrics],
+    metrics: Metrics | None,
+    old_kit_id: str,
 ):
     new_kit = station.order_manager.pop_next_kit()
     if new_kit is None:
         if station.order_manager.is_all_completed():
             print(f"All kits completed at t={env.now}.")
+            metrics.record_simulation_end(env.now)
+        if metrics is not None:
+            metrics.record_kit_replacement(
+                env.now,
+                station_id=station.station_id,
+                old_kit_id=old_kit_id,
+                new_kit_id=None,
+            )
         return
 
     yield env.timeout(KittingStationSpec.KIT_CHANGING_TIME_SEC)
-    station.assign_kit(new_kit)
+    station.assign_kit(new_kit, env.now)
+
+    if metrics is not None:
+        metrics.record_kit_replacement(
+            env.now,
+            station_id=station.station_id,
+            old_kit_id=old_kit_id,
+            new_kit_id=new_kit.kit_id,
+        )
+
     dispatcher.notify()

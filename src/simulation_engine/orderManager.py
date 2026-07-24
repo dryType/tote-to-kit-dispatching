@@ -1,14 +1,12 @@
-from typing import List, Optional
-
 from simulation_engine.entities import Kit
 
 
 class OrderManager:
-    def __init__(self, pending_kits: List[Kit]):
-        self.pending_kits: List[Kit] = pending_kits
-        self.activated_kits: List[Kit] = []
+    def __init__(self, pending_kits: list[Kit]):
+        self.pending_kits: list[Kit] = pending_kits
+        self.activated_kits: list[Kit] = []
 
-    def pop_next_kit(self) -> Optional[Kit]:
+    def pop_next_kit(self) -> Kit | None:
         if not self.pending_kits:
             return None
 

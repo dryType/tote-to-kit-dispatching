@@ -33,13 +33,17 @@ class ScenarioRunner:
 
         metrics = simulator.run()
 
-        #kit의 deaeline과 completion time을 비교하여 지표를 확인할 수 있음
+        # kit의 deaeline과 completion time을 비교하여 지표를 확인할 수 있음
         for kit in order_manager.activated_kits:
             print(
-                f"Kit {kit.kit_id} completed at t={kit.completed_time_sec}, "
-                f"deadline was t={kit.start_time_sec}."
+                f"Kit {kit.kit_id} started at t={kit.started_time_sec:.1f}, completed at t={kit.completed_time_sec:.1f}, "
+                f"duration = {kit.completed_time_sec - kit.started_time_sec:.1f}, deadline was t={kit.start_time_sec:.1f}."
             )
-            
+
+        metrics.print_summary()
+        metrics.print_agv_utilization(agvs)
+        metrics.to_dataframe().to_csv(f"metrics_{self.scenario_name}.csv", index=False)
+
         return metrics
 
 
@@ -48,8 +52,4 @@ if __name__ == "__main__":
 
     runner = ScenarioRunner("custom", policy)
     metrics = runner.run()
-
-    
-
-    # 지표 확인
-    # print(f"Completed Kits: {metrics.completed_kits_count}")
+    # metrics 결과 확인

@@ -53,7 +53,17 @@ class Dispatcher:
         if not selected_dispatching or not selected_agv:
             return False
 
-        selected_dispatching.execute_dispatch(selected_agv)
+        selected_dispatching.execute_dispatch(selected_agv, self.env.now)
+
+        if self.metrics is not None:
+            self.metrics.record_dispatch(
+                self.env.now,
+                agv_id=selected_agv.agv_id,
+                tote_id=selected_dispatching.tote.tote_id,
+                station_id=selected_dispatching.station.station_id,
+                kit_id=selected_dispatching.kit.kit_id,
+                matched_parts=dict(selected_dispatching.matched_parts),
+            )
 
         self.env.process(
             agv_transport_process(

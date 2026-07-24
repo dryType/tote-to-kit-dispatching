@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass, field
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any
 
 import simpy
 
@@ -16,15 +16,15 @@ if TYPE_CHECKING:
 class Component:
     part_id: str
     quantity: int
-    lot_size: Optional[int] = None
-    carton_count: Optional[int] = None
-    v_part: Optional[int] = None
-    v_carton: Optional[int] = None
-    used_carton_volume_cm3: Optional[int] = None
-    dead_space_volume_cm3: Optional[int] = None
+    lot_size: int | None = None
+    carton_count: int | None = None
+    v_part: int | None = None
+    v_carton: int | None = None
+    used_carton_volume_cm3: int | None = None
+    dead_space_volume_cm3: int | None = None
 
     @classmethod
-    def from_dict(cls, d: Dict[str, Any]) -> "Component":
+    def from_dict(cls, d: dict[str, Any]) -> Component:
         return cls(
             part_id=d.get("part_id", ""),
             quantity=int(d.get("quantity", 0)),
@@ -36,7 +36,7 @@ class Component:
             dead_space_volume_cm3=d.get("dead_space_volume_cm3"),
         )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "part_id": self.part_id,
             "quantity": self.quantity,
@@ -77,9 +77,9 @@ class ToteStatus:
 class Tote:
     tote_id: str
     tote_type: str
-    location_id: Optional[str] = None
-    position: Optional[Position] = None
-    contents: List[Component] = field(default_factory=list)
+    location_id: str | None = None
+    position: Position | None = None
+    contents: list[Component] = field(default_factory=list)
     used_volume_cm3: int = 0
     remaining_capacity_cm3: int = 0
     max_capacity_cm3: int = ToteSpec.MAX_CAPACITY_CM3
@@ -89,7 +89,7 @@ class Tote:
         self.update_used_volume_cm3()
 
     @classmethod
-    def from_dict(cls, d: Dict[str, Any]) -> "Tote":
+    def from_dict(cls, d: dict[str, Any]) -> Tote:
         contents = [Component.from_dict(c) for c in d.get("contents", [])]
         return cls(
             tote_id=d.get("tote_id", ""),
@@ -105,7 +105,7 @@ class Tote:
             remaining_capacity_cm3=int(d.get("remaining_capacity_cm3", 0)),
         )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "tote_id": self.tote_id,
             "tote_type": self.tote_type,
@@ -149,7 +149,7 @@ class Tote:
     def is_empty(self) -> bool:
         return len(self.contents) == 0
 
-    def get_part_summary(self) -> Dict[str, int]:
+    def get_part_summary(self) -> dict[str, int]:
         return {c.part_id: c.quantity for c in self.contents}
 
     def mark_as_busy(self):
@@ -168,23 +168,24 @@ class KitStatus:
 @dataclass
 class Kit:
     kit_id: str
-    source_plan_index: Optional[int] = None
-    line: Optional[str] = None
-    start_time_sec: Optional[int] = None
-    product: Optional[str] = None
-    qty: Optional[int] = None
-    assigned_station: Optional[KittingStation] = None
-    required_parts: Dict[str, int] = field(default_factory=dict)
-    reserved_parts: Dict[str, int] = field(default_factory=dict)
+    source_plan_index: int | None = None
+    line: str | None = None
+    start_time_sec: int | None = None
+    product: str | None = None
+    qty: int | None = None
+    assigned_station: KittingStation | None = None
+    required_parts: dict[str, int] = field(default_factory=dict)
+    reserved_parts: dict[str, int] = field(default_factory=dict)
     status: str = KitStatus.WAITING  # waiting, in_progress, completed
-    kit_dimensions_cm: Dict[str, Any] = field(default_factory=dict)
+    kit_dimensions_cm: dict[str, Any] = field(default_factory=dict)
     kit_total_capacity_cm3: int = KitSpec.TOTAL_CAPACITY_CM3
-    required_volume_cm3: Optional[int] = None
-    filled_parts: Dict[str, int] = field(default_factory=dict)
-    completed_time_sec: Optional[int] = None
+    required_volume_cm3: int | None = None
+    filled_parts: dict[str, int] = field(default_factory=dict)
+    started_time_sec: int | None = None
+    completed_time_sec: int | None = None
 
     @classmethod
-    def from_dict(cls, d: Dict[str, Any]) -> "Kit":
+    def from_dict(cls, d: dict[str, Any]) -> Kit:
         req_parts = d.get("required_parts", {})
         filled_parts = d.get("filled_parts") or {p: 0 for p in req_parts.keys()}
         return cls(
@@ -207,7 +208,7 @@ class Kit:
             filled_parts=filled_parts,
         )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "kit_id": self.kit_id,
             "source_plan_index": self.source_plan_index,
@@ -267,7 +268,7 @@ class Kit:
             del self.reserved_parts[part_id]
         self.add_parts(part_id, quantity)
 
-    def get_remaining_parts(self) -> Dict[str, int]:
+    def get_remaining_parts(self) -> dict[str, int]:
         remaining_parts = {}
         for part_id, req_qty in self.required_parts.items():
             filled_qty = self.filled_parts.get(part_id, 0)
@@ -277,9 +278,10 @@ class Kit:
                 remaining_parts[part_id] = remaining_qty
         return remaining_parts
 
-    def assign_station(self, station: KittingStation) -> None:
+    def assign_station(self, station: KittingStation, now: float) -> None:
         self.assigned_station = station
         self.status = KitStatus.IN_PROGRESS
+        self.started_time_sec = now
 
     def complete_kit(self, now: float) -> None:
         if not self.is_completed():
@@ -297,13 +299,13 @@ class StationStatus:
 @dataclass
 class KittingStation:
     station_id: str
-    position: Optional[Position] = None
+    position: Position | None = None
     assigned_agv_count: int = 0
     status: str = StationStatus.IDLE
-    assigned_kit: Optional[Kit] = None
-    completed_kits: List[Kit] = field(default_factory=list)
-    dock: Optional[simpy.Resource] = field(default=None, init=False, repr=False)
-    order_manager: Optional[OrderManager] = None
+    assigned_kit: Kit | None = None
+    completed_kits: list[Kit] = field(default_factory=list)
+    dock: simpy.Resource | None = field(default=None, init=False, repr=False)
+    order_manager: OrderManager | None = None
 
     def init_simulation(
         self, env: simpy.Environment, order_manager: OrderManager
@@ -312,7 +314,7 @@ class KittingStation:
         self.order_manager = order_manager
 
     @classmethod
-    def from_dict(cls, d: Dict[str, Any]) -> "KittingStation":
+    def from_dict(cls, d: dict[str, Any]) -> KittingStation:
         return cls(
             station_id=d.get("station_id", ""),
             position=Position(
@@ -322,7 +324,7 @@ class KittingStation:
             else None,
         )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "station_id": self.station_id,
             "position_x": self.position.x if self.position else None,
@@ -333,16 +335,16 @@ class KittingStation:
             "completed_kits_count": len(self.completed_kits),
         }
 
-    def assign_kit(self, kit: Kit) -> None:
+    def assign_kit(self, kit: Kit, now: float) -> None:
         if self.assigned_kit is not None:
             raise ValueError(
                 f"Station {self.station_id} already has an assigned kit {self.assigned_kit.kit_id}."
             )
         self.assigned_kit = kit
         self.status = StationStatus.KITTING
-        kit.assign_station(self)
+        kit.assign_station(self, now)
 
-    def complete_kit(self) -> Optional[Kit]:
+    def complete_kit(self) -> Kit | None:
         completed = self.assigned_kit
         if not completed:
             return None
@@ -387,29 +389,19 @@ class AGVStatus:
     RETURNING_TO_STORAGE = "returning_to_storage"
 
 
-# [1. idle]
-#   └─ (작업 할당) ──> [2. moving_to_storage]
-#                          └─ (토트 적재 완료) ──> [3. moving_to_station]
-#                                                        │
-#                                      ┌─────────────────┴─────────────────┐
-#                             (스테이션 점유 중)                   (스테이션 비어있음)
-#                                      ▼                                   ▼
-#                              [5. waiting] ──(앞 AGV 완료)──> [4. docking / working]
-#                                                                          │
-# [7. idle] <──(대기 상태 복귀)── [6. returning_to_storage] <──(피킹/작업 완료)──┘
-
-
 @dataclass
 class AGV:
     agv_id: str
-    position: Optional[Position] = None
+    position: Position | None = None
     status: str = AGVStatus.IDLE
-    carried_tote: Optional[Tote] = None
-    target_storage_position: Optional[Position] = None
-    target_station: Optional[KittingStation] = None
+    carried_tote: Tote | None = None
+    target_storage_position: Position | None = None
+    target_station: KittingStation | None = None
+    total_work_time: float = 0
+    last_start_time: float = 0
 
     @classmethod
-    def from_dict(cls, d: Dict[str, Any]) -> "AGV":
+    def from_dict(cls, d: dict[str, Any]) -> AGV:
         return cls(
             agv_id=d.get("agv_id") or d.get("id", ""),
             position=Position(
@@ -422,7 +414,7 @@ class AGV:
             status=d.get("status", AGVStatus.IDLE),
         )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "agv_id": self.agv_id,
             "position_x": self.position.x if self.position else None,
@@ -437,10 +429,13 @@ class AGV:
             else None,
         }
 
-    def assign_task(self, storage_position: Position, station: KittingStation) -> None:
+    def assign_task(
+        self, storage_position: Position, station: KittingStation, now: float
+    ) -> None:
         self.target_storage_position = storage_position
         self.target_station = station
         self.status = AGVStatus.MOVING_TO_STORAGE
+        self.last_start_time = now
 
     def head_to_station(self) -> None:
         self.status = AGVStatus.MOVING_TO_STATION
@@ -474,14 +469,20 @@ class AGV:
         self.carried_tote = None
         return tote
 
-    def finish_task(self) -> None:
+    def finish_task(self, now: float) -> None:
         self.status = AGVStatus.IDLE
         self.carried_tote = None
         self.target_storage_position = None
         self.target_station = None
+        self.total_work_time += now - self.last_start_time
 
     def is_idle(self) -> bool:
         return self.status == AGVStatus.IDLE
+
+    def get_idle_ratio(self, total_simulation_time: float) -> float:
+        if total_simulation_time <= 0:
+            raise ValueError("Total simulation time must be greater than zero.")
+        return (total_simulation_time - self.total_work_time) / total_simulation_time
 
 
 @dataclass(frozen=True)
@@ -489,13 +490,10 @@ class DispatchCandidate:
     tote: Tote
     station: KittingStation
     kit: Kit
-    matched_parts: Dict[str, int]
+    matched_parts: dict[str, int]
 
-    def execute_dispatch(self, selected_agv: AGV) -> None:
-        selected_agv.assign_task(
-            self.tote.position,
-            self.kit.assigned_station,
-        )
+    def execute_dispatch(self, selected_agv: AGV, now: float) -> None:
+        selected_agv.assign_task(self.tote.position, self.kit.assigned_station, now)
         self.station.increment_agv_count()
         self.tote.mark_as_busy()
         for part, quantity in self.matched_parts.items():
