@@ -5,17 +5,31 @@ from typing import Any
 
 import pandas as pd
 
-from simulation_engine.entities import AGV
+from policy.base_policy import BasePolicy
+from simulation_engine.entities import AGV, Kit, KittingStation, Tote
+from simulation_engine.orderManager import OrderManager
 
 
 class Metrics:
-    def __init__(self):
+    def __init__(
+        self,
+        agvs: list[AGV],
+        stations: list[KittingStation],
+        totes: list[Tote],
+        order_manager: OrderManager,
+        policy: BasePolicy,
+    ):
         self.event_logs: list[dict[str, Any]] = []
         self.dispatched_count = 0
         self.kitting_started_count = 0
         self.tote_kitting_completed_count = 0
         self.completed_kit_count = 0
         self.kit_replacement_count = 0
+        self.agvs = agvs
+        self.stations = stations
+        self.totes = totes
+        self.order_manager = order_manager
+        self.policy = policy
 
     @property
     def kitting_completed_count(self) -> int:
@@ -27,7 +41,6 @@ class Metrics:
     def record_dispatch(
         self,
         now: float,
-        *,
         agv_id: str,
         tote_id: str,
         station_id: str,
@@ -231,3 +244,120 @@ class Metrics:
         print(f"Total Tote Process Completed: {self.kitting_completed_count}")
         print(f"Total Kit Replacements     : {self.kit_replacement_count}")
         print("==================================\n")
+
+    def export_to_html_report(
+        self,
+        kits: list[Kit],
+        totes: list[Tote],
+        filename: str = "simulation_report.html",
+    ):
+        """전체 이력을 브라우저에서 바로 볼 수 있는 HTML 리포트로 추출"""
+
+        # 1. 데이터 프레임 생성 (이전 로직 동일)
+        # [Tote DataFrame]
+        tote_logs = []
+        for tote in totes:
+            history = getattr(tote, "assigned_history", [])
+            assigned_kits = [h[0] for h in history] if history else []
+            tote_logs.append(
+                {
+                    "Tote ID": tote.tote_id,
+                    "총 이송 횟수": len(history),
+                    "잔량": f"{tote.get_remaining_component_summary()}",
+                    "할당된 Kit 목록": ", ".join(assigned_kits),
+                }
+            )
+        df_totes = pd.DataFrame(tote_logs)
+
+        # [Kit Summary DataFrame]
+        kit_logs = []
+        for kit in kits:
+            history = getattr(kit, "tote_reservation_history", [])
+            unique_totes = list(set(h["tote_id"] for h in history)) if history else []
+            start_t = getattr(kit, "start_time", 0.0)
+            comp_t = getattr(kit, "completed_time", 0.0)
+            deadline = getattr(kit, "deadline", 0.0)
+            tardiness = max(0.0, comp_t - deadline) if comp_t else 0.0
+
+            kit_logs.append(
+                {
+                    "Kit ID": kit.kit_id,
+                    "투입 토트 수": len(unique_totes),
+                    "총 배차 횟수": len(history),
+                    "소요 시간(s)": round(comp_t - start_t, 1) if comp_t else "-",
+                    "데드라인(s)": deadline,
+                    "지연 시간(s)": round(tardiness, 1),
+                    "지연 여부": "LATE" if tardiness > 0 else "OK",
+                }
+            )
+        df_kits = pd.DataFrame(kit_logs)
+
+        # [Kit Progress Timeline DataFrame]
+        progress_logs = []
+        for kit in kits:
+            history = getattr(kit, "tote_reservation_history", [])
+            prev_prog = 0.0
+            for step, h in enumerate(history, 1):
+                curr_prog = h.get("current_progress", 0.0)
+                gain = curr_prog - prev_prog
+                progress_logs.append(
+                    {
+                        "Kit ID": kit.kit_id,
+                        "Step": step,
+                        "할당 토트": h.get("tote_id"),
+                        "할당 시각(s)": round(h.get("assigned_at", 0.0), 1),
+                        "부품 매칭 내역": str(h.get("matched_parts")),
+                        "진행률 상승폭": f"+{gain * 100:.1f}%p",
+                        "누적 진행률": f"{curr_prog * 100:.1f}%",
+                    }
+                )
+                prev_prog = curr_prog
+        df_timeline = pd.DataFrame(progress_logs)
+
+        # 2. HTML 템플릿 및 CSS 스타일 정의
+        html_content = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8">
+            <title>Simulation Results Report</title>
+            <style>
+                body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background-color: #f5f5f5; }}
+                h1 {{ color: #333; border-bottom: 2px solid #4CAF50; padding-bottom: 10px; }}
+                h2 {{ color: #555; margin-top: 30px; }}
+                .table-container {{ max-height: 400px; overflow-y: auto; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }}
+                table {{ width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }}
+                th {{ background-color: #4CAF50; color: white; position: sticky; top: 0; padding: 10px; }}
+                td {{ padding: 10px; border-bottom: 1px solid #ddd; }}
+                tr:hover {{ background-color: #f1f1f1; }}
+                .late {{ color: red; font-weight: bold; }}
+                .ok {{ color: green; font-weight: bold; }}
+            </style>
+        </head>
+        <body>
+            <h1>📊 물류 시뮬레이션 전수 분석 리포트</h1>
+            
+            <h2>📦 1. 전체 토트(Tote) 상태 및 이력</h2>
+            <div class="table-container">
+                {df_totes.to_html(index=False, classes="data-table")}
+            </div>
+
+            <h2>📋 2. 전체 키트(Kit) 수행 결과</h2>
+            <div class="table-container">
+                {df_kits.to_html(index=False, classes="data-table").replace("<td>LATE</td>", '<td class="late">LATE</td>').replace("<td>OK</td>", '<td class="ok">OK</td>')}
+            </div>
+
+            <h2>⏱️ 3. 키트별 스텝 바이 스텝 진행 타임라인</h2>
+            <div class="table-container">
+                {df_timeline.to_html(index=False, classes="data-table")}
+            </div>
+        </body>
+        </html>
+        """
+
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write(html_content)
+
+        print(
+            f"✅ HTML 리포트 생성 완료: {filename} (더블 클릭하여 브라우저에서 확인 가능)"
+        )

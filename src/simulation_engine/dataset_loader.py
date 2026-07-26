@@ -45,32 +45,32 @@ def _layout_path() -> Path:
     return _data_root() / "master_data" / "layout.json"
 
 
-def load_totes(totes_path: Path) -> List[entities.Tote]:
+def load_totes(totes_path: Path) -> list[entities.Tote]:
     data = _load_json(Path(totes_path))
     totes_list = data.get("totes") if isinstance(data, dict) else data
     return [entities.Tote.from_dict(t) for t in totes_list]
 
 
-def load_kits(kits_path: Path) -> List[entities.Kit]:
+def load_kits(kits_path: Path) -> list[entities.Kit]:
     data = _load_json(Path(kits_path))
     kits_list = data.get("kits") if isinstance(data, dict) else data
     return [entities.Kit.from_dict(k) for k in kits_list]
 
 
-def load_agvs(agv_config_path: Path) -> List[entities.AGV]:
+def load_agvs(agv_config_path: Path) -> list[entities.AGV]:
     data = _load_json(Path(agv_config_path))
     agv_list = data.get("agvs") if isinstance(data, dict) else data
     return [entities.AGV.from_dict(agv) for agv in agv_list]
 
 
-def load_stations_from_layout(layout_path: Path) -> List[entities.KittingStation]:
+def load_stations_from_layout(layout_path: Path) -> list[entities.KittingStation]:
     layout = _load_json(Path(layout_path))
     stations = layout.get("kitting_stations", [])
     return [entities.KittingStation.from_dict(s) for s in stations]
 
 
-def create_agvs(count: int, start_index: int = 1) -> List[entities.AGV]:
-    agvs: List[entities.AGV] = []
+def create_agvs(count: int, start_index: int = 1) -> list[entities.AGV]:
+    agvs: list[entities.AGV] = []
     for i in range(start_index, start_index + max(0, int(count))):
         agv_id = f"AGV_{i:03d}"
         agvs.append(entities.AGV(agv_id=agv_id))
@@ -80,9 +80,9 @@ def create_agvs(count: int, start_index: int = 1) -> List[entities.AGV]:
 def load_entities_from_dataset(
     totes_path: Path,
     kits_path: Path,
-    layout_path: Optional[Path] = None,
+    layout_path: Path | None = None,
     agv_count: int = 0,
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """Return a dict of instantiated entities from dataset files.
 
     Returns a dictionary with keys: `totes`, `kits`, `stations`, `agvs`.
@@ -90,7 +90,7 @@ def load_entities_from_dataset(
     totes = load_totes(Path(totes_path))
     kits = load_kits(Path(kits_path))
 
-    stations: List[entities.KittingStation] = []
+    stations: list[entities.KittingStation] = []
     if layout_path is not None and Path(layout_path).exists():
         stations = load_stations_from_layout(Path(layout_path))
 
@@ -148,7 +148,7 @@ if __name__ == "__main__":
 
 
 class ScenarioEntities(NamedTuple):
-    totes: List[Tote]
-    kits: List[Kit]
-    stations: List[KittingStation]
-    agvs: List[AGV]
+    totes: list[Tote]
+    kits: list[Kit]
+    stations: list[KittingStation]
+    agvs: list[AGV]

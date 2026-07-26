@@ -1,7 +1,3 @@
-# simulation_engine/candidate_generator.py
-
-from typing import Dict, List
-
 from simulation_engine.entities import (
     DispatchCandidate,
     Kit,
@@ -13,8 +9,8 @@ from simulation_engine.entities import (
 
 
 def generate_candidates(
-    stations: List[KittingStation], totes: List[Tote]
-) -> List[DispatchCandidate]:
+    stations: list[KittingStation], totes: list[Tote]
+) -> list[DispatchCandidate]:
     candidates = []
 
     for station in stations:
@@ -43,7 +39,7 @@ def generate_candidates(
     return candidates
 
 
-def _calculate_matched_parts(tote: Tote, kit: Kit) -> Dict[str, int]:
+def _calculate_matched_parts(tote: Tote, kit: Kit) -> dict[str, int]:
     matched_parts = {}
     remaining_parts = kit.get_remaining_parts()
 

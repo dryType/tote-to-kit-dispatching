@@ -43,6 +43,11 @@ class ScenarioRunner:
         metrics.print_summary()
         metrics.print_agv_utilization(agvs)
         metrics.to_dataframe().to_csv(f"metrics_{self.scenario_name}.csv", index=False)
+        metrics.export_to_html_report(
+            kits=order_manager.activated_kits,
+            totes=totes,
+            filename=f"simulation_report_{self.scenario_name}.html",
+        )
 
         return metrics
 

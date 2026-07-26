@@ -2,6 +2,7 @@ import simpy
 
 from policy.base_policy import BasePolicy
 from simulation_engine.candidate_generator import generate_candidates
+from simulation_engine.metrics import Metrics
 from simulation_engine.processes import agv_transport_process
 from simulation_engine.state import WorldStateSnapshot
 
@@ -12,7 +13,7 @@ class Dispatcher:
         env: simpy.Environment,
         world_state: WorldStateSnapshot,
         policy: BasePolicy,
-        metrics=None,
+        metrics: Metrics | None,
     ):
         self.env = env
         self.world_state = world_state

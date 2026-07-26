@@ -26,7 +26,7 @@ class Simulator:
         self.sim_time_limit = sim_time_limit
 
         self.env = simpy.Environment()
-        self.metrics = Metrics()
+        self.metrics = Metrics(agvs, stations, totes, order_manager, policy)
 
         for station in self.stations:
             station.init_simulation(self.env, self.order_manager)

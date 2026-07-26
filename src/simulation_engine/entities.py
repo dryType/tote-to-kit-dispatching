@@ -84,9 +84,14 @@ class Tote:
     remaining_capacity_cm3: int = 0
     max_capacity_cm3: int = ToteSpec.MAX_CAPACITY_CM3
     status: str = ToteStatus.AVAILABLE  # available, busy
+    assigned_history: list[tuple[str, dict[str, int], float]] = field(
+        default_factory=list
+    )
+    initial_contents: list[Component] = field(default_factory=list)
 
     def __post_init__(self) -> None:
         self.update_used_volume_cm3()
+        self.initial_contents = [Component(**vars(c)) for c in self.contents]
 
     @classmethod
     def from_dict(cls, d: dict[str, Any]) -> Tote:
@@ -152,11 +157,28 @@ class Tote:
     def get_part_summary(self) -> dict[str, int]:
         return {c.part_id: c.quantity for c in self.contents}
 
-    def mark_as_busy(self):
+    def assign_to_kit(
+        self, kit_id: str, matched_parts: dict[str, int], now: float
+    ) -> None:
         self.status = ToteStatus.BUSY
+        self.assigned_history.append((kit_id, matched_parts, now))
 
     def mark_as_available(self):
         self.status = ToteStatus.AVAILABLE
+
+    def get_remaining_component_summary(self) -> str:
+        if not self.initial_contents:
+            return "Empty initial contents"
+
+        remaining_ratios = []
+        for initial_comp in self.initial_contents:
+            part_id = initial_comp.part_id
+            initial_qty = initial_comp.quantity
+            current_qty = self.get_component_quantity(part_id)
+            ratio_str = f"{part_id}({current_qty}/{initial_qty})"
+            remaining_ratios.append(ratio_str)
+
+        return ", ".join(remaining_ratios)
 
 
 class KitStatus:
@@ -183,6 +205,7 @@ class Kit:
     filled_parts: dict[str, int] = field(default_factory=dict)
     started_time_sec: int | None = None
     completed_time_sec: int | None = None
+    tote_reservation_history: list[dict[str, Any]] = field(default_factory=list)
 
     @classmethod
     def from_dict(cls, d: dict[str, Any]) -> Kit:
@@ -238,6 +261,21 @@ class Kit:
                 return False
         return True
 
+    def reserve_matched_parts(
+        self, tote_id: str, matched_parts: dict[str, int], now: float
+    ) -> None:
+        for part, quantity in matched_parts.items():
+            self.reserve_parts(part, quantity)
+
+        self.tote_reservation_history.append(
+            {
+                "tote_id": tote_id,
+                "matched_parts": matched_parts,
+                "assigned_at": now,
+                "current_progress": self.get_reserved_progress_ratio(),
+            }
+        )
+
     def reserve_parts(self, part_id: str, quantity: int) -> None:
         if part_id not in self.required_parts:
             raise ValueError(f"Part {part_id} is not required for kit {self.kit_id}.")
@@ -288,6 +326,13 @@ class Kit:
             raise ValueError(f"Kit {self.kit_id} is not yet completed.")
         self.status = KitStatus.COMPLETED
         self.completed_time_sec = now
+
+    def get_reserved_progress_ratio(self) -> float:
+        total_required = sum(self.required_parts.values())
+        total_committed = sum(self.filled_parts.values()) + sum(
+            self.reserved_parts.values()
+        )
+        return total_committed / total_required if total_required > 0 else 0.0
 
 
 class StationStatus:
@@ -495,9 +540,8 @@ class DispatchCandidate:
     def execute_dispatch(self, selected_agv: AGV, now: float) -> None:
         selected_agv.assign_task(self.tote.position, self.kit.assigned_station, now)
         self.station.increment_agv_count()
-        self.tote.mark_as_busy()
-        for part, quantity in self.matched_parts.items():
-            self.kit.reserve_parts(part, quantity)
+        self.tote.assign_to_kit(self.kit.kit_id, self.matched_parts, now)
+        self.kit.reserve_matched_parts(self.tote.tote_id, self.matched_parts, now)
 
 
 @dataclass(frozen=True)
