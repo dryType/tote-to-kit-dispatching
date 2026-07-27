@@ -1,5 +1,3 @@
-from typing import List, Optional
-
 from policy.base_policy import BasePolicy
 from simulation_engine.entities import AGV, DispatchCandidate
 from simulation_engine.state import WorldStateSnapshot
@@ -12,17 +10,18 @@ class GreedyPolicy(BasePolicy):
 
     def select(
         self,
-        candidates: List[DispatchCandidate],
-        idle_agvs: List[AGV],
+        now: float,
+        candidates: list[DispatchCandidate],
+        idle_agvs: list[AGV],
         state: WorldStateSnapshot,
-    ) -> tuple[Optional[DispatchCandidate], Optional[AGV]]:
+    ) -> tuple[DispatchCandidate | None, AGV | None]:
         if not candidates or not idle_agvs:
-            return None
+            return None, None
 
-        min_start_time = min(c.kit.start_time_sec for c in candidates)
+        min_start_time = min(c.kit.deadline_time_sec for c in candidates)
 
         same_deadline_candidates = [
-            c for c in candidates if c.kit.start_time_sec == min_start_time
+            c for c in candidates if c.kit.deadline_time_sec == min_start_time
         ]
         best_candidate = max(same_deadline_candidates, key=self._calc_progress_score)
         best_agv = min(

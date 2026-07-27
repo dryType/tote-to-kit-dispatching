@@ -192,7 +192,7 @@ class Kit:
     kit_id: str
     source_plan_index: int | None = None
     line: str | None = None
-    start_time_sec: int | None = None
+    deadline_time_sec: int | None = None
     product: str | None = None
     qty: int | None = None
     assigned_station: KittingStation | None = None
@@ -215,7 +215,7 @@ class Kit:
             kit_id=d.get("kit_id", ""),
             source_plan_index=d.get("source_plan_index"),
             line=d.get("line"),
-            start_time_sec=d.get("start_time_sec"),
+            deadline_time_sec=d.get("deadline_time_sec"),
             product=d.get("product"),
             qty=d.get("qty"),
             assigned_station=KittingStation.from_dict(d.get("assigned_station", {}))
@@ -236,7 +236,7 @@ class Kit:
             "kit_id": self.kit_id,
             "source_plan_index": self.source_plan_index,
             "line": self.line,
-            "start_time_sec": self.start_time_sec,
+            "deadline_time_sec": self.deadline_time_sec,
             "product": self.product,
             "qty": self.qty,
             "assigned_station": self.assigned_station.to_dict()
@@ -536,6 +536,7 @@ class DispatchCandidate:
     station: KittingStation
     kit: Kit
     matched_parts: dict[str, int]
+    score_info: dict[str, Any] = field(default=None, compare=False, hash=False)
 
     def execute_dispatch(self, selected_agv: AGV, now: float) -> None:
         selected_agv.assign_task(self.tote.position, self.kit.assigned_station, now)

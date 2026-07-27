@@ -895,7 +895,7 @@ def build_kits(
                     "kit_id": f"KIT_{plan_index:04d}_{sub + 1:02d}",
                     "source_plan_index": plan_index,
                     "line": line_name,
-                    "start_time_sec": int(request["start_time_sec"]),
+                    "deadline_time_sec": int(request["start_time_sec"]),
                     "product": product_id,
                     "qty": units_for_kit,
                     "station_id": station["station_id"],

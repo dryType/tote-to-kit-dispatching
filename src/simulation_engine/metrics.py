@@ -6,7 +6,7 @@ from typing import Any
 import pandas as pd
 
 from policy.base_policy import BasePolicy
-from simulation_engine.entities import AGV, Kit, KittingStation, Tote
+from simulation_engine.entities import AGV, Kit, KittingStation, Position, Tote
 from simulation_engine.orderManager import OrderManager
 
 
@@ -30,6 +30,7 @@ class Metrics:
         self.totes = totes
         self.order_manager = order_manager
         self.policy = policy
+        self.total_agv_move_distance = 0.0
 
     @property
     def kitting_completed_count(self) -> int:
@@ -46,17 +47,22 @@ class Metrics:
         station_id: str,
         kit_id: str,
         matched_parts: dict[str, int],
+        score_info: dict[str, Any]
+        | None = None,  # dispatch 선택에 대한 policy의 score 정보
+        agv_move_distance: float = 0.0,
     ) -> None:
         self.dispatched_count += 1
-        self.log_event(
-            "dispatch",
-            now,
-            agv_id=agv_id,
-            tote_id=tote_id,
-            station_id=station_id,
-            kit_id=kit_id,
-            matched_parts=matched_parts,
-        )
+        self.total_agv_move_distance += agv_move_distance
+        payload = {
+            "agv_id": agv_id,
+            "tote_id": tote_id,
+            "station_id": station_id,
+            "kit_id": kit_id,
+            "matched_parts": matched_parts,
+        }
+        if score_info:
+            payload.update(score_info)
+        self.log_event("dispatch", now, **payload)
 
     def record_kitting_started(
         self,
@@ -239,10 +245,15 @@ class Metrics:
         """종료 시점 텍스트 리포트 출력"""
         print("\n=== Simulation Metrics Summary ===")
         print(f"Makespan (End Time)        : {self.makespan:.2f} s")
+        print(
+            f"Total Tardiness            : {sum(max(0.0, k.completed_time_sec - k.deadline_time_sec) for k in self.order_manager.activated_kits):.2f} s "
+        )
+        print(
+            f"Tardiness Count            : {sum(1 for k in self.order_manager.activated_kits if k.completed_time_sec > k.deadline_time_sec)}"
+        )
         print(f"Total Dispatches           : {self.dispatched_count}")
         print(f"Total Completed Kits       : {self.completed_kits_count}")
-        print(f"Total Tote Process Completed: {self.kitting_completed_count}")
-        print(f"Total Kit Replacements     : {self.kit_replacement_count}")
+        print(f"Total Agv Move Distance    : {self.total_agv_move_distance:.2f}m")
         print("==================================\n")
 
     def export_to_html_report(

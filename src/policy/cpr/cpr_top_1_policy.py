@@ -1,0 +1,55 @@
+from dataclasses import replace
+from typing import Any
+
+from policy.base_policy import BasePolicy
+from policy.cpr.cpr_score import CPRScore
+from simulation_engine.entities import AGV, DispatchCandidate
+from simulation_engine.state import WorldStateSnapshot
+
+
+class CPRTop1Policy(BasePolicy):
+    def __init__(self, scorer: CPRScore | None = None):
+        self.scorer = scorer or CPRScore()
+
+    @property
+    def name(self):
+        return "CPR Top-1 Policy"
+
+    def select(
+        self,
+        now: float,
+        candidates: list[DispatchCandidate],
+        idle_agvs: list[AGV],
+        state: WorldStateSnapshot,
+    ) -> tuple[DispatchCandidate | None, AGV | None]:
+        if not candidates or not idle_agvs:
+            return None, None
+
+        best_candidate: DispatchCandidate | None = None
+        best_agv: AGV | None = None
+        best_score = float("-inf")
+        best_distance = float("inf")
+        d_max = self.scorer._calc_d_max(state)
+        best_score_info: dict[str, Any] | None = None
+
+        for candidate in candidates:
+            for agv in idle_agvs:
+                distance = agv.position.manhattan_distance_to(candidate.tote.position)
+                if distance > best_distance:
+                    continue
+                best_distance = distance
+                best_agv = agv
+
+            score_info = self.scorer.build_score_info(
+                now, candidate, best_agv, state, d_max=d_max
+            )
+            score = score_info["total_score"]
+            if score > best_score:
+                best_score = score
+                best_candidate = candidate
+                best_score_info = score_info
+
+        if best_candidate is not None and best_score_info is not None:
+            best_candidate = replace(best_candidate, score_info=best_score_info)
+
+        return best_candidate, best_agv

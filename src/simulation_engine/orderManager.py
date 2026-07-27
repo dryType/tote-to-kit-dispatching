@@ -10,7 +10,7 @@ class OrderManager:
         if not self.pending_kits:
             return None
 
-        next_kit = min(self.pending_kits, key=lambda kit: kit.start_time_sec)
+        next_kit = min(self.pending_kits, key=lambda kit: kit.deadline_time_sec)
         self.pending_kits.remove(next_kit)
         self.activated_kits.append(next_kit)
         return next_kit

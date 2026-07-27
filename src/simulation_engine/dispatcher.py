@@ -49,12 +49,19 @@ class Dispatcher:
             return False
 
         selected_dispatching, selected_agv = self.policy.select(
-            tote_to_kit_candidates, idle_agvs, self.world_state
+            self.env.now, tote_to_kit_candidates, idle_agvs, self.world_state
         )
         if not selected_dispatching or not selected_agv:
             return False
 
         selected_dispatching.execute_dispatch(selected_agv, self.env.now)
+        agv_move_distance = selected_agv.position.manhattan_distance_to(
+            selected_dispatching.tote.position
+        ) + 2 * (
+            selected_dispatching.tote.position.manhattan_distance_to(
+                selected_dispatching.station.position
+            )
+        )
 
         if self.metrics is not None:
             self.metrics.record_dispatch(
@@ -64,6 +71,8 @@ class Dispatcher:
                 station_id=selected_dispatching.station.station_id,
                 kit_id=selected_dispatching.kit.kit_id,
                 matched_parts=dict(selected_dispatching.matched_parts),
+                score_info=selected_dispatching.score_info,
+                agv_move_distance=agv_move_distance,
             )
 
         self.env.process(

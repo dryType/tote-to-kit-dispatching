@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import List, Optional
 
 from simulation_engine.entities import AGV, DispatchCandidate
 from simulation_engine.state import WorldStateSnapshot
@@ -15,9 +14,10 @@ class BasePolicy(ABC):
     @abstractmethod
     def select(
         self,
-        candidates: List[DispatchCandidate],
-        idle_agvs: List[AGV],
+        now: float,
+        candidates: list[DispatchCandidate],
+        idle_agvs: list[AGV],
         state: WorldStateSnapshot,
-    ) -> tuple[Optional[DispatchCandidate], Optional[AGV]]:
+    ) -> tuple[DispatchCandidate | None, AGV | None]:
         # 후보 중 하나 선택하여 반환
         pass

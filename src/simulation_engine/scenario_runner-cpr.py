@@ -7,7 +7,7 @@ if __package__ is None or __package__ == "":
         sys.path.insert(0, str(src_dir))
 
 from policy.base_policy import BasePolicy
-from policy.greedy.greedy_policy import GreedyPolicy
+from policy.cpr.cpr_top_1_policy import CPRTop1Policy
 from simulation_engine.dataset_loader import load_entities_from_scenario
 from simulation_engine.orderManager import OrderManager
 from simulation_engine.simulator import Simulator
@@ -53,7 +53,7 @@ class ScenarioRunner:
 
 
 if __name__ == "__main__":
-    policy = GreedyPolicy()
+    policy = CPRTop1Policy()
 
     runner = ScenarioRunner("custom", policy)
     metrics = runner.run()
