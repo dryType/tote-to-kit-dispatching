@@ -31,6 +31,39 @@ class Metrics:
         self.order_manager = order_manager
         self.policy = policy
         self.total_agv_move_distance = 0.0
+        self.wf1 = 0.3
+        self.wf2 = 0.7
+        self.initial_frag_index = self.calc_fragmentation_index()
+
+    def calc_tardiness_index(self, t_greedy_sq: float) -> float:
+        if t_greedy_sq <= 0:
+            return 0.0
+
+        total_tardiness_sq = sum(
+            max(0.0, k.completed_time_sec - k.deadline_time_sec) ** 2
+            for k in self.order_manager.activated_kits
+        )
+        return math.sqrt(total_tardiness_sq / t_greedy_sq)
+
+    def calc_fragmentation_index(self) -> float:
+        f_score_total = 0.0
+        for tote in self.totes:
+            f_score_tote = (
+                0
+                if tote.is_empty()
+                else self.wf1 * (1 - tote.calc_tote_used_space_ratio())
+                + self.wf2 * tote.calc_carton_dead_space_ratio()
+            )
+            f_score_total += f_score_tote
+
+        return f_score_total / len(self.totes)
+
+    def calc_distance_index(self, max_x: float, max_y: float) -> float:
+        if self.dispatched_count == 0:
+            return 0.0
+        return self.total_agv_move_distance / (
+            self.dispatched_count * 3.0 * max_x + max_y
+        )
 
     @property
     def kitting_completed_count(self) -> int:
@@ -241,16 +274,33 @@ class Metrics:
         """이벤트 로그를 데이터프레임으로 바로 반환"""
         return pd.DataFrame(self.event_logs)
 
+    def calc_total_tardiness(self) -> float:
+        return sum(
+            max(0.0, k.completed_time_sec - k.deadline_time_sec)
+            for k in self.order_manager.activated_kits
+            if k.completed_time_sec > k.deadline_time_sec
+        )
+
+    def calc_tardiness_count(self) -> int:
+        return sum(
+            1
+            for k in self.order_manager.activated_kits
+            if k.completed_time_sec > k.deadline_time_sec
+        )
+
+    def print_kit_completion_summary(self) -> None:
+        for kit in self.order_manager.activated_kits:
+            print(
+                f"Kit {kit.kit_id} started at t={kit.started_time_sec:.1f}, completed at t={kit.completed_time_sec:.1f}, "
+                f"duration = {kit.completed_time_sec - kit.started_time_sec:.1f}, deadline was t={kit.deadline_time_sec:.1f}."
+            )
+
     def print_summary(self) -> None:
         """종료 시점 텍스트 리포트 출력"""
         print("\n=== Simulation Metrics Summary ===")
         print(f"Makespan (End Time)        : {self.makespan:.2f} s")
-        print(
-            f"Total Tardiness            : {sum(max(0.0, k.completed_time_sec - k.deadline_time_sec) for k in self.order_manager.activated_kits):.2f} s "
-        )
-        print(
-            f"Tardiness Count            : {sum(1 for k in self.order_manager.activated_kits if k.completed_time_sec > k.deadline_time_sec)}"
-        )
+        print(f"Total Tardiness            : {self.calc_total_tardiness():.2f} s ")
+        print(f"Tardiness Count            : {self.calc_tardiness_count()}")
         print(f"Total Dispatches           : {self.dispatched_count}")
         print(f"Total Completed Kits       : {self.completed_kits_count}")
         print(f"Total Agv Move Distance    : {self.total_agv_move_distance:.2f}m")

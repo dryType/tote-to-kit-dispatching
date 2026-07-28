@@ -1,3 +1,4 @@
+import json
 import sys
 from pathlib import Path
 
@@ -33,15 +34,16 @@ class ScenarioRunner:
 
         metrics = simulator.run()
 
-        # kit의 deaeline과 completion time을 비교하여 지표를 확인할 수 있음
+        total_tardiness_sq = 0.0
         for kit in order_manager.activated_kits:
-            print(
-                f"Kit {kit.kit_id} started at t={kit.started_time_sec:.1f}, completed at t={kit.completed_time_sec:.1f}, "
-                f"duration = {kit.completed_time_sec - kit.started_time_sec:.1f}, deadline was t={kit.deadline_time_sec:.1f}."
-            )
+            tardiness = max(0.0, kit.completed_time_sec - kit.deadline_time_sec)
+            total_tardiness_sq += tardiness**2
 
-        metrics.print_summary()
+        print(f"Total tardiness squared: {total_tardiness_sq:.2f}")
+
+        metrics.print_kit_completion_summary()
         metrics.print_agv_utilization(agvs)
+        metrics.print_summary()
         metrics.to_dataframe().to_csv(f"metrics_{self.scenario_name}.csv", index=False)
         metrics.export_to_html_report(
             kits=order_manager.activated_kits,
@@ -54,7 +56,18 @@ class ScenarioRunner:
 
 if __name__ == "__main__":
     policy = GreedyPolicy()
+    print(__file__)
 
-    runner = ScenarioRunner("custom", policy)
+    scenario_name = "custom"
+    runner = ScenarioRunner(scenario_name, policy)
     metrics = runner.run()
+    total_tardiness = metrics.calc_total_tardiness()
+    tardiness_count = metrics.calc_tardiness_count()
+    # data/generated_datasets/scenario_"시나리오명"/greedy_result.json에 total_tardiness를 기록  경로를 못찾는듯
+    with open(
+        f"data/generated_datasets/scenario_{scenario_name}/greedy_result.json", "w"
+    ) as f:
+        json.dump(
+            {"total_tardiness": total_tardiness, "tardiness_count": tardiness_count}, f
+        )
     # metrics 결과 확인

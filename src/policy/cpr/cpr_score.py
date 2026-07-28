@@ -10,18 +10,18 @@ from simulation_engine.state import WorldStateSnapshot
 
 @dataclass(frozen=True)
 class CPRScore:
-    alpha_1: float = 0.6
-    alpha_2: float = 0.3
+    alpha_1: float = 0.9
+    alpha_2: float = 0.0
     alpha_3: float = 0.1
-    gamma1: float = 0.03
-    gamma2: float = 0.1
+    gamma1: float = 0.2
+    gamma2: float = 0.3
     epsilon: float = 0.2
     beta: float = 0.1
     lambda_: float = 0.006
     p: float = 2.0
     margin_sec: float = 1200.0
-    w_s1: float = 0.8
-    w_s2: float = 0.2
+    w_s1: float = 0.5
+    w_s2: float = 0.5
 
     def score(
         self,

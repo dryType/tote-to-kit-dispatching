@@ -8,8 +8,10 @@ from simulation_engine.state import WorldStateSnapshot
 
 
 class CPRTop1Policy(BasePolicy):
-    def __init__(self, scorer: CPRScore | None = None):
-        self.scorer = scorer or CPRScore()
+    def __init__(
+        self, alpha_1: float = 0.9, alpha_2: float = 0.0, alpha_3: float = 0.1
+    ):
+        self.scorer = CPRScore(alpha_1=alpha_1, alpha_2=alpha_2, alpha_3=alpha_3)
 
     @property
     def name(self):

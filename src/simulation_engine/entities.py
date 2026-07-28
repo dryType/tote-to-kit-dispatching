@@ -180,6 +180,22 @@ class Tote:
 
         return ", ".join(remaining_ratios)
 
+    def calc_tote_used_space_ratio(self) -> float:
+        if self.is_empty():
+            return 0.0
+        return self.used_volume_cm3 / self.max_capacity_cm3
+
+    def calc_carton_dead_space(self) -> float:
+        dead_space_volume = 0
+        for component in self.contents:
+            dead_space_volume += component.dead_space_volume_cm3
+        return dead_space_volume
+
+    def calc_carton_dead_space_ratio(self) -> float:
+        if self.is_empty():
+            return 0.0
+        return self.calc_carton_dead_space() / self.max_capacity_cm3
+
 
 class KitStatus:
     WAITING = "waiting"
