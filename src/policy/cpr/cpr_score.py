@@ -155,7 +155,7 @@ class CPRScore:
             candidate.station.position
         )
         d_max = d_max or self._calc_d_max(state)
-        return d_actual / d_max
+        return (d_actual / d_max) ** 2
 
     def _calc_d_max(self, state: WorldStateSnapshot) -> float:
         positions = []

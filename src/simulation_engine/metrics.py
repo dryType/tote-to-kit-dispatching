@@ -35,15 +35,14 @@ class Metrics:
         self.wf2 = 0.7
         self.initial_frag_index = self.calc_fragmentation_index()
 
-    def calc_tardiness_index(self, t_greedy_sq: float) -> float:
-        if t_greedy_sq <= 0:
-            return 0.0
-
-        total_tardiness_sq = sum(
-            max(0.0, k.completed_time_sec - k.deadline_time_sec) ** 2
+    def calc_tardiness_index(self, t_base: float = 1800.0) -> float:
+        total_tardiness_sec = sum(
+            max(0.0, k.completed_time_sec - k.deadline_time_sec)
             for k in self.order_manager.activated_kits
         )
-        return math.sqrt(total_tardiness_sq / t_greedy_sq)
+
+        t_hat = math.log(1.0 + (total_tardiness_sec / t_base))
+        return t_hat
 
     def calc_fragmentation_index(self) -> float:
         f_score_total = 0.0
