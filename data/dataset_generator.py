@@ -23,7 +23,7 @@ import math
 import random
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Set, Tuple
+from typing import Any, Iterable, Set
 
 BASE_DIR = Path(__file__).resolve().parent
 SCENARIO_MODULE_NAME = "scenario_custom"
@@ -112,10 +112,10 @@ def ceil_to_lot(quantity: int, lot_size: int) -> int:
 
 
 def compute_total_part_demand(
-    bom_data: Dict[str, Any], prod_plan_data: List[Dict[str, Any]]
-) -> Dict[str, int]:
+    bom_data: dict[str, Any], prod_plan_data: list[dict[str, Any]]
+) -> dict[str, int]:
     products = bom_data.get("products", {})
-    demand: Dict[str, int] = {part_id: 0 for part_id in bom_data.get("parts", {})}
+    demand: dict[str, int] = {part_id: 0 for part_id in bom_data.get("parts", {})}
 
     for request in prod_plan_data:
         product_id = request["product"]
@@ -129,12 +129,12 @@ def compute_total_part_demand(
 
 def split_stock_by_ratio(
     quantity: int, single_ratio: float, mixed_ratio: float, residual_ratio: float
-) -> Tuple[int, int, int]:
+) -> tuple[int, int, int]:
     if quantity <= 0:
         return 0, 0, 0
 
-    single_qty = int(math.floor(quantity * single_ratio))
-    mixed_qty = int(math.floor(quantity * mixed_ratio))
+    single_qty = math.floor(quantity * single_ratio)
+    mixed_qty = math.floor(quantity * mixed_ratio)
     residual_qty = quantity - single_qty - mixed_qty
 
     if residual_qty < 0:
@@ -144,7 +144,7 @@ def split_stock_by_ratio(
     return single_qty, mixed_qty, residual_qty
 
 
-def assign_storage_location(index: int, layout_data: Dict[str, Any]) -> Dict[str, Any]:
+def assign_storage_location(index: int, layout_data: dict[str, Any]) -> dict[str, Any]:
     locations = layout_data.get("storage_locations", [])
     if not locations:
         return {
@@ -162,12 +162,12 @@ def assign_storage_location(index: int, layout_data: Dict[str, Any]) -> Dict[str
 
 
 def build_tote_content(
-    part_id: str, quantity: int, part_info: Dict[str, Any]
-) -> Dict[str, Any]:
+    part_id: str, quantity: int, part_info: dict[str, Any]
+) -> dict[str, Any]:
     lot_size = int(part_info["lot_size"])
     v_part = int(part_info["v_part"])
     v_carton = int(part_info["v_carton"])
-    carton_count = 0 if quantity <= 0 else int(math.ceil(quantity / lot_size))
+    carton_count = 0 if quantity <= 0 else math.ceil(quantity / lot_size)
     used_carton_volume = carton_count * v_carton
     dead_space_units = carton_count * lot_size - quantity
     dead_space_volume = dead_space_units * v_part
@@ -185,17 +185,17 @@ def build_tote_content(
 
 
 def pack_mixed_totes(
-    mixed_and_residual_stock: Iterable[Tuple[str, int]],
-    parts_data: Dict[str, Any],
+    mixed_and_residual_stock: Iterable[tuple[str, int]],
+    parts_data: dict[str, Any],
     starting_index: int,
-    layout_data: Dict[str, Any],
+    layout_data: dict[str, Any],
     min_types: int = 1,
     max_types: int = 9999,
     seed: int | None = None,
-) -> Tuple[List[Dict[str, Any]], int]:
-    totes: List[Dict[str, Any]] = []
+) -> tuple[list[dict[str, Any]], int]:
+    totes: list[dict[str, Any]] = []
     tote_index = starting_index
-    current_tote: Dict[str, Any] | None = None
+    current_tote: dict[str, Any] | None = None
     current_volume = 0
 
     def flush_current_tote() -> None:
@@ -305,10 +305,6 @@ def pack_mixed_totes(
             ):
                 # attempt to find another future item that fits into remaining capacity
                 found_index = None
-                if seed is not None:
-                    rnd2 = random.Random(seed + 1)
-                else:
-                    rnd2 = random.Random()
                 for j in range(i + 1, len(items)):
                     pid_j, qty_j = items[j]
                     if pid_j == part_id:
@@ -370,7 +366,6 @@ def pack_mixed_totes(
             if len(t_i.get("contents", [])) > 1:
                 continue
             s_vol = t_i.get("used_volume_cm3", 0)
-            merged = False
             for j in range(len(totes)):
                 if i == j:
                     continue
@@ -388,7 +383,6 @@ def pack_mixed_totes(
                         0, t_j.get("remaining_capacity_cm3", 0) - s_vol
                     )
                     totes[i] = None
-                    merged = True
                     break
             # if not merged, leave as is
 
@@ -399,29 +393,29 @@ def pack_mixed_totes(
 
 
 def pack_mixed_grouped(
-    mixed_pool: Iterable[Tuple[str, int]],
-    parts_data: Dict[str, Any],
+    mixed_pool: list[tuple[str, int]],
+    parts_data: dict[str, Any],
     starting_index: int,
-    layout_data: Dict[str, Any],
+    layout_data: dict[str, Any],
     min_types: int = 2,
-    max_types: int = 4,
+    max_types: int = 3,
     seed: int | None = 42,
-) -> Tuple[List[Dict[str, Any]], int]:
+) -> tuple[list[dict[str, Any]], int]:
     """
     Group parts into seeded groups of 2-4 distinct parts and pack full-carton units
     in a round-robin fashion into mixed totes. Ensures mixed totes contain >= min_types
     distinct parts when physically possible (full-carton constraint preserved).
     """
-    totes: List[Dict[str, Any]] = []
+    totes: list[dict[str, Any]] = []
     tote_index = starting_index
     rnd = random.Random(seed) if seed is not None else random.Random()
 
     # compute cartons per part (full cartons only)
-    cartons_per_part: Dict[str, int] = {}
-    lot_sizes: Dict[str, int] = {}
+    cartons_per_part: dict[str, int] = {}
+    lot_sizes: dict[str, int] = {}
     for part_id, qty in mixed_pool:
         lot = int(parts_data[part_id]["lot_size"])
-        cartons = max(0, qty // lot)
+        cartons = qty // lot
         if cartons > 0:
             cartons_per_part[part_id] = cartons_per_part.get(part_id, 0) + cartons
             lot_sizes[part_id] = lot
@@ -430,14 +424,14 @@ def pack_mixed_grouped(
         return totes, tote_index
 
     # build groups by repeatedly taking up to `max_types` distinct parts (1 carton each)
-    groups: List[List[str]] = []
+    groups: list[list[str]] = []
     # work on a mutable dict
     remaining = dict(cartons_per_part)
 
     part_ids = list(remaining.keys())
     while sum(remaining.values()) > 0:
         rnd.shuffle(part_ids)
-        group: List[str] = []
+        group: list[str] = []
         for pid in part_ids:
             if remaining.get(pid, 0) <= 0:
                 continue
@@ -479,14 +473,14 @@ def pack_mixed_grouped(
         # counting total cartons across groups for pid to get used; safer to rebuild from original
         # We'll instead calculate available cartons by summing occurrences across groups
         # Build occurrences
-        occ: Dict[str, int] = {pid: 0 for pid in group}
+        occ: dict[str, int] = {pid: 0 for pid in group}
         for g in groups:
             for pid in g:
                 if pid in occ:
                     occ[pid] += 1
         # remaining_cartons for group will be occ[pid] plus any extra cartons beyond the occurrences
         # To avoid complexity, we'll reconstruct from the original mixed_pool totals
-        original_cartons: Dict[str, int] = {}
+        original_cartons: dict[str, int] = {}
         for pid, qty in mixed_pool:
             lot = int(parts_data[pid]["lot_size"])
             original_cartons[pid] = original_cartons.get(pid, 0) + (qty // lot)
@@ -510,7 +504,7 @@ def pack_mixed_grouped(
     while sum(global_cartons.values()) > 0:
         # start a new mixed tote
         location = assign_storage_location(tote_index - 1, layout_data)
-        current_contents: List[Dict[str, Any]] = []
+        current_contents: list[dict[str, Any]] = []
         current_volume = 0
         placed_types: Set[str] = set()
 
@@ -648,24 +642,27 @@ def pack_mixed_grouped(
 
 
 def build_totes(
-    bom_data: Dict[str, Any],
-    layout_data: Dict[str, Any],
+    bom_data: dict[str, Any],
+    layout_data: dict[str, Any],
     scenario: ScenarioPaths,
-    prod_plan_data: List[Dict[str, Any]],
-) -> List[Dict[str, Any]]:
+    prod_plan_data: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
     parts_data = bom_data["parts"]
     total_demand = compute_total_part_demand(bom_data, prod_plan_data)
 
-    tote_entries: List[Dict[str, Any]] = []
+    tote_entries: list[dict[str, Any]] = []
     tote_index = 1
-    mixed_pool: List[Tuple[str, int]] = []
-    residual_pool: List[Tuple[str, int]] = []
+    mixed_pool: list[tuple[str, int]] = []
+    residual_pool: list[tuple[str, int]] = []
 
     for part_id in sorted(parts_data):
         part_info = parts_data[part_id]
+        lot_size = int(part_info["lot_size"])
+        v_carton = int(part_info["v_carton"])
+
         planned_quantity = ceil_to_lot(
             int(total_demand.get(part_id, 0) * (1.0 + scenario.part_margin)),
-            int(part_info["lot_size"]),
+            lot_size,
         )
         single_qty, mixed_qty, residual_qty = split_stock_by_ratio(
             planned_quantity,
@@ -675,23 +672,19 @@ def build_totes(
         )
 
         if single_qty > 0:
-            # Split single-type stock into one or more single-part totes so each
-            # resulting tote does not exceed TOTE_VOLUME_CM3. This mirrors the
-            # packing logic used for mixed totes but keeps totes single-part.
-            # Only use full-carton units for single-part totes so they have no dead space.
-            lot_size = int(part_info["lot_size"])
             full_single_units = (single_qty // lot_size) * lot_size
             remainder_single = single_qty - full_single_units
-            remaining_single = full_single_units
-            v_carton = int(part_info["v_carton"])
-            lot_size = int(part_info["lot_size"])
-            # how many cartons can fit in an empty tote (at least 1)
-            cartons_per_tote = max(1, TOTE_VOLUME_CM3 // v_carton)
-            units_per_tote = max(1, cartons_per_tote * lot_size)
+            if remainder_single > 0:
+                residual_pool.append((part_id, remainder_single))
+            if TOTE_VOLUME_CM3 < v_carton:
+                raise ValueError(
+                    f"Part {part_id} carton volume {v_carton} exceeds tote volume {TOTE_VOLUME_CM3}"
+                )
+            cartons_per_tote = TOTE_VOLUME_CM3 // v_carton
+            units_per_tote = cartons_per_tote * lot_size
 
-            while remaining_single > 0:
-                place_units = min(remaining_single, units_per_tote)
-                content = build_tote_content(part_id, int(place_units), part_info)
+            while full_single_units > 0:
+                content = build_tote_content(part_id, units_per_tote, part_info)
                 location = assign_storage_location(tote_index - 1, layout_data)
                 tote_entries.append(
                     {
@@ -706,16 +699,9 @@ def build_totes(
                     }
                 )
                 tote_index += 1
-                remaining_single -= place_units
+                full_single_units -= units_per_tote
 
-            # any leftover single units that were not full cartons become residual
-            if remainder_single > 0:
-                residual_pool.append((part_id, remainder_single))
-
-        # For mixed stock, only put full-carton units into mixed_pool so cartons
-        # themselves have no dead space. Any remainder moves to residual_pool.
         if mixed_qty > 0:
-            lot_size = int(part_info["lot_size"])
             full_mixed_units = (mixed_qty // lot_size) * lot_size
             remainder_mixed = mixed_qty - full_mixed_units
             if full_mixed_units > 0:
@@ -723,25 +709,18 @@ def build_totes(
             if remainder_mixed > 0:
                 residual_pool.append((part_id, remainder_mixed))
 
-        # residual_qty may contain full cartons; move full cartons into mixed pool
-        # and keep at most one partial carton in residual_pool per part.
         if residual_qty > 0:
-            lot_size = int(part_info["lot_size"])
-            full_from_residual = (residual_qty // lot_size) * lot_size
-            partial = residual_qty - full_from_residual
-            if full_from_residual > 0:
-                mixed_pool.append((part_id, full_from_residual))
+            partial = residual_qty
             if partial > 0:
                 residual_pool.append((part_id, partial))
 
-    # pack mixed (full-carton) totes
     mixed_totes, tote_index = pack_mixed_grouped(
         mixed_pool,
         parts_data,
         tote_index,
         layout_data,
         min_types=2,
-        max_types=4,
+        max_types=3,
         seed=42,
     )
     tote_entries.extend(mixed_totes)
@@ -760,7 +739,7 @@ def build_totes(
             # create a residual tote and try to add all group contents; if overflow,
             # split into multiple residual totes as needed
             location = assign_storage_location(tote_index - 1, layout_data)
-            current_contents: List[Dict[str, Any]] = []
+            current_contents: list[dict[str, Any]] = []
             current_volume = 0
             for part_id, qty in group:
                 part_info = parts_data[part_id]
@@ -790,8 +769,8 @@ def build_totes(
 
                 # if single content itself larger than tote, split similarly to mixed logic
                 if content_volume > TOTE_VOLUME_CM3:
-                    max_cartons_fit = max(1, TOTE_VOLUME_CM3 // part_info["v_carton"])
-                    max_units_fit = max(1, max_cartons_fit * int(part_info["lot_size"]))
+                    max_cartons_fit = max(1, TOTE_VOLUME_CM3 // v_carton)
+                    max_units_fit = max(1, max_cartons_fit * lot_size)
                     units_to_place = min(int(qty), max_units_fit)
                     content = build_tote_content(part_id, units_to_place, part_info)
                     content_volume = content["used_carton_volume_cm3"]
@@ -817,8 +796,8 @@ def build_totes(
 
 
 def infer_station_for_line(
-    line_name: str, layout_data: Dict[str, Any]
-) -> Dict[str, Any]:
+    line_name: str, layout_data: dict[str, Any]
+) -> dict[str, Any]:
     stations = layout_data.get("kitting_stations", [])
     if not stations:
         return {
@@ -838,11 +817,11 @@ def infer_station_for_line(
 
 
 def build_kits(
-    bom_data: Dict[str, Any],
-    layout_data: Dict[str, Any],
-    prod_plan_data: List[Dict[str, Any]],
-) -> List[Dict[str, Any]]:
-    kits: List[Dict[str, Any]] = []
+    bom_data: dict[str, Any],
+    layout_data: dict[str, Any],
+    prod_plan_data: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    kits: list[dict[str, Any]] = []
     products = bom_data["products"]
 
     # Kit physical defaults (provided): width x depth in cm, layered stacking info
@@ -860,7 +839,7 @@ def build_kits(
         station = infer_station_for_line(line_name, layout_data)
 
         # compute per-product parts and per-product volume (using v_part)
-        per_product_parts: Dict[str, int] = {}
+        per_product_parts: dict[str, int] = {}
         per_product_volume = 0
         for part_id, per_unit_qty in products[product_id]["required_parts"].items():
             per_unit_qty_int = int(per_unit_qty)
@@ -917,7 +896,7 @@ def build_kits(
     return kits
 
 
-def generate_dataset(output_dir: Path) -> Dict[str, Path]:
+def generate_dataset(output_dir: Path) -> dict[str, Path]:
     scenario_module = load_scenario_module()
     scenario = build_paths(scenario_module)
     validate_inputs(scenario)
@@ -977,11 +956,13 @@ def parse_args() -> argparse.Namespace:
         default=BASE_DIR / "generated_datasets" / SCENARIO_MODULE_NAME,
         help="Directory where totes.json and kits.json will be written.",
     )
-    return parser.parse_args()
+    args, _ = parser.parse_known_args()
+    return args
 
 
 def main() -> None:
     args = parse_args()
+    print(args)
     for arg_name, arg_value in vars(args).items():
         print(f"{arg_name}: {arg_value}")
     paths = generate_dataset(args.output_dir)

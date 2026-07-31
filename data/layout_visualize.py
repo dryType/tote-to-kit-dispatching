@@ -12,7 +12,7 @@ DEFAULT_LAYOUT_PATH = BASE_DIR / "master_data" / "layout.json"
 DEFAULT_OUTPUT_PATH = BASE_DIR / "layout_visualization.png"
 
 
-def load_layout(layout_path: Path) -> Dict[str, Any]:
+def load_layout(layout_path: Path) -> dict[str, Any]:
     if not layout_path.exists():
         raise FileNotFoundError(f"Layout file not found: {layout_path}")
 
@@ -22,11 +22,11 @@ def load_layout(layout_path: Path) -> Dict[str, Any]:
 
 def _plot_points(
     ax: plt.Axes,
-    items: Iterable[Dict[str, Any]],
+    items: Iterable[dict[str, Any]],
     color: str,
     marker: str,
     label: str,
-    text_offset: Tuple[float, float],
+    text_offset: tuple[float, float],
 ) -> None:
     items = list(items)
     if not items:
@@ -48,7 +48,7 @@ def _plot_points(
         ax.text(x + text_offset[0], y + text_offset[1], item_id, fontsize=8)
 
 
-def plot_layout(layout: Dict[str, Any], output_path: Path) -> None:
+def plot_layout(layout: dict[str, Any], output_path: Path) -> None:
     storage_locations = layout.get("storage_locations", [])
     kitting_stations = layout.get("kitting_stations", [])
     agv_depots = layout.get("agv_depots", [])

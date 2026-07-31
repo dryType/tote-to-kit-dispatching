@@ -7,9 +7,9 @@ class WorldStateSnapshot:
     def __init__(
         self,
         now: float,
-        agvs: Dict[str, AGV],
-        stations: Dict[str, KittingStation],
-        totes: Dict[str, Tote],
+        agvs: dict[str, AGV],
+        stations: dict[str, KittingStation],
+        totes: dict[str, Tote],
         order_manager,
     ):
         self.now = now

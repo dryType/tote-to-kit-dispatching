@@ -27,7 +27,7 @@ KITS_CSV = OUT_DIR / "kits_summary.csv"
 TOTES_CSV = OUT_DIR / "totes_summary.csv"
 
 
-def load_data() -> tuple[list[Dict[str, Any]], list[Dict[str, Any]]]:
+def load_data() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     if not KITS_JSON.exists() or not TOTES_JSON.exists():
         print(f"Error: expected files not found in {OUT_DIR}")
         sys.exit(1)
@@ -39,7 +39,7 @@ def load_data() -> tuple[list[Dict[str, Any]], list[Dict[str, Any]]]:
     return kits, totes
 
 
-def summarize_and_save(kits: list[Dict[str, Any]], totes: list[Dict[str, Any]]):
+def summarize_and_save(kits: list[dict[str, Any]], totes: list[dict[str, Any]]):
     df_k = pd.DataFrame(kits)
     df_t = pd.DataFrame(totes)
 
