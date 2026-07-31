@@ -369,9 +369,10 @@ def build_totes(
     )
     totes.extend(residual_totes)
     for tote in totes:
-        tote["storage_location"] = assign_storage_location(
+        for key, value in assign_storage_location(
             int(tote["tote_id"].split("_")[1]), layout_data
-        )
+        ).items():
+            tote[key] = value
     return totes
 
 
