@@ -67,7 +67,7 @@ if __name__ == "__main__":
     tardiness_index = metrics.calc_tardiness_index()
     init_frag_index = metrics.initial_frag_index
     frag_index = metrics.calc_fragmentation_index()
-    distance_index = metrics.calc_distance_index(max_x, max_y)
+    distance_index = metrics.calc_distance_index(layout["agv_max_distance"])
     objective_value = 0.6 * tardiness_index + 0.3 * frag_index + 0.1 * distance_index
 
     print(f"Tardiness Index: {tardiness_index:.4f}")
@@ -86,5 +86,9 @@ if __name__ == "__main__":
         "distance_index": distance_index,
         "objective_value": objective_value,
     }
+
+    # greedy_result.json에 makespan 저장
+    with open("./src/simulation_engine/greedy_result.json", "w") as f:
+        json.dump({"makespan": metrics.makespan}, f, indent=4)
 
     print(result)

@@ -21,6 +21,7 @@ def main():
 
     totes, kits, stations, agvs = load_entities_from_scenario("custom")
 
+    # part_to tote/kit 역색인 생성
     for tote in totes:
         for component in tote.contents:
             part_id = component.part_id

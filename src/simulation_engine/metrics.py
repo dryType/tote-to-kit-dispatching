@@ -57,12 +57,15 @@ class Metrics:
 
         return f_score_total / len(self.totes)
 
-    def calc_distance_index(self, max_x: float, max_y: float) -> float:
+    def calc_makespan_index(self, base_makespan: float) -> float:
+        if self.makespan <= 0:
+            return 0.0
+        return self.makespan / base_makespan
+
+    def calc_distance_index(self, agv_max_distance: float) -> float:
         if self.dispatched_count == 0:
             return 0.0
-        return self.total_agv_move_distance / (
-            self.dispatched_count * 3.0 * max_x + max_y
-        )
+        return self.total_agv_move_distance / (self.dispatched_count * agv_max_distance)
 
     @property
     def kitting_completed_count(self) -> int:

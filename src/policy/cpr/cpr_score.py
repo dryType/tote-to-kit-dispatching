@@ -66,7 +66,7 @@ class CPRScore:
             "lambda_": self.lambda_,
             "p": self.p,
             "margin_sec": self.margin_sec,
-            "total_score": self.alpha_1 * st - self.alpha_2 * sf - self.alpha_3 * sd,
+            "total_score": self.alpha_1 * st + self.alpha_2 * sf - self.alpha_3 * sd,
         }
 
     def calc_st(

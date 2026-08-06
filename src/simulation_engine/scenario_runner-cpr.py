@@ -30,6 +30,8 @@ class ScenarioRunner:
             Path(__file__).resolve().parents[2] / "data" / "master_data" / "layout.json"
         )
         layout = json.loads(layout_path.read_text())
+        # station-totes간 최대 manhatan 거리
+
         self.max_x = layout["map_bounds"]["max_x"]
         self.max_y = layout["map_bounds"]["max_y"]
 
@@ -55,7 +57,7 @@ class ScenarioRunner:
         tardiness_index = metrics.calc_tardiness_index()
         init_frag_index = metrics.initial_frag_index
         frag_index = metrics.calc_fragmentation_index()
-        distance_index = metrics.calc_distance_index(self.max_x, self.max_y)
+        distance_index = metrics.calc_distance_index(layout["agv_max_distance"])
 
         print(f"Tardiness Index: {tardiness_index:.4f}")
         print(
@@ -79,7 +81,7 @@ class ScenarioRunner:
 def generate_alpha_grid(step: float = 0.1) -> list[tuple[float, float, float]]:
     """합이 1.0이 되는 alpha1, alpha2, alpha3 조합만 2중 루프로 생성"""
     grid = []
-    steps = int(round(1.0 / step)) + 1
+    steps = round(1.0 / step) + 1
     for i in range(steps):
         a1 = round(i * step, 4)
         for j in range(steps - i):
@@ -89,25 +91,35 @@ def generate_alpha_grid(step: float = 0.1) -> list[tuple[float, float, float]]:
     return grid
 
 
-def run_single_simulation(args: tuple[float, float, float, float, float]) -> dict:
-    alpha_1, alpha_2, alpha_3, max_x, max_y = args
+def run_single_simulation(args: tuple[float, float, float, float]) -> dict:
+    alpha_1, alpha_2, alpha_3, agv_max_distance = args
 
     policy = CPRTop1Policy(alpha_1=alpha_1, alpha_2=alpha_2, alpha_3=alpha_3)
     runner = ScenarioRunner("custom", policy)
     metrics = runner.run()
 
+    with open("./src/simulation_engine/greedy_result.json", "r") as f:
+        greedy_result = json.load(f)["makespan"]
+
     tardiness_index = metrics.calc_tardiness_index()
     init_frag_index = metrics.initial_frag_index
     frag_index = metrics.calc_fragmentation_index()
-    distance_index = metrics.calc_distance_index(max_x, max_y)
+    distance_index = metrics.calc_distance_index(agv_max_distance)
+    makespan_index = metrics.calc_makespan_index(greedy_result)
 
-    objective_value = 0.6 * tardiness_index + 0.3 * frag_index + 0.1 * distance_index
+    objective_value = (
+        0.55 * tardiness_index
+        + 0.05 * makespan_index
+        + 0.3 * frag_index
+        + 0.1 * distance_index
+    )
 
     return {
         "alpha_1": alpha_1,
         "alpha_2": alpha_2,
         "alpha_3": alpha_3,
         "tardiness_index": tardiness_index,
+        "makespan_index": makespan_index,
         "initial_fragmentation_index": init_frag_index,
         "final_fragmentation_index": frag_index,
         "distance_index": distance_index,
@@ -119,115 +131,113 @@ def run_single_simulation(args: tuple[float, float, float, float, float]) -> dic
     }
 
 
-# if __name__ == "__main__":
-#     layout_path = (
-#         Path(__file__).resolve().parents[2] / "data" / "master_data" / "layout.json"
-#     )
-#     layout = json.loads(layout_path.read_text())
-#     max_x = layout["map_bounds"]["max_x"]
-#     max_y = layout["map_bounds"]["max_y"]
-
-#     alpha_combinations = generate_alpha_grid(step=0.05)
-#     total_tasks = len(alpha_combinations)
-
-#     num_cores = os.cpu_count() or 4
-#     print(
-#         f"=== CPU 코어 수: {num_cores}개 | 총 {total_tasks}개 알파 조합 병렬 시뮬레이션 시작 ==="
-#     )
-
-#     # 인자 패킹 (max_x, max_y 전달)
-#     task_args = [(a1, a2, a3, max_x, max_y) for a1, a2, a3 in alpha_combinations]
-
-#     results = []
-
-#     # 멀티프로세서 풀 가동
-#     with ProcessPoolExecutor(max_workers=num_cores) as executor:
-#         futures = [executor.submit(run_single_simulation, arg) for arg in task_args]
-
-#         completed_count = 0
-#         for future in as_completed(futures):
-#             res = future.result()
-#             results.append(res)
-#             completed_count += 1
-#             print(
-#                 f"[{completed_count}/{total_tasks}] Alpha: ({res['alpha_1']:.2f}, {res['alpha_2']:.2f}, {res['alpha_3']:.2f}) -> Obj Value: {res['objective_value']:.4f}"
-#             )
-
-#     # DataFrame 생성 및 목적함수 우수(오름차순) 순 정렬
-#     df = pd.DataFrame(results)
-#     df = df.sort_values(by="objective_value", ascending=True).reset_index(drop=True)
-#     df["index"] = df.index  # 정렬 후 순위 인덱스 부여
-
-#     # CSV 저장
-#     output_csv = "alpha_grid_search_results Sd제곱.csv"
-#     df.to_csv(output_csv, index=False, encoding="utf-8-sig")
-
-#     print(f"\n=== 모든 시뮬레이션 완료! 결과가 '{output_csv}'에 저장되었습니다. ===")
-#     print("\n--- Top 5 Best Combinations ---")
-#     print(
-#         df.head(5)[
-#             [
-#                 "alpha_1",
-#                 "alpha_2",
-#                 "alpha_3",
-#                 "tardiness_index",
-#                 "final_fragmentation_index",
-#                 "distance_index",
-#                 "objective_value",
-#             ]
-#         ]
-#     )
-
-
 if __name__ == "__main__":
     layout_path = (
         Path(__file__).resolve().parents[2] / "data" / "master_data" / "layout.json"
     )
     layout = json.loads(layout_path.read_text())
-    max_x = layout["map_bounds"]["max_x"]
-    max_y = layout["map_bounds"]["max_y"]
+    agv_max_distance = layout["agv_max_distance"]
 
     alpha_combinations = generate_alpha_grid(step=0.05)
+    total_tasks = len(alpha_combinations)
+
+    num_cores = os.cpu_count() or 4
+    print(
+        f"=== CPU 코어 수: {num_cores}개 | 총 {total_tasks}개 알파 조합 병렬 시뮬레이션 시작 ==="
+    )
+
+    # 인자 패킹 (max_x, max_y 전달)
+    task_args = [(a1, a2, a3, agv_max_distance) for a1, a2, a3 in alpha_combinations]
 
     results = []
 
-    alpha_1, alpha_2, alpha_3 = 0.95, 0, 0.05
-    policy = CPRTop1Policy(alpha_1=alpha_1, alpha_2=alpha_2, alpha_3=alpha_3)
-    runner = ScenarioRunner("custom", policy)
-    metrics = runner.run()
-    tardiness_index = metrics.calc_tardiness_index()
-    init_frag_index = metrics.initial_frag_index
-    frag_index = metrics.calc_fragmentation_index()
-    distance_index = metrics.calc_distance_index(max_x, max_y)
-    objective_value = 0.6 * tardiness_index + 0.3 * frag_index + 0.1 * distance_index
-    print(f"Tardiness Index: {tardiness_index:.4f}")
+    # 멀티프로세서 풀 가동
+    with ProcessPoolExecutor(max_workers=num_cores) as executor:
+        futures = [executor.submit(run_single_simulation, arg) for arg in task_args]
+
+        completed_count = 0
+        for future in as_completed(futures):
+            res = future.result()
+            results.append(res)
+            completed_count += 1
+            print(
+                f"[{completed_count}/{total_tasks}] Alpha: ({res['alpha_1']:.2f}, {res['alpha_2']:.2f}, {res['alpha_3']:.2f}) -> Obj Value: {res['objective_value']:.4f}"
+            )
+
+    # DataFrame 생성 및 목적함수 우수(오름차순) 순 정렬
+    df = pd.DataFrame(results)
+    df = df.sort_values(by="objective_value", ascending=True).reset_index(drop=True)
+    df["index"] = df.index  # 정렬 후 순위 인덱스 부여
+
+    # CSV 저장
+    output_csv = "alpha_grid_search_results Sd제곱.csv"
+    df.to_csv(output_csv, index=False, encoding="utf-8-sig")
+
+    print(f"\n=== 모든 시뮬레이션 완료! 결과가 '{output_csv}'에 저장되었습니다. ===")
+    print("\n--- Top 5 Best Combinations ---")
     print(
-        f"Initial Fragmentation Index: {init_frag_index:.4f}, Final Fragmentation Index: {frag_index:.4f}"
+        df.head(5)[
+            [
+                "alpha_1",
+                "alpha_2",
+                "alpha_3",
+                "tardiness_index",
+                "final_fragmentation_index",
+                "distance_index",
+                "objective_value",
+            ]
+        ]
     )
-    print(f"Distance Index: {distance_index:.4f})")
-    print(
-        f"Total Objective Value: {0.6 * tardiness_index + 0.3 * frag_index + 0.1 * distance_index:.4f}"
-    )
-    results.append(
-        {
-            "index": len(results),
-            "alpha_1": alpha_1,
-            "alpha_2": alpha_2,
-            "alpha_3": alpha_3,
-            "tardiness_index": tardiness_index,
-            "initial_fragmentation_index": init_frag_index,
-            "final_fragmentation_index": frag_index,
-            "distance_index": distance_index,
-            "objective_value": objective_value,
-            "make_span": metrics.makespan,
-            "tardiness count": metrics.calc_tardiness_count(),
-            "dispatch count": metrics.dispatched_count,
-            "total distance": metrics.total_agv_move_distance,
-        }
-    )
-    print(
-        f"Index: {len(results)}, Alpha: ({alpha_1}, {alpha_2}, {alpha_3}), Objective Value: {objective_value:.4f}"
-    )
+
+
+# if __name__ == "__main__":
+#     layout_path = (
+#         Path(__file__).resolve().parents[2] / "data" / "master_data" / "layout.json"
+#     )
+#     layout = json.loads(layout_path.read_text())
+#     agv_max_distance = layout["agv_max_distance"]
+
+#     alpha_combinations = generate_alpha_grid(step=0.05)
+
+#     results = []
+
+#     alpha_1, alpha_2, alpha_3 = 0.72, 0.2, 0.08
+#     policy = CPRTop1Policy(alpha_1=alpha_1, alpha_2=alpha_2, alpha_3=alpha_3)
+#     runner = ScenarioRunner("custom", policy)
+#     metrics = runner.run()
+#     tardiness_index = metrics.calc_tardiness_index()
+#     init_frag_index = metrics.initial_frag_index
+#     frag_index = metrics.calc_fragmentation_index()
+#     distance_index = metrics.calc_distance_index(agv_max_distance)
+#     objective_value = 0.6 * tardiness_index + 0.3 * frag_index + 0.1 * distance_index
+#     print(f"Tardiness Index: {tardiness_index:.4f}")
+#     print(
+#         f"Initial Fragmentation Index: {init_frag_index:.4f}, Final Fragmentation Index: {frag_index:.4f}"
+#     )
+#     print(f"Distance Index: {distance_index:.4f})")
+#     print(
+#         f"Total Objective Value: {0.6 * tardiness_index + 0.3 * frag_index + 0.1 * distance_index:.4f}"
+#     )
+#     results.append(
+#         {
+#             "index": len(results),
+#             "alpha_1": alpha_1,
+#             "alpha_2": alpha_2,
+#             "alpha_3": alpha_3,
+#             "tardiness_index": tardiness_index,
+#             "initial_fragmentation_index": init_frag_index,
+#             "final_fragmentation_index": frag_index,
+#             "distance_index": distance_index,
+#             "objective_value": objective_value,
+#             "make_span": metrics.makespan,
+#             "tardiness count": metrics.calc_tardiness_count(),
+#             "dispatch count": metrics.dispatched_count,
+#             "total distance": metrics.total_agv_move_distance,
+#         }
+#     )
+#     print(
+#         f"Index: {len(results)}, Alpha: ({alpha_1}, {alpha_2}, {alpha_3}), Objective Value: {objective_value:.4f}"
+#     )
 
 #     # DataFrame 생성 및 정렬 (목적함수 점수 좋은 순)
 #     df = pd.DataFrame(results)

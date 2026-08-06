@@ -43,10 +43,5 @@
         "agv_id": "AGV_09",
         "initial_position_x": "32",
         "initial_position_y": "28"
-    },
-    {
-        "agv_id": "AGV_10",
-        "initial_position_x": "32",
-        "initial_position_y": "30"
     }
 ]
