@@ -4,24 +4,33 @@ import math
 from dataclasses import dataclass
 from typing import Any
 
-from simulation_engine.entities import AGV, DispatchCandidate, Kit
+from simulation_engine.entities import AGV, DispatchCandidate, Kit, Tote
 from simulation_engine.state import WorldStateSnapshot
 
 
-@dataclass(frozen=True)
 class CPRScore:
-    alpha_1: float = 0.9
-    alpha_2: float = 0.0
-    alpha_3: float = 0.1
-    gamma1: float = 0.2
-    gamma2: float = 0.3
-    epsilon: float = 0.2
-    beta: float = 0.1
-    lambda_: float = 0.006
-    p: float = 2.0
-    margin_sec: float = 1200.0
-    w_s1: float = 0.5
-    w_s2: float = 0.5
+    def __init__(
+        self,
+        alpha_1: float = 0.9,
+        alpha_2: float = 0.0,
+        alpha_3: float = 0.1,
+        w_s1: float = 0.5,
+        w_s2: float = 0.5,
+    ):
+        self.alpha_1 = alpha_1
+        self.alpha_2 = alpha_2
+        self.alpha_3 = alpha_3
+        self.w_s1 = w_s1
+        self.w_s2 = w_s2
+        self.gamma1 = 0.2
+        self.gamma2 = 0.3
+        self.epsilon = 0.2
+        self.beta = 0.1
+        self.lambda_ = 0.006
+        self.p = 2.0
+        self.margin_sec = 1200.0
+        self.max_clearance_cache: dict[str, dict[str, Any]] = {}
+        self.dispatch_count: int = 0
 
     def score(
         self,
@@ -42,11 +51,13 @@ class CPRScore:
         agv: AGV,
         state: WorldStateSnapshot,
         d_max: float | None = None,
+        dispatch_count: int = 0,
     ) -> dict[str, Any]:
         st_urgency, st_progress, st_contribution = self.calc_st(candidate, now)
         st = st_urgency + st_progress + st_contribution
-        sf = self.calc_sf(candidate)
+        sf = self.calc_sf(candidate, state.order_manager.get_all_kits())
         sd = self.calc_sd(candidate, agv, state, d_max=d_max)
+        self.dispatch_count = dispatch_count
 
         return {
             "deadline": float(candidate.kit.deadline_time_sec or 0.0),
@@ -101,39 +112,52 @@ class CPRScore:
 
         return sum(candidate.matched_parts.values()) / total_required
 
-    def calc_sf(self, candidate: DispatchCandidate) -> float:
+    def calc_sf(self, candidate: DispatchCandidate, kits: list[Kit]) -> float:
         tote = candidate.tote
         matched_parts = candidate.matched_parts
 
         if not tote.contents or not matched_parts:
             return 0.0
 
-        score = 0.0
-        any_remaining = False
-
+        component_empty_count = 0
+        perfect_empty_count = 0
+        after_carton_dead_space_total = 0
         for component in tote.contents:
             matched_qty = matched_parts.get(component.part_id, 0)
             if matched_qty <= 0:
-                if component.quantity > 0:
-                    any_remaining = True
+                after_carton_dead_space_total += component.dead_space_volume_cm3
                 continue
 
-            lot_size = component.lot_size or 1
-            before_qty = component.quantity
-            after_qty = max(before_qty - matched_qty, 0)
-
-            before_ratio = math.ceil(before_qty / lot_size) - (before_qty / lot_size)
-            after_ratio = (
-                math.ceil(after_qty / lot_size) - (after_qty / lot_size)
-                if after_qty > 0
-                else 0.0
+            after_qty = max(component.quantity - matched_qty, 0)
+            after_last_carton_qty = after_qty % component.lot_size
+            after_carton_dead_space_total += (
+                0
+                if after_last_carton_qty == 0
+                else component.v_carton - (after_last_carton_qty * component.v_part)
             )
-            score += after_ratio - before_ratio
+            if after_qty == 0:
+                component_empty_count += 1
 
-            if after_qty > 0:
-                any_remaining = True
+            if component.quantity == candidate.kit.required_parts[component.part_id]:
+                perfect_empty_count += 1
 
-        return self.w_s1 * score + self.w_s2 * (1.0 if not any_remaining else 0.0)
+        carton_dead_space_change_ratio = (
+            tote.calc_carton_dead_space() - after_carton_dead_space_total
+        ) / tote.max_capacity_cm3
+
+        clearance_bonus = (0.5 * component_empty_count + perfect_empty_count) / len(
+            tote.contents
+        )
+
+        future_penalty = max(
+            0,
+            self.get_or_compute_max_clearance(tote, kits)
+            - (component_empty_count / len(tote.contents)),
+        )
+
+        return self.w_s1 * carton_dead_space_change_ratio + self.w_s2 * max(
+            0, clearance_bonus - future_penalty
+        )
 
     def calc_sd(
         self,
@@ -178,3 +202,35 @@ class CPRScore:
         max_x = max(position.x for position in positions)
         max_y = max(position.y for position in positions)
         return max(3.0 * (max_x + max_y), 1.0)
+
+    def get_or_compute_max_clearance(self, tote: Tote, kits: list[Kit]) -> float:
+        cached = self.max_clearance_cache.get(tote.tote_id)
+
+        if cached and cached["version"] == self.dispatch_count:
+            return cached["max_clearance"]
+
+        n_distinct_parts = len(tote.contents)
+        if n_distinct_parts == 0:
+            return 0.0
+
+        max_clearance = 0.0
+        for kit in kits:
+            if kit.is_completed():
+                continue
+
+            remaining_parts = kit.get_remaining_parts()
+            clearance_count = sum(
+                1
+                for part in tote.contents
+                if remaining_parts.get(part.part_id, 0) >= part.quantity
+            )
+            max_clearance = max(max_clearance, clearance_count)
+
+        max_ratio = max_clearance / n_distinct_parts
+
+        self.max_clearance_cache[tote.tote_id] = {
+            "max_clearance": max_ratio,
+            "version": self.dispatch_count,
+        }
+
+        return max_ratio

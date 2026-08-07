@@ -18,6 +18,7 @@ class BasePolicy(ABC):
         candidates: list[DispatchCandidate],
         idle_agvs: list[AGV],
         state: WorldStateSnapshot,
+        dispatched_count: int = 0,
     ) -> tuple[DispatchCandidate | None, AGV | None]:
         # 후보 중 하나 선택하여 반환
         pass

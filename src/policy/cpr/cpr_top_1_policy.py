@@ -9,9 +9,20 @@ from simulation_engine.state import WorldStateSnapshot
 
 class CPRTop1Policy(BasePolicy):
     def __init__(
-        self, alpha_1: float = 0.9, alpha_2: float = 0.0, alpha_3: float = 0.1
+        self,
+        alpha_1: float = 0.9,
+        alpha_2: float = 0.0,
+        alpha_3: float = 0.1,
+        w_s1: float = 0.5,
+        w_s2: float = 0.5,
     ):
-        self.scorer = CPRScore(alpha_1=alpha_1, alpha_2=alpha_2, alpha_3=alpha_3)
+        self.scorer = CPRScore(
+            alpha_1=alpha_1,
+            alpha_2=alpha_2,
+            alpha_3=alpha_3,
+            w_s1=w_s1,
+            w_s2=w_s2,
+        )
 
     @property
     def name(self):
@@ -23,6 +34,7 @@ class CPRTop1Policy(BasePolicy):
         candidates: list[DispatchCandidate],
         idle_agvs: list[AGV],
         state: WorldStateSnapshot,
+        dispatched_count: int,
     ) -> tuple[DispatchCandidate | None, AGV | None]:
         if not candidates or not idle_agvs:
             return None, None
@@ -43,7 +55,12 @@ class CPRTop1Policy(BasePolicy):
                 best_agv = agv
 
             score_info = self.scorer.build_score_info(
-                now, candidate, best_agv, state, d_max=d_max
+                now,
+                candidate,
+                best_agv,
+                state,
+                d_max=d_max,
+                dispatch_count=dispatched_count,
             )
             score = score_info["total_score"]
             if score > best_score:

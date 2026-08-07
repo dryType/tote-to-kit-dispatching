@@ -19,3 +19,6 @@ class OrderManager:
         return len(self.pending_kits) == 0 and all(
             kit.is_completed() for kit in self.activated_kits
         )
+
+    def get_all_kits(self) -> list[Kit]:
+        return self.pending_kits + self.activated_kits

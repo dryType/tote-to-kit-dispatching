@@ -49,7 +49,11 @@ class Dispatcher:
             return False
 
         selected_dispatching, selected_agv = self.policy.select(
-            self.env.now, tote_to_kit_candidates, idle_agvs, self.world_state
+            self.env.now,
+            tote_to_kit_candidates,
+            idle_agvs,
+            self.world_state,
+            self.metrics.dispatched_count,
         )
         if not selected_dispatching or not selected_agv:
             return False

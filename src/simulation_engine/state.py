@@ -1,6 +1,5 @@
-from typing import Dict
-
 from simulation_engine.entities import AGV, AGVStatus, KittingStation, Tote
+from simulation_engine.orderManager import OrderManager
 
 
 class WorldStateSnapshot:
@@ -10,7 +9,7 @@ class WorldStateSnapshot:
         agvs: dict[str, AGV],
         stations: dict[str, KittingStation],
         totes: dict[str, Tote],
-        order_manager,
+        order_manager: OrderManager,
     ):
         self.now = now
         self.agvs = agvs
