@@ -11,25 +11,27 @@ from simulation_engine.state import WorldStateSnapshot
 class CPRScore:
     def __init__(
         self,
-        alpha_1: float = 0.9,
-        alpha_2: float = 0.0,
-        alpha_3: float = 0.1,
+        alpha_1: float = 0.5,
+        alpha_2: float = 0.25,
+        alpha_3: float = 0.25,
         w_s1: float = 0.5,
         w_s2: float = 0.5,
+        margin_sec: float = 1200.0,
     ):
         self.alpha_1 = alpha_1
         self.alpha_2 = alpha_2
         self.alpha_3 = alpha_3
         self.w_s1 = w_s1
         self.w_s2 = w_s2
+        self.margin_sec = margin_sec
         self.gamma1 = 0.2
         self.gamma2 = 0.3
         self.epsilon = 0.2
         self.beta = 0.1
         self.lambda_ = 0.006
         self.p = 2.0
-        self.margin_sec = 1200.0
         self.max_clearance_cache: dict[str, dict[str, Any]] = {}
+        self._active_kits_remaining_cache: list[dict[str, int]] = []
         self.dispatch_count: int = 0
 
     def score(
@@ -53,11 +55,14 @@ class CPRScore:
         d_max: float | None = None,
         dispatch_count: int = 0,
     ) -> dict[str, Any]:
+        if self.dispatch_count != dispatch_count:
+            self.dispatch_count = dispatch_count
+            self._update_active_kits_cache(state.order_manager.get_all_kits())
+
         st_urgency, st_progress, st_contribution = self.calc_st(candidate, now)
         st = st_urgency + st_progress + st_contribution
-        sf = self.calc_sf(candidate, state.order_manager.get_all_kits())
+        sf = self.calc_sf(candidate)
         sd = self.calc_sd(candidate, agv, state, d_max=d_max)
-        self.dispatch_count = dispatch_count
 
         return {
             "deadline": float(candidate.kit.deadline_time_sec or 0.0),
@@ -89,7 +94,7 @@ class CPRScore:
 
         return urgency, total_progress, contribution
 
-    def calc_urgency(self, kit, now: float) -> float:
+    def calc_urgency(self, kit: Kit, now: float) -> float:
         deadline = float(kit.deadline_time_sec or 0.0)
         threshold = deadline - self.margin_sec
 
@@ -112,7 +117,7 @@ class CPRScore:
 
         return sum(candidate.matched_parts.values()) / total_required
 
-    def calc_sf(self, candidate: DispatchCandidate, kits: list[Kit]) -> float:
+    def calc_sf(self, candidate: DispatchCandidate) -> float:
         tote = candidate.tote
         matched_parts = candidate.matched_parts
 
@@ -122,6 +127,7 @@ class CPRScore:
         component_empty_count = 0
         perfect_empty_count = 0
         after_carton_dead_space_total = 0
+
         for component in tote.contents:
             matched_qty = matched_parts.get(component.part_id, 0)
             if matched_qty <= 0:
@@ -151,7 +157,7 @@ class CPRScore:
 
         future_penalty = max(
             0,
-            self.get_or_compute_max_clearance(tote, kits)
+            self.get_or_compute_max_clearance(tote)
             - (component_empty_count / len(tote.contents)),
         )
 
@@ -203,7 +209,15 @@ class CPRScore:
         max_y = max(position.y for position in positions)
         return max(3.0 * (max_x + max_y), 1.0)
 
-    def get_or_compute_max_clearance(self, tote: Tote, kits: list[Kit]) -> float:
+    def _update_active_kits_cache(self, kits: list[Kit]) -> None:
+        self._active_kits_remaining_cache = [
+            kit.get_remaining_parts() for kit in kits if not kit.is_completed()
+        ]
+
+    def get_or_compute_max_clearance(
+        self,
+        tote: Tote,
+    ) -> float:
         cached = self.max_clearance_cache.get(tote.tote_id)
 
         if cached and cached["version"] == self.dispatch_count:
@@ -214,17 +228,15 @@ class CPRScore:
             return 0.0
 
         max_clearance = 0.0
-        for kit in kits:
-            if kit.is_completed():
-                continue
-
-            remaining_parts = kit.get_remaining_parts()
-            clearance_count = sum(
-                1
-                for part in tote.contents
-                if remaining_parts.get(part.part_id, 0) >= part.quantity
-            )
-            max_clearance = max(max_clearance, clearance_count)
+        for remaining_parts in self._active_kits_remaining_cache:
+            clearance_count = 0
+            for part in tote.contents:
+                if remaining_parts.get(part.part_id, 0) >= part.quantity:
+                    clearance_count += 1
+            if clearance_count > max_clearance:
+                max_clearance = clearance_count
+                if max_clearance == n_distinct_parts:
+                    break
 
         max_ratio = max_clearance / n_distinct_parts
 

@@ -20,7 +20,7 @@ if __name__ == "__main__":
     greedy_makespan = load_greedy_makespan()
 
     alpha_1, alpha_2, alpha_3 = 0.65, 0.15, 0.20
-    w_s1, w_s2 = 0.2, 0.8
+    w_s1, w_s2 = 0.3, 0.7
 
     result = run_single_simulation(
         (alpha_1, alpha_2, alpha_3, w_s1, w_s2, agv_max_distance, greedy_makespan)

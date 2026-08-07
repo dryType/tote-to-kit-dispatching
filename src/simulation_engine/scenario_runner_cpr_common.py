@@ -70,9 +70,24 @@ def generate_alpha_grid(step: float = 0.1) -> list[tuple[float, float, float]]:
 
 
 def run_single_simulation(
-    args: tuple[float, float, float, float, float, float, float],
+    args: tuple[float, float, float, float, float, float, float]
+    | tuple[float, float, float, float, float, float, float, float],
 ) -> dict:
-    alpha_1, alpha_2, alpha_3, w_s1, w_s2, agv_max_distance, greedy_makespan = args
+
+    if len(args) == 8:
+        (
+            alpha_1,
+            alpha_2,
+            alpha_3,
+            w_s1,
+            w_s2,
+            margin_sec,
+            agv_max_distance,
+            greedy_makespan,
+        ) = args
+    else:
+        alpha_1, alpha_2, alpha_3, w_s1, w_s2, agv_max_distance, greedy_makespan = args
+        margin_sec = 1200.0  # default
 
     policy = CPRTop1Policy(
         alpha_1=alpha_1,
@@ -80,6 +95,7 @@ def run_single_simulation(
         alpha_3=alpha_3,
         w_s1=w_s1,
         w_s2=w_s2,
+        margin_sec=margin_sec,
     )
     runner = ScenarioRunner("custom", policy)
     metrics = runner.run()
@@ -103,6 +119,7 @@ def run_single_simulation(
         "alpha_3": alpha_3,
         "w_s1": w_s1,
         "w_s2": w_s2,
+        "margin_sec": margin_sec,
         "tardiness_index": tardiness_index,
         "makespan_index": makespan_index,
         "initial_fragmentation_index": init_frag_index,

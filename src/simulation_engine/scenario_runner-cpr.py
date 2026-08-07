@@ -5,6 +5,11 @@ from pathlib import Path
 
 import pandas as pd
 
+if __package__ is None or __package__ == "":
+    src_dir = Path(__file__).resolve().parents[1]
+    if str(src_dir) not in sys.path:
+        sys.path.insert(0, str(src_dir))
+
 from simulation_engine.scenario_runner_cpr_common import (
     generate_alpha_grid,
     load_greedy_makespan,
@@ -22,8 +27,8 @@ if __name__ == "__main__":
     layout = load_layout()
     agv_max_distance = layout["agv_max_distance"]
     greedy_makespan = load_greedy_makespan()
-    w_s1 = 0.2
-    w_s2 = 0.8
+    w_s1 = 0.3
+    w_s2 = 0.7
 
     alpha_combinations = generate_alpha_grid(step=0.05)
     total_tasks = len(alpha_combinations)
