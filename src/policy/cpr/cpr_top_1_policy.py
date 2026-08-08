@@ -15,7 +15,11 @@ class CPRTop1Policy(BasePolicy):
         alpha_3: float = 0.1,
         w_s1: float = 0.5,
         w_s2: float = 0.5,
+        g1: float = 0.2,
+        g2: float = 0.3,
         margin_sec: float = 1200.0,
+        lmb: float = 0.006,
+        p: float = 2.0,
     ):
         self.scorer = CPRScore(
             alpha_1=alpha_1,
@@ -23,7 +27,11 @@ class CPRTop1Policy(BasePolicy):
             alpha_3=alpha_3,
             w_s1=w_s1,
             w_s2=w_s2,
+            gamma1=g1,
+            gamma2=g2,
             margin_sec=margin_sec,
+            lambda_=lmb,
+            p=p,
         )
 
     @property

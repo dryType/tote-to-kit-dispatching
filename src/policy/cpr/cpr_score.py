@@ -16,7 +16,11 @@ class CPRScore:
         alpha_3: float = 0.25,
         w_s1: float = 0.5,
         w_s2: float = 0.5,
+        gamma1: float = 0.2,
+        gamma2: float = 0.3,
         margin_sec: float = 1200.0,
+        lambda_: float = 0.006,
+        p: float = 2.0,
     ):
         self.alpha_1 = alpha_1
         self.alpha_2 = alpha_2
@@ -24,12 +28,12 @@ class CPRScore:
         self.w_s1 = w_s1
         self.w_s2 = w_s2
         self.margin_sec = margin_sec
-        self.gamma1 = 0.2
-        self.gamma2 = 0.3
+        self.gamma1 = gamma1
+        self.gamma2 = gamma2
         self.epsilon = 0.2
         self.beta = 0.1
-        self.lambda_ = 0.006
-        self.p = 2.0
+        self.lambda_ = lambda_
+        self.p = p
         self.max_clearance_cache: dict[str, dict[str, Any]] = {}
         self._active_kits_remaining_cache: list[dict[str, int]] = []
         self.dispatch_count: int = 0

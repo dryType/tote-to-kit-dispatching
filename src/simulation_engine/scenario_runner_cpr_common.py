@@ -71,7 +71,22 @@ def generate_alpha_grid(step: float = 0.1) -> list[tuple[float, float, float]]:
 
 def run_single_simulation(
     args: tuple[float, float, float, float, float, float, float]
-    | tuple[float, float, float, float, float, float, float, float],
+    | tuple[float, float, float, float, float, float, float, float]
+    | tuple[float, float, float, float, float, float, float, float, float, float]
+    | tuple[
+        float,
+        float,
+        float,
+        float,
+        float,
+        float,
+        float,
+        float,
+        float,
+        float,
+        float,
+        float,
+    ],
 ) -> dict:
 
     if len(args) == 8:
@@ -85,16 +100,57 @@ def run_single_simulation(
             agv_max_distance,
             greedy_makespan,
         ) = args
-    else:
+        g1 = 0.2
+        g2 = 0.3
+        lmb = 0.006
+        p = 2.0
+    elif len(args) == 7:
         alpha_1, alpha_2, alpha_3, w_s1, w_s2, agv_max_distance, greedy_makespan = args
-        margin_sec = 1200.0  # default
-
+        margin_sec = 1200.0
+        g1 = 0.2
+        g2 = 0.3
+        lmb = 0.006
+        p = 2.0
+    elif len(args) == 10:
+        (
+            alpha_1,
+            alpha_2,
+            alpha_3,
+            w_s1,
+            w_s2,
+            margin_sec,
+            g1,
+            g2,
+            agv_max_distance,
+            greedy_makespan,
+        ) = args
+        lmb = 0.006
+        p = 2.0
+    elif len(args) == 12:
+        (
+            alpha_1,
+            alpha_2,
+            alpha_3,
+            w_s1,
+            w_s2,
+            margin_sec,
+            g1,
+            g2,
+            lmb,
+            p,
+            agv_max_distance,
+            greedy_makespan,
+        ) = args
     policy = CPRTop1Policy(
         alpha_1=alpha_1,
         alpha_2=alpha_2,
         alpha_3=alpha_3,
         w_s1=w_s1,
         w_s2=w_s2,
+        g1=g1,
+        g2=g2,
+        lmb=lmb,
+        p=p,
         margin_sec=margin_sec,
     )
     runner = ScenarioRunner("custom", policy)
@@ -119,7 +175,11 @@ def run_single_simulation(
         "alpha_3": alpha_3,
         "w_s1": w_s1,
         "w_s2": w_s2,
+        "gamma1": g1,
+        "gamma2": g2,
         "margin_sec": margin_sec,
+        "lambda": lmb,
+        "p": p,
         "tardiness_index": tardiness_index,
         "makespan_index": makespan_index,
         "initial_fragmentation_index": init_frag_index,
