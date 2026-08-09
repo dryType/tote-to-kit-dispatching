@@ -21,6 +21,8 @@ class CPRScore:
         margin_sec: float = 1200.0,
         lambda_: float = 0.006,
         p: float = 2.0,
+        epsilon: float = 0.2,
+        beta: float = 0.1,
     ):
         self.alpha_1 = alpha_1
         self.alpha_2 = alpha_2
@@ -30,8 +32,8 @@ class CPRScore:
         self.margin_sec = margin_sec
         self.gamma1 = gamma1
         self.gamma2 = gamma2
-        self.epsilon = 0.2
-        self.beta = 0.1
+        self.epsilon = epsilon
+        self.beta = beta
         self.lambda_ = lambda_
         self.p = p
         self.max_clearance_cache: dict[str, dict[str, Any]] = {}

@@ -14,6 +14,7 @@ class GreedyPolicy(BasePolicy):
         candidates: list[DispatchCandidate],
         idle_agvs: list[AGV],
         state: WorldStateSnapshot,
+        dispatched_count: int,
     ) -> tuple[DispatchCandidate | None, AGV | None]:
         if not candidates or not idle_agvs:
             return None, None

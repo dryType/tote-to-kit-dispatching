@@ -69,25 +69,7 @@ def generate_alpha_grid(step: float = 0.1) -> list[tuple[float, float, float]]:
     return grid
 
 
-def run_single_simulation(
-    args: tuple[float, float, float, float, float, float, float]
-    | tuple[float, float, float, float, float, float, float, float]
-    | tuple[float, float, float, float, float, float, float, float, float, float]
-    | tuple[
-        float,
-        float,
-        float,
-        float,
-        float,
-        float,
-        float,
-        float,
-        float,
-        float,
-        float,
-        float,
-    ],
-) -> dict:
+def run_single_simulation(args: tuple[float, ...]) -> dict:
 
     if len(args) == 8:
         (
@@ -104,6 +86,8 @@ def run_single_simulation(
         g2 = 0.3
         lmb = 0.006
         p = 2.0
+        eps = 0.2
+        beta = 0.1
     elif len(args) == 7:
         alpha_1, alpha_2, alpha_3, w_s1, w_s2, agv_max_distance, greedy_makespan = args
         margin_sec = 1200.0
@@ -111,6 +95,8 @@ def run_single_simulation(
         g2 = 0.3
         lmb = 0.006
         p = 2.0
+        eps = 0.2
+        beta = 0.1
     elif len(args) == 10:
         (
             alpha_1,
@@ -126,6 +112,8 @@ def run_single_simulation(
         ) = args
         lmb = 0.006
         p = 2.0
+        eps = 0.2
+        beta = 0.1
     elif len(args) == 12:
         (
             alpha_1,
@@ -141,6 +129,25 @@ def run_single_simulation(
             agv_max_distance,
             greedy_makespan,
         ) = args
+        eps = 0.2
+        beta = 0.1
+    elif len(args) == 14:
+        (
+            alpha_1,
+            alpha_2,
+            alpha_3,
+            w_s1,
+            w_s2,
+            margin_sec,
+            g1,
+            g2,
+            lmb,
+            p,
+            eps,
+            beta,
+            agv_max_distance,
+            greedy_makespan,
+        ) = args
     policy = CPRTop1Policy(
         alpha_1=alpha_1,
         alpha_2=alpha_2,
@@ -152,6 +159,8 @@ def run_single_simulation(
         lmb=lmb,
         p=p,
         margin_sec=margin_sec,
+        epsilon=eps,
+        beta=beta,
     )
     runner = ScenarioRunner("custom", policy)
     metrics = runner.run()
@@ -180,6 +189,8 @@ def run_single_simulation(
         "margin_sec": margin_sec,
         "lambda": lmb,
         "p": p,
+        "epsilon": eps,
+        "beta": beta,
         "tardiness_index": tardiness_index,
         "makespan_index": makespan_index,
         "initial_fragmentation_index": init_frag_index,
