@@ -40,6 +40,11 @@ class CPRScore:
         self._active_kits_remaining_cache: list[dict[str, int]] = []
         self.dispatch_count: int = 0
 
+    def change_alpha(self, alpha_1: float, alpha_2: float, alpha_3: float) -> None:
+        self.alpha_1 = alpha_1
+        self.alpha_2 = alpha_2
+        self.alpha_3 = alpha_3
+
     def score(
         self,
         now: float,
