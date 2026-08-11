@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any
 
 BASE_DIR = Path(__file__).resolve().parent
-SCENARIO_MODULE_NAME = "scenario_custom"
+SCENARIO_MODULE_NAME = "scenario_high_frag"
 SCENARIO_PATH = BASE_DIR / f"{SCENARIO_MODULE_NAME}.py"
 TOTE_VOLUME_RATIO = 0.8
 TOTE_WIDTH_CM = 60

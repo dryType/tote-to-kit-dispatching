@@ -69,6 +69,82 @@ def generate_alpha_grid(step: float = 0.1) -> list[tuple[float, float, float]]:
     return grid
 
 
+def run_single_simulation_all_params(
+    scenario_name: str,
+    alpha_1: float,
+    alpha_2: float,
+    alpha_3: float,
+    w_s1: float,
+    w_s2: float,
+    margin_sec: float,
+    g1: float,
+    g2: float,
+    lmb: float,
+    p: float,
+    eps: float,
+    beta: float,
+    agv_max_distance: float,
+    greedy_makespan: float,
+) -> dict:
+    policy = CPRTop1Policy(
+        alpha_1=alpha_1,
+        alpha_2=alpha_2,
+        alpha_3=alpha_3,
+        w_s1=w_s1,
+        w_s2=w_s2,
+        g1=g1,
+        g2=g2,
+        lmb=lmb,
+        p=p,
+        margin_sec=margin_sec,
+        epsilon=eps,
+        beta=beta,
+    )
+    runner = ScenarioRunner(scenario_name, policy)
+    metrics = runner.run()
+
+    tardiness_index = metrics.calc_tardiness_index()
+    init_frag_index = metrics.initial_frag_index
+    frag_index = metrics.calc_fragmentation_index()
+    distance_index = metrics.calc_distance_index(agv_max_distance)
+    makespan_index = metrics.calc_makespan_index(greedy_makespan)
+
+    objective_value = (
+        0.55 * tardiness_index
+        + 0.05 * makespan_index
+        + 0.3 * frag_index
+        + 0.1 * distance_index
+    )
+
+    return {
+        "alpha_1": alpha_1,
+        "alpha_2": alpha_2,
+        "alpha_3": alpha_3,
+        "w_s1": w_s1,
+        "w_s2": w_s2,
+        "gamma1": g1,
+        "gamma2": g2,
+        "margin_sec": margin_sec,
+        "lambda": lmb,
+        "p": p,
+        "epsilon": eps,
+        "beta": beta,
+        "tardiness_index": tardiness_index,
+        "makespan_index": makespan_index,
+        "initial_fragmentation_index": init_frag_index,
+        "final_fragmentation_index": frag_index,
+        "fragmentationReductionRate": round(
+            (init_frag_index - frag_index) / init_frag_index * 100, 2
+        ),
+        "distance_index": distance_index,
+        "objective_value": objective_value,
+        "make_span": metrics.makespan,
+        "tardiness count": metrics.calc_tardiness_count(),
+        "dispatch count": metrics.dispatched_count,
+        "total distance": metrics.total_agv_move_distance,
+    }
+
+
 def run_single_simulation(args: tuple[float, ...]) -> dict:
 
     if len(args) == 8:

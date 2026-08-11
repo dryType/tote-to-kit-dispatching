@@ -2,6 +2,8 @@ import json
 import sys
 from pathlib import Path
 
+import pandas as pd
+
 if __package__ is None or __package__ == "":
     src_dir = Path(__file__).resolve().parents[1]
     if str(src_dir) not in sys.path:
@@ -60,7 +62,7 @@ if __name__ == "__main__":
 
     result = None
 
-    scenario_name = "custom"
+    scenario_name = "high_frag"
     runner = ScenarioRunner(scenario_name, policy)
     metrics = runner.run()
 
@@ -83,9 +85,24 @@ if __name__ == "__main__":
         "tardiness_index": tardiness_index,
         "initial_fragmentation_index": init_frag_index,
         "final_fragmentation_index": frag_index,
+        "fragmentationReductionRate": round(
+            (init_frag_index - frag_index) / init_frag_index * 100, 2
+        ),
         "distance_index": distance_index,
         "objective_value": objective_value,
+        "make_span": metrics.makespan,
+        "tardiness count": metrics.calc_tardiness_count(),
+        "dispatch count": metrics.dispatched_count,
+        "total distance": metrics.total_agv_move_distance,
     }
+
+    df = pd.DataFrame(result, index=[0])
+    df = df.sort_values(by="objective_value", ascending=True).reset_index(drop=True)
+    df["index"] = df.index  # 정렬 후 순위 인덱스 부여
+
+    # CSV 저장
+    output_csv = f"greedy_result_{scenario_name}.csv"
+    df.to_csv(output_csv, index=False, encoding="utf-8-sig")
 
     # greedy_result.json에 makespan 저장
     with open("./src/simulation_engine/greedy_result.json", "w") as f:
