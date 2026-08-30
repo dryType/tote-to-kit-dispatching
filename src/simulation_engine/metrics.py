@@ -191,6 +191,45 @@ class Metrics:
             if k.completed_time_sec > k.deadline_time_sec
         )
 
+    def calc_station_no_dock_ratio(self, station: KittingStation) -> float:
+        if station.active_kit_total_time_sec <= 0:
+            return 0.0
+        return max(
+            0.0,
+            1.0
+            - station.dock_occupied_total_time_sec / station.active_kit_total_time_sec,
+        )
+
+    def calc_station_dock_occupancy_ratio(self, station: KittingStation) -> float:
+        if station.active_kit_total_time_sec <= 0:
+            return 0.0
+        return station.dock_occupied_total_time_sec / station.active_kit_total_time_sec
+
+    def print_station_dock_summary(self) -> None:
+        print("\n=== Station Dock/Active-Kit Summary ===")
+        for station in self.stations:
+            active_time = station.active_kit_total_time_sec
+            dock_time = station.dock_occupied_total_time_sec
+            dock_ratio = 0.0 if active_time <= 0 else dock_time / active_time
+            no_dock_ratio = 1.0 - dock_ratio
+            print(
+                f"Station {station.station_id}: "
+                f"active_kit_time={active_time:.1f}s, "
+                f"dock_occupied_time={dock_time:.1f}s, "
+                f"dock_ratio={dock_ratio:.3f}, "
+                f"no_dock_ratio={no_dock_ratio:.3f}"
+            )
+
+        total_active = sum(s.active_kit_total_time_sec for s in self.stations)
+        total_dock = sum(s.dock_occupied_total_time_sec for s in self.stations)
+        weighted_dock_ratio = 0.0 if total_active <= 0 else total_dock / total_active
+        weighted_no_dock_ratio = 1.0 - weighted_dock_ratio
+        print(
+            f"Weighted overall: dock_ratio={weighted_dock_ratio:.3f}, "
+            f"no_dock_ratio={weighted_no_dock_ratio:.3f}"
+        )
+        print("==================================\n")
+
     def print_kit_completion_summary(self) -> None:
         for kit in self.order_manager.activated_kits:
             print(

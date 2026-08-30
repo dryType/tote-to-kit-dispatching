@@ -37,6 +37,7 @@ class ScenarioRunner:
 
         metrics.print_kit_completion_summary()
         metrics.print_agv_utilization(agvs)
+        metrics.print_station_dock_summary()
         metrics.print_summary()
 
         tardiness_index = metrics.calc_tardiness_index()
@@ -116,6 +117,12 @@ def run_single_simulation_all_params(
         + 0.1 * distance_index
     )
 
+    total_active_time = sum(s.active_kit_total_time_sec for s in metrics.stations)
+    total_dock_time = sum(s.dock_occupied_total_time_sec for s in metrics.stations)
+    weighted_dock_ratio = (
+        0.0 if total_active_time <= 0 else total_dock_time / total_active_time
+    )
+
     return {
         "alpha_1": alpha_1,
         "alpha_2": alpha_2,
@@ -142,6 +149,7 @@ def run_single_simulation_all_params(
         "tardiness count": metrics.calc_tardiness_count(),
         "dispatch count": metrics.dispatched_count,
         "total distance": metrics.total_agv_move_distance,
+        "station_dock_occupancy_ratio_weighted": weighted_dock_ratio,
     }
 
 

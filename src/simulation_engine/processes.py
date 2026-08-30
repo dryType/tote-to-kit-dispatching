@@ -49,6 +49,7 @@ def agv_transport_process(
 
     # agv docking position 도착 & kitting 작업 대기
     agv.start_docking()
+    candidate.station.start_docking(env.now)
 
     if metrics is not None:
         metrics.record_kitting_started(
@@ -63,6 +64,7 @@ def agv_transport_process(
 
     # kitting 작업 완료. storage_bin으로 복귀
     candidate.station.decrement_agv_count()
+    candidate.station.end_docking(env.now)
     candidate.station.dock.release(dock_request)
 
     agv.return_to_storage()
@@ -112,7 +114,7 @@ def kitting_process(
         )
 
     if candidate.kit.is_completed():
-        candidate.station.complete_kit()
+        candidate.station.complete_kit(env.now)
         candidate.kit.complete_kit(env.now)
         env.process(
             kit_replacement_process(

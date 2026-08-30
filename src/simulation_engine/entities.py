@@ -367,6 +367,10 @@ class KittingStation:
     completed_kits: list[Kit] = field(default_factory=list)
     dock: simpy.Resource | None = field(default=None, init=False, repr=False)
     order_manager: OrderManager | None = None
+    dock_occupied_total_time_sec: float = 0.0
+    dock_start_time_sec: float | None = None
+    active_kit_total_time_sec: float = 0.0
+    active_kit_start_time_sec: float | None = None
 
     def init_simulation(
         self, env: simpy.Environment, order_manager: OrderManager
@@ -403,18 +407,40 @@ class KittingStation:
             )
         self.assigned_kit = kit
         self.status = StationStatus.KITTING
+        self.active_kit_start_time_sec = now
         kit.assign_station(self, now)
 
-    def complete_kit(self) -> Kit | None:
+    def complete_kit(self, now: float | None = None) -> Kit | None:
         completed = self.assigned_kit
         if not completed:
             return None
+
+        if now is not None and self.active_kit_start_time_sec is not None:
+            self.active_kit_total_time_sec += now - self.active_kit_start_time_sec
+            self.active_kit_start_time_sec = None
 
         self.assigned_kit = None
         self.status = StationStatus.KIT_CHANGING
         self.completed_kits.append(completed)
 
         return completed
+
+    def start_docking(self, now: float) -> None:
+        if self.dock_start_time_sec is None:
+            self.dock_start_time_sec = now
+
+    def end_docking(self, now: float) -> None:
+        if self.dock_start_time_sec is not None:
+            self.dock_occupied_total_time_sec += now - self.dock_start_time_sec
+            self.dock_start_time_sec = None
+
+    def get_dock_occupied_ratio(self) -> float:
+        if self.active_kit_total_time_sec <= 0:
+            return 0.0
+        return self.dock_occupied_total_time_sec / self.active_kit_total_time_sec
+
+    def get_no_dock_ratio(self) -> float:
+        return max(0.0, 1.0 - self.get_dock_occupied_ratio())
 
     def increment_agv_count(self) -> None:
         if self.assigned_agv_count >= 2:

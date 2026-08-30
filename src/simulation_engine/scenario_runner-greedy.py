@@ -62,7 +62,7 @@ if __name__ == "__main__":
 
     result = None
 
-    scenario_name = "high_frag"
+    scenario_name = "custom"
     runner = ScenarioRunner(scenario_name, policy)
     metrics = runner.run()
 
