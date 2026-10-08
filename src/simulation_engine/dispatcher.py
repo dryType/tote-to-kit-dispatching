@@ -78,6 +78,7 @@ class Dispatcher:
                 score_info=selected_dispatching.score_info,
                 agv_move_distance=agv_move_distance,
             )
+            self.metrics.calc_tote_state_counts()
 
         self.env.process(
             agv_transport_process(

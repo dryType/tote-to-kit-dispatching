@@ -1,0 +1,182 @@
+[
+    {
+        "line": "LINE_01",
+        "start_time_sec": 3330,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_02",
+        "start_time_sec": 3330,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_03",
+        "start_time_sec": 3330,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_04",
+        "start_time_sec": 3330,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_05",
+        "start_time_sec": 3330,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_01",
+        "start_time_sec": 6210,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_02",
+        "start_time_sec": 6210,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_03",
+        "start_time_sec": 6210,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_04",
+        "start_time_sec": 6210,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_05",
+        "start_time_sec": 6210,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_01",
+        "start_time_sec": 9090,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_02",
+        "start_time_sec": 9090,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_03",
+        "start_time_sec": 9090,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_04",
+        "start_time_sec": 9090,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_05",
+        "start_time_sec": 9090,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_01",
+        "start_time_sec": 11970,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_02",
+        "start_time_sec": 11970,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_03",
+        "start_time_sec": 11970,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_04",
+        "start_time_sec": 11970,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_05",
+        "start_time_sec": 11970,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_01",
+        "start_time_sec": 14850,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_02",
+        "start_time_sec": 14850,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_03",
+        "start_time_sec": 14850,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_04",
+        "start_time_sec": 14850,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_05",
+        "start_time_sec": 14850,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_01",
+        "start_time_sec": 17730,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_02",
+        "start_time_sec": 17730,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_03",
+        "start_time_sec": 17730,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_04",
+        "start_time_sec": 17730,
+        "product": "PROD_A",
+        "qty": 200
+    },
+    {
+        "line": "LINE_05",
+        "start_time_sec": 17730,
+        "product": "PROD_A",
+        "qty": 200
+    }
+]

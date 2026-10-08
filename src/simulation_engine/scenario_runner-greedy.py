@@ -62,15 +62,54 @@ if __name__ == "__main__":
 
     result = None
 
-    scenario_name = "custom"
+    scenario_name = "relaxed_deadline"
     runner = ScenarioRunner(scenario_name, policy)
     metrics = runner.run()
+
+    metrics.calc_tote_state_counts()
+
+    tote_state_rows = []
+    for sequence, counts in enumerate(metrics.tote_state_counts, start=1):
+        total_totes = sum(counts.values())
+        tote_state_rows.append(
+            {
+                "순번": sequence,
+                "full 비율": counts["Full"] / total_totes if total_totes else 0.0,
+                "partial 비율": counts["Partial"] / total_totes if total_totes else 0.0,
+                "residual 비율": counts["Residual"] / total_totes
+                if total_totes
+                else 0.0,
+            }
+        )
+
+    tote_state_df = pd.DataFrame(
+        tote_state_rows,
+        columns=["순번", "full 비율", "partial 비율", "residual 비율"],
+    )
+    tote_state_df.to_csv(
+        f"tote_state_counts_{scenario_name}.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+
+    # tardiness_index = metrics.calc_tardiness_index()
+    # init_frag_index = metrics.initial_frag_index
+    # frag_index = metrics.calc_fragmentation_index()
+    # distance_index = metrics.calc_distance_index(layout["agv_max_distance"])
+    # objective_value = 0.6 * tardiness_index + 0.3 * frag_index + 0.1 * distance_index
 
     tardiness_index = metrics.calc_tardiness_index()
     init_frag_index = metrics.initial_frag_index
     frag_index = metrics.calc_fragmentation_index()
     distance_index = metrics.calc_distance_index(layout["agv_max_distance"])
-    objective_value = 0.6 * tardiness_index + 0.3 * frag_index + 0.1 * distance_index
+    makespan_index = metrics.calc_makespan_index(metrics.makespan)
+
+    objective_value = (
+        0.55 * tardiness_index
+        + 0.05 * makespan_index
+        + 0.3 * frag_index
+        + 0.1 * distance_index
+    )
 
     print(f"Tardiness Index: {tardiness_index:.4f}")
     print(

@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any
 
 BASE_DIR = Path(__file__).resolve().parent
-SCENARIO_MODULE_NAME = "scenario_high_frag"
+SCENARIO_MODULE_NAME = "scenario_single_model"
 SCENARIO_PATH = BASE_DIR / f"{SCENARIO_MODULE_NAME}.py"
 TOTE_VOLUME_RATIO = 0.8
 TOTE_WIDTH_CM = 60
@@ -152,10 +152,12 @@ def build_single_tote(
     current_index = tote_index
 
     for part_id, quantity in single_parts_quantity.items():
-        if quantity <= 0:
+        if quantity < 0:
             raise ValueError(
                 f"Quantity for part {part_id} must be positive for single tote generation."
             )
+        if quantity == 0:
+            continue
 
         lot_size = parts_data[part_id]["lot_size"]
         carton_volume = parts_data[part_id]["v_carton"]

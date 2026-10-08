@@ -30,10 +30,31 @@ class Metrics:
         self.totes = totes
         self.order_manager = order_manager
         self.policy = policy
+        self.tote_state_counts: list[dict[str, int]] = []
         self.total_agv_move_distance = 0.0
         self.wf1 = 0.3
         self.wf2 = 0.7
         self.initial_frag_index = self.calc_fragmentation_index()
+
+    def calc_tote_state_counts(self) -> dict[str, int]:
+        """Calculate non-empty tote counts by remaining part-volume ratio."""
+        tote_list = self.totes
+        counts = {"Full": 0, "Partial": 0, "Residual": 0}
+
+        for tote in tote_list:
+            if tote.used_volume_cm3 <= 0 or tote.max_capacity_cm3 <= 0:
+                continue
+
+            volume_ratio = tote.used_volume_cm3 / tote.max_capacity_cm3
+            if volume_ratio >= 0.8:
+                counts["Full"] += 1
+            elif volume_ratio >= 0.3:
+                counts["Partial"] += 1
+            else:
+                counts["Residual"] += 1
+
+        self.tote_state_counts.append(counts.copy())
+        return counts
 
     def calc_tardiness_index(self, t_base: float = 1800.0) -> float:
         total_tardiness_sec = sum(
