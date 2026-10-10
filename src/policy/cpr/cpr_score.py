@@ -135,6 +135,7 @@ class CPRScore:
         if not tote.contents or not matched_parts:
             return 0.0
 
+        remaining_parts = candidate.kit.get_remaining_parts()
         component_empty_count = 0
         perfect_empty_count = 0
         after_carton_dead_space_total = 0
@@ -154,9 +155,8 @@ class CPRScore:
             )
             if after_qty == 0:
                 component_empty_count += 1
-
-            if component.quantity == candidate.kit.required_parts[component.part_id]:
-                perfect_empty_count += 1
+                if component.quantity == remaining_parts[component.part_id]:
+                    perfect_empty_count += 1
 
         carton_dead_space_change_ratio = (
             tote.calc_carton_dead_space() - after_carton_dead_space_total

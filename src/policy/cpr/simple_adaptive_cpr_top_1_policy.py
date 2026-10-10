@@ -70,7 +70,6 @@ class SimpleAdaptiveCPRTop1Policy(BasePolicy):
         best_candidate: DispatchCandidate | None = None
         best_agv: AGV | None = None
         best_score = float("-inf")
-        best_distance = float("inf")
         d_max = self.scorer._calc_d_max(state)
         best_score_info: dict[str, Any] | None = None
 
@@ -83,17 +82,17 @@ class SimpleAdaptiveCPRTop1Policy(BasePolicy):
             self.scorer.change_alpha(**self.phase3_alpha)
 
         for candidate in candidates:
-            for agv in idle_agvs:
-                distance = agv.position.manhattan_distance_to(candidate.tote.position)
-                if distance > best_distance:
-                    continue
-                best_distance = distance
-                best_agv = agv
+            nearest_agv = min(
+                idle_agvs,
+                key=lambda agv: agv.position.manhattan_distance_to(
+                    candidate.tote.position
+                ),
+            )
 
             score_info = self.scorer.build_score_info(
                 now,
                 candidate,
-                best_agv,
+                nearest_agv,
                 state,
                 d_max=d_max,
                 dispatch_count=dispatched_count,
@@ -102,6 +101,7 @@ class SimpleAdaptiveCPRTop1Policy(BasePolicy):
             if score > best_score:
                 best_score = score
                 best_candidate = candidate
+                best_agv = nearest_agv
                 best_score_info = score_info
 
         if best_candidate is not None and best_score_info is not None:
