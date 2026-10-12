@@ -12,8 +12,8 @@ if __package__ is None or __package__ == "":
 
 from simulation_engine.scenario_runner_cpr_common import (
     generate_alpha_grid,
-    load_greedy_makespan,
     load_layout,
+    run_greedy_baseline,
     run_single_simulation_all_params,
 )
 
@@ -26,7 +26,8 @@ if __package__ is None or __package__ == "":
 if __name__ == "__main__":
     layout = load_layout()
     agv_max_distance = layout["agv_max_distance"]
-    greedy_makespan = load_greedy_makespan()
+    scenario_name = "relaxed_deadline"
+    greedy_makespan = run_greedy_baseline(scenario_name)
     w_s1 = 0.3
     w_s2 = 0.7
     margin_sec = 1200
@@ -36,7 +37,6 @@ if __name__ == "__main__":
     p = 2.0
     eps = 0.2
     beta = 0.1
-    scenario_name = "relaxed_deadline"
 
     alpha_combinations = generate_alpha_grid(step=0.05)
     total_tasks = len(alpha_combinations)

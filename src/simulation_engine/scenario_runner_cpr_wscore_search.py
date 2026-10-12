@@ -13,8 +13,9 @@ if __package__ is None or __package__ == "":
         sys.path.insert(0, str(src_dir))
 
 from simulation_engine.scenario_runner_cpr_common import (
-    load_greedy_makespan,
+    DEFAULT_SCENARIO_NAME,
     load_layout,
+    run_greedy_baseline,
     run_single_simulation,
 )
 from simulation_engine.scenario_runner_cpr_configs import ALPHA_COMBINATIONS
@@ -43,7 +44,7 @@ def run_w_grid_search(
 
     layout = load_layout()
     agv_max_distance = layout["agv_max_distance"]
-    greedy_makespan = load_greedy_makespan()
+    greedy_makespan = run_greedy_baseline(DEFAULT_SCENARIO_NAME)
 
     task_args = [
         (alpha_1, alpha_2, alpha_3, w_s1, w_s2, agv_max_distance, greedy_makespan)

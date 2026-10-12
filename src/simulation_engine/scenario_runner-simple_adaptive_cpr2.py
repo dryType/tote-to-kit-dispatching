@@ -16,7 +16,7 @@ if __package__ is None or __package__ == "":
 from policy.cpr.simple_adaptive_cpr_top_1_policy import SimpleAdaptiveCPRTop1Policy
 from simulation_engine.dataset_loader import load_entities_from_scenario
 from simulation_engine.orderManager import OrderManager
-from simulation_engine.scenario_runner_cpr_common import load_greedy_makespan
+from simulation_engine.scenario_runner_cpr_common import run_greedy_baseline
 from simulation_engine.simulator import Simulator
 
 
@@ -95,6 +95,7 @@ def run_single_adaptive_simulation(args: tuple) -> dict:
         "distance_index": distance_index,
         "objective_value": objective_value,
         "make_span": metrics.makespan,
+        "greedy_makespan": greedy_makespan,
         "tardiness count": metrics.calc_tardiness_count(),
         "dispatch count": metrics.dispatched_count,
         "total distance": metrics.total_agv_move_distance,
@@ -146,7 +147,7 @@ if __name__ == "__main__":
     )
     layout = json.loads(layout_path.read_text())
     agv_max_distance = layout["agv_max_distance"]
-    greedy_makespan = load_greedy_makespan()
+    greedy_makespan = run_greedy_baseline(scenario_name)
 
     # Alpha 후보 조합 생성 (총 4 * 3 * 4 = 48개 조합)
     alpha_combos = generate_adaptive_alpha_candidates()

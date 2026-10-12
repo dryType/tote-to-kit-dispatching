@@ -12,7 +12,7 @@ from policy.cpr.simple_adaptive_cpr_top_1_policy import SimpleAdaptiveCPRTop1Pol
 from policy.greedy.greedy_policy import GreedyPolicy
 from simulation_engine.dataset_loader import load_entities_from_scenario
 from simulation_engine.orderManager import OrderManager
-from simulation_engine.scenario_runner_cpr_common import load_greedy_makespan
+from simulation_engine.scenario_runner_cpr_common import run_greedy_baseline
 from simulation_engine.simulator import Simulator
 
 
@@ -70,7 +70,7 @@ if __name__ == "__main__":
     init_frag_index = metrics.initial_frag_index
     frag_index = metrics.calc_fragmentation_index()
     distance_index = metrics.calc_distance_index(layout["agv_max_distance"])
-    greedy_makespan = load_greedy_makespan()
+    greedy_makespan = run_greedy_baseline(scenario_name)
     makespan_index = metrics.calc_makespan_index(greedy_makespan)
     objective_value = (
         0.55 * tardiness_index
@@ -90,6 +90,7 @@ if __name__ == "__main__":
         "distance_index": distance_index,
         "objective_value": objective_value,
         "make_span": metrics.makespan,
+        "greedy_makespan": greedy_makespan,
         "tardiness count": metrics.calc_tardiness_count(),
         "dispatch count": metrics.dispatched_count,
         "total distance": metrics.total_agv_move_distance,

@@ -116,9 +116,7 @@ if __name__ == "__main__":
         f"Initial Fragmentation Index: {init_frag_index:.4f}, Final Fragmentation Index: {frag_index:.4f}"
     )
     print(f"Distance Index: {distance_index:.4f})")
-    print(
-        f"Total Objective Value: {0.6 * tardiness_index + 0.3 * frag_index + 0.1 * distance_index:.4f}"
-    )
+    print(f"Total Objective Value: {objective_value:.4f}")
 
     result = {
         "tardiness_index": tardiness_index,
@@ -142,9 +140,5 @@ if __name__ == "__main__":
     # CSV 저장
     output_csv = f"greedy_result_{scenario_name}.csv"
     df.to_csv(output_csv, index=False, encoding="utf-8-sig")
-
-    # greedy_result.json에 makespan 저장
-    with open("./src/simulation_engine/greedy_result.json", "w") as f:
-        json.dump({"makespan": metrics.makespan}, f, indent=4)
 
     print(result)

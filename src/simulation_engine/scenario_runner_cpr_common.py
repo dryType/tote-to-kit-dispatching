@@ -1,13 +1,19 @@
 from __future__ import annotations
 
+import contextlib
+import io
 import json
 from pathlib import Path
 
 from policy.base_policy import BasePolicy
 from policy.cpr.cpr_top_1_policy import CPRTop1Policy
+from policy.greedy.greedy_policy import GreedyPolicy
 from simulation_engine.dataset_loader import load_entities_from_scenario
 from simulation_engine.orderManager import OrderManager
 from simulation_engine.simulator import Simulator
+
+# run_single_simulation이 실행하는 시나리오
+DEFAULT_SCENARIO_NAME = "custom"
 
 
 class ScenarioRunner:
@@ -146,6 +152,7 @@ def run_single_simulation_all_params(
         "distance_index": distance_index,
         "objective_value": objective_value,
         "make_span": metrics.makespan,
+        "greedy_makespan": greedy_makespan,
         "tardiness count": metrics.calc_tardiness_count(),
         "dispatch count": metrics.dispatched_count,
         "total distance": metrics.total_agv_move_distance,
@@ -246,7 +253,7 @@ def run_single_simulation(args: tuple[float, ...]) -> dict:
         epsilon=eps,
         beta=beta,
     )
-    runner = ScenarioRunner("custom", policy)
+    runner = ScenarioRunner(DEFAULT_SCENARIO_NAME, policy)
     metrics = runner.run()
 
     tardiness_index = metrics.calc_tardiness_index()
@@ -285,6 +292,7 @@ def run_single_simulation(args: tuple[float, ...]) -> dict:
         "distance_index": distance_index,
         "objective_value": objective_value,
         "make_span": metrics.makespan,
+        "greedy_makespan": greedy_makespan,
         "tardiness count": metrics.calc_tardiness_count(),
         "dispatch count": metrics.dispatched_count,
         "total distance": metrics.total_agv_move_distance,
@@ -295,14 +303,23 @@ def layout_path() -> Path:
     return Path(__file__).resolve().parents[2] / "data" / "master_data" / "layout.json"
 
 
-def greedy_result_path() -> Path:
-    return Path(__file__).resolve().parent / "greedy_result.json"
-
-
 def load_layout() -> dict:
     return json.loads(layout_path().read_text())
 
 
-def load_greedy_makespan() -> float:
-    with greedy_result_path().open("r", encoding="utf-8") as fh:
-        return json.load(fh)["makespan"]
+def run_greedy_baseline(scenario_name: str, sim_time_limit: float = 172800) -> float:
+    """makespan 지표의 기준값으로 쓸 Greedy makespan을 같은 코드 상태에서 계산"""
+    totes, kits, stations, agvs = load_entities_from_scenario(scenario_name)
+    simulator = Simulator(
+        agvs=agvs,
+        stations=stations,
+        totes=totes,
+        order_manager=OrderManager(pending_kits=kits),
+        policy=GreedyPolicy(),
+        sim_time_limit=sim_time_limit,
+    )
+    with contextlib.redirect_stdout(io.StringIO()):
+        metrics = simulator.run()
+
+    print(f"[Greedy baseline] {scenario_name}: makespan={metrics.makespan:.1f}")
+    return metrics.makespan

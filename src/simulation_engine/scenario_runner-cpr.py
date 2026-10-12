@@ -11,9 +11,10 @@ if __package__ is None or __package__ == "":
         sys.path.insert(0, str(src_dir))
 
 from simulation_engine.scenario_runner_cpr_common import (
+    DEFAULT_SCENARIO_NAME,
     generate_alpha_grid,
-    load_greedy_makespan,
     load_layout,
+    run_greedy_baseline,
     run_single_simulation,
 )
 
@@ -26,7 +27,7 @@ if __package__ is None or __package__ == "":
 if __name__ == "__main__":
     layout = load_layout()
     agv_max_distance = layout["agv_max_distance"]
-    greedy_makespan = load_greedy_makespan()
+    greedy_makespan = run_greedy_baseline(DEFAULT_SCENARIO_NAME)
     w_s1 = 0.3
     w_s2 = 0.7
 

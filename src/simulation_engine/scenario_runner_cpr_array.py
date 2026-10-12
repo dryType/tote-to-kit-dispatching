@@ -13,8 +13,9 @@ if __package__ is None or __package__ == "":
         sys.path.insert(0, str(src_dir))
 
 from simulation_engine.scenario_runner_cpr_common import (
-    load_greedy_makespan,
+    DEFAULT_SCENARIO_NAME,
     load_layout,
+    run_greedy_baseline,
     run_single_simulation,
 )
 from simulation_engine.scenario_runner_cpr_configs import ALPHA_COMBINATIONS
@@ -30,7 +31,7 @@ def run_alpha_combinations(
 
     layout = load_layout()
     agv_max_distance = layout["agv_max_distance"]
-    greedy_makespan = load_greedy_makespan()
+    greedy_makespan = run_greedy_baseline(DEFAULT_SCENARIO_NAME)
     total_tasks = len(alpha_combinations)
     num_cores = max_workers or os.cpu_count() or 4
     task_args = [

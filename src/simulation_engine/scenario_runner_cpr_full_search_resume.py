@@ -13,9 +13,10 @@ if __package__ is None or __package__ == "":
         sys.path.insert(0, str(src_dir))
 
 from simulation_engine.scenario_runner_cpr_common import (
+    DEFAULT_SCENARIO_NAME,
     generate_alpha_grid,
-    load_greedy_makespan,
     load_layout,
+    run_greedy_baseline,
     run_single_simulation,
 )
 
@@ -88,7 +89,7 @@ def run_full_search(
 ) -> pd.DataFrame:
     layout = load_layout()
     agv_max_distance = layout["agv_max_distance"]
-    greedy_makespan = load_greedy_makespan()
+    greedy_makespan = run_greedy_baseline(DEFAULT_SCENARIO_NAME)
 
     alpha_combinations = generate_alpha_grid(step=alpha_step)
     w_combinations = generate_w_grid(step=w_step)

@@ -13,8 +13,9 @@ if __package__ is None or __package__ == "":
         sys.path.insert(0, str(src_dir))
 
 from simulation_engine.scenario_runner_cpr_common import (
-    load_greedy_makespan,
+    DEFAULT_SCENARIO_NAME,
     load_layout,
+    run_greedy_baseline,
     run_single_simulation,
 )
 
@@ -52,7 +53,7 @@ def run_margin_sec_search(
 
     layout = load_layout()
     agv_max_distance = layout["agv_max_distance"]
-    greedy_makespan = load_greedy_makespan()
+    greedy_makespan = run_greedy_baseline(DEFAULT_SCENARIO_NAME)
 
     alpha_1, alpha_2, alpha_3 = alpha
     w_s1, w_s2 = w_s
