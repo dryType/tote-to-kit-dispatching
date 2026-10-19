@@ -1,6 +1,5 @@
 from simulation_engine.entities import (
     DispatchCandidate,
-    Kit,
     KittingStation,
     StationStatus,
     Tote,
@@ -12,6 +11,8 @@ def generate_candidates(
     stations: list[KittingStation], totes: list[Tote]
 ) -> list[DispatchCandidate]:
     candidates = []
+    # 후보를 만드는 동안 토트/키트 상태는 바뀌지 않으므로 재고와 남은 수량을 한 번만 계산한다
+    available_stocks: list[tuple[Tote, dict[str, int]]] | None = None
 
     for station in stations:
         if station.status != StationStatus.KITTING:
@@ -22,14 +23,19 @@ def generate_candidates(
             continue
 
         kit = station.assigned_kit
-        if kit.get_remaining_parts() == {}:
+        remaining_parts = kit.get_remaining_parts()
+        if remaining_parts == {}:
             continue
 
-        for tote in totes:
-            if tote.status == ToteStatus.BUSY:
-                continue
+        if available_stocks is None:
+            available_stocks = [
+                (tote, _stock_of(tote))
+                for tote in totes
+                if tote.status != ToteStatus.BUSY
+            ]
 
-            matched_parts = _calculate_matched_parts(tote, kit)
+        for tote, stock in available_stocks:
+            matched_parts = _calculate_matched_parts(stock, remaining_parts)
             if matched_parts:
                 candidate = DispatchCandidate(
                     tote=tote, station=station, kit=kit, matched_parts=matched_parts
@@ -39,12 +45,21 @@ def generate_candidates(
     return candidates
 
 
-def _calculate_matched_parts(tote: Tote, kit: Kit) -> dict[str, int]:
+def _stock_of(tote: Tote) -> dict[str, int]:
+    # Tote.get_component_quantity 와 같게, 같은 부품이 여러 번 있으면 첫 번째 수량을 쓴다
+    stock: dict[str, int] = {}
+    for component in tote.contents:
+        stock.setdefault(component.part_id, component.quantity)
+    return stock
+
+
+def _calculate_matched_parts(
+    stock: dict[str, int], remaining_parts: dict[str, int]
+) -> dict[str, int]:
     matched_parts = {}
-    remaining_parts = kit.get_remaining_parts()
 
     for part_id, required_qty in remaining_parts.items():
-        available_qty = tote.get_component_quantity(part_id)
+        available_qty = stock.get(part_id, 0)
         if available_qty > 0:
             matched_qty = min(available_qty, required_qty)
             matched_parts[part_id] = matched_qty
