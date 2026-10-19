@@ -2,6 +2,7 @@ import simpy
 
 from policy.base_policy import BasePolicy
 from simulation_engine.candidate_generator import generate_candidates
+from simulation_engine.disturbance import Disturbance
 from simulation_engine.metrics import Metrics
 from simulation_engine.processes import agv_transport_process
 from simulation_engine.state import WorldStateSnapshot
@@ -14,11 +15,13 @@ class Dispatcher:
         world_state: WorldStateSnapshot,
         policy: BasePolicy,
         metrics: Metrics | None,
+        disturbance: Disturbance | None = None,
     ):
         self.env = env
         self.world_state = world_state
         self.policy = policy
         self.metrics = metrics
+        self.disturbance = disturbance
         self.dispatch_event = env.event()
 
     def notify(self) -> None:

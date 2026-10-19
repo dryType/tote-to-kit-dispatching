@@ -2,6 +2,7 @@ import simpy
 
 from policy.base_policy import BasePolicy
 from simulation_engine.dispatcher import Dispatcher
+from simulation_engine.disturbance import Disturbance
 from simulation_engine.entities import AGV, KittingStation, Tote
 from simulation_engine.metrics import Metrics
 from simulation_engine.orderManager import OrderManager
@@ -17,6 +18,7 @@ class Simulator:
         order_manager: OrderManager,
         policy: BasePolicy,
         sim_time_limit: float = 3600.0,
+        disturbance: Disturbance | None = None,
     ):
         self.agvs = agvs
         self.stations = stations
@@ -43,7 +45,7 @@ class Simulator:
             order_manager=self.order_manager,
         )
         self.dispatcher = Dispatcher(
-            self.env, self.world_state, self.policy, self.metrics
+            self.env, self.world_state, self.policy, self.metrics, disturbance
         )
 
     def run(self) -> Metrics:

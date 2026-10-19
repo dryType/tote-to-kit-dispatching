@@ -11,9 +11,9 @@ from simulation_engine.entities import (
 from simulation_engine.metrics import Metrics
 
 
-def _calc_agv_travel_time(p1: Position, p2: Position) -> float:
+def _calc_agv_travel_time(p1: Position, p2: Position, factor: float = 1.0) -> float:
     dist = abs(p2.x - p1.x) + abs(p2.y - p1.y)  # Manhattan distance
-    return dist / AGVSpec.SPEED_M_PER_S
+    return dist / AGVSpec.SPEED_M_PER_S * factor
 
 
 def agv_transport_process(
@@ -23,9 +23,15 @@ def agv_transport_process(
     dispatcher: dispatcher.Dispatcher,
     metrics: Metrics | None,
 ):
+    disturbance = dispatcher.disturbance
+
+    def travel_time(p1: Position, p2: Position) -> float:
+        # 교란이 있으면 이동 구간마다 시작 시점에 배수를 뽑는다
+        factor = disturbance.travel_factor(agv.agv_id) if disturbance else 1.0
+        return _calc_agv_travel_time(p1, p2, factor)
 
     # agv가 작업 할당받아 storage_bin으로 이동 시작
-    yield env.timeout(_calc_agv_travel_time(agv.position, candidate.tote.position))
+    yield env.timeout(travel_time(agv.position, candidate.tote.position))
 
     # agv storage_bin 도착
     agv.update_position(candidate.tote.position)
@@ -36,16 +42,14 @@ def agv_transport_process(
 
     # tote pickup 완료. kitting stationd으로 이동 시작
     agv.head_to_station()
-    yield env.timeout(
-        _calc_agv_travel_time(agv.position, candidate.station.waiting_position)
-    )
+    yield env.timeout(travel_time(agv.position, candidate.station.waiting_position))
     # waiting position 도착 docking position이 비어있는지 확인
     agv.start_waiting()
     dock_request = candidate.station.dock.request()
     yield dock_request
 
     # agv docking position으로 이동
-    yield env.timeout(_calc_agv_travel_time(agv.position, candidate.station.position))
+    yield env.timeout(travel_time(agv.position, candidate.station.position))
 
     # agv docking position 도착 & kitting 작업 대기
     agv.start_docking()
@@ -68,7 +72,7 @@ def agv_transport_process(
     candidate.station.dock.release(dock_request)
 
     agv.return_to_storage()
-    yield env.timeout(_calc_agv_travel_time(agv.position, agv.target_storage_position))
+    yield env.timeout(travel_time(agv.position, agv.target_storage_position))
     yield env.timeout(AGVSpec.TOTE_PUTDOWN_TIME_S)
 
     agv.unload_tote()
@@ -94,6 +98,11 @@ def kitting_process(
         total_transfer_time += (
             full_carton_count * KittingStationSpec.FULL_CARTON_TRANSFER_TIME_SEC
             + partial_carton_count * KittingStationSpec.PARTIAL_CARTON_TRANSFER_TIME_SEC
+        )
+
+    if dispatcher.disturbance is not None:
+        total_transfer_time *= dispatcher.disturbance.picking_factor(
+            candidate.station.station_id
         )
 
     yield env.timeout(total_transfer_time)
