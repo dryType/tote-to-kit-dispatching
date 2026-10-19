@@ -1,8 +1,9 @@
 """임의 시나리오에 대해 CPR α 그리드 탐색을 수행한다.
 
-사용 예:
-    python src/simulation_engine/scenario_runner_cpr_grid.py gen3_medium_s42
-    python src/simulation_engine/scenario_runner_cpr_grid.py gen3_small_s42 --step 0.1 --workers 4
+사용 예 (시나리오는 data/dataset_generator3.py로 먼저 생성):
+    python data/dataset_generator3.py --preset medium --seed 42 --load 0.8
+    python src/simulation_engine/scenario_runner_cpr_grid.py gen3_medium_s42_L080
+    python src/simulation_engine/scenario_runner_cpr_grid.py gen3_small_s42_L080 --step 0.1 --workers 4
 """
 
 import argparse
