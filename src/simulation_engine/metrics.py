@@ -88,6 +88,39 @@ class Metrics:
             return 0.0
         return self.total_agv_move_distance / (self.dispatched_count * agv_max_distance)
 
+    def calc_distance_index_per_tote(self, agv_max_distance: float) -> float:
+        """분모를 토트 세트 크기(인스턴스 고정값)로 둔 거리 지표. 재방문으로 늘어난 운반도 반영된다."""
+        if not self.totes:
+            return 0.0
+        return self.total_agv_move_distance / (len(self.totes) * agv_max_distance)
+
+    def calc_tote_usage_stats(self) -> dict[str, float]:
+        """토트 단위 단편화 지표.
+
+        - opened_left_totes: 한 번 이상 꺼냈는데 잔량이 남은 토트 (한 번도 안 꺼낸 토트는 제외)
+        - revisit_ratio: (디스패치 수 - 사용한 토트 수) / 사용한 토트 수
+        - partial_cartons: 일부만 찬 카톤 수
+        """
+        used = sum(1 for tote in self.totes if tote.assigned_history)
+        opened_left = sum(
+            1 for tote in self.totes if tote.assigned_history and not tote.is_empty()
+        )
+        partial_cartons = sum(
+            1
+            for tote in self.totes
+            for component in tote.contents
+            if component.lot_size and component.quantity % component.lot_size
+        )
+        return {
+            "tote_count": len(self.totes),
+            "totes_used": used,
+            "untouched_totes": len(self.totes) - used,
+            "opened_left_totes": opened_left,
+            "opened_left_ratio": opened_left / len(self.totes) if self.totes else 0.0,
+            "revisit_ratio": (self.dispatched_count - used) / used if used else 0.0,
+            "partial_cartons": partial_cartons,
+        }
+
     @property
     def kitting_completed_count(self) -> int:
         return self.tote_kitting_completed_count

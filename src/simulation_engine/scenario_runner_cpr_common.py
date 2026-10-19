@@ -129,6 +129,17 @@ def run_single_simulation_all_params(
         0.0 if total_active_time <= 0 else total_dock_time / total_active_time
     )
 
+    # 수정안 목적함수: 거리는 토트 수 기준(고정 분모), 단편화는 잔량 토트 비율
+    tote_stats = metrics.calc_tote_usage_stats()
+    distance_index_per_tote = metrics.calc_distance_index_per_tote(agv_max_distance)
+    objective_v2 = (
+        0.55 * tardiness_index
+        + 0.05 * makespan_index
+        + 0.3 * tote_stats["opened_left_ratio"]
+        + 0.1 * distance_index_per_tote
+    )
+    completed_kits = sum(1 for kit in metrics.order_manager.get_all_kits() if kit.is_completed())
+
     return {
         "alpha_1": alpha_1,
         "alpha_2": alpha_2,
@@ -157,6 +168,11 @@ def run_single_simulation_all_params(
         "dispatch count": metrics.dispatched_count,
         "total distance": metrics.total_agv_move_distance,
         "station_dock_occupancy_ratio_weighted": weighted_dock_ratio,
+        "completed_kits": completed_kits,
+        "total_kits": len(metrics.order_manager.get_all_kits()),
+        "distance_index_per_tote": distance_index_per_tote,
+        "objective_v2": objective_v2,
+        **tote_stats,
     }
 
 
