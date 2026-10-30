@@ -1,0 +1,49 @@
+{
+  "default": "new_cpr_L1.0",
+  "datasets": [
+    {
+      "id": "cpr_L1.0",
+      "policy": "cpr",
+      "policy_name": "CPR Top-1 Policy",
+      "size": "medium",
+      "seed": 42,
+      "target_load": 1.0,
+      "n_trips": 1470,
+      "n_kits": 39,
+      "n_late_kits": 25
+    },
+    {
+      "id": "greedy_L1.0",
+      "policy": "greedy",
+      "policy_name": "Greedy Policy",
+      "size": "medium",
+      "seed": 42,
+      "target_load": 1.0,
+      "n_trips": 1408,
+      "n_kits": 39,
+      "n_late_kits": 17
+    },
+    {
+      "id": "new_cpr_L1.0",
+      "policy": "new_cpr",
+      "policy_name": "New CPR Policy",
+      "size": "medium",
+      "seed": 42,
+      "target_load": 1.0,
+      "n_trips": 1407,
+      "n_kits": 39,
+      "n_late_kits": 16
+    },
+    {
+      "id": "new_cpr_L0.8",
+      "policy": "new_cpr",
+      "policy_name": "New CPR Policy",
+      "size": "medium",
+      "seed": 42,
+      "target_load": 0.8,
+      "n_trips": 1407,
+      "n_kits": 39,
+      "n_late_kits": 0
+    }
+  ]
+}

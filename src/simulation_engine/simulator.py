@@ -33,7 +33,7 @@ class Simulator:
         for station in self.stations:
             station.init_simulation(self.env, self.order_manager)
 
-            initial_kit = self.order_manager.pop_next_kit()
+            initial_kit = self.order_manager.pop_next_kit(0.0)
             if initial_kit is not None:
                 station.assign_kit(initial_kit, 0)
 

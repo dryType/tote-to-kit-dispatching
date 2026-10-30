@@ -1,0 +1,60 @@
+{
+  "label": "new_cpr",
+  "policy": "New CPR Policy",
+  "n_totes": 787,
+  "n_kits": 39,
+  "n_stations": 4,
+  "n_agvs": 9,
+  "n_sku": 80,
+  "makespan": 17764.166666666697,
+  "n_dispatch": 1407,
+  "total_agv_move_distance": 87124.25,
+  "n_decisions": 1407,
+  "n_candidate_rows": 229458,
+  "completed_kits": 39,
+  "tardy_kits": 0,
+  "total_tardiness": 0,
+  "totes_touched": 786,
+  "totes_opened_left": 101,
+  "totes_emptied": 685,
+  "frag_index_init": 0.034154644042072566,
+  "frag_index_final": 0.04642165881335565,
+  "check_metrics_frag_init": 0.03415464404207248,
+  "check_metrics_frag_final": 0.04642165881335592,
+  "definitions": {
+    "wait_start": "AGV.start_waiting() 호출 시각 (스테이션 대기 위치 도착), s",
+    "dock_grant": "station.dock.request() 가 허락된 시각, s",
+    "dock_wait": "dock_grant - wait_start = kitting_start - wait_start - (대기 위치 -> 도킹 위치 이동시간), s",
+    "partial_picks": "그 트립의 matched_parts 중 qty % lot_size != 0 인 부품 수",
+    "cartons_needed": "qty_required / lot_size (올림하지 않은 실수)"
+  },
+  "checks": {
+    "dispatch_rows_equal_n_dispatch": {
+      "ok": true,
+      "rows": 1407,
+      "n_dispatch": 1407
+    },
+    "dock_wait_nonnegative": {
+      "ok": true,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 162.833
+    },
+    "kit_sku_sum_equals_kits_qty_required": {
+      "ok": true,
+      "mismatched_kits": []
+    },
+    "dock_move_time_residual": {
+      "nominal_sec": [
+        1.333333
+      ],
+      "max_abs_residual_sec": 0.000667,
+      "note": "교란(dist_cv>0)이 있으면 이동시간이 바뀌므로 0이 아닐 수 있다"
+    }
+  },
+  "size": "medium",
+  "seed": 42,
+  "target_load": 0.8,
+  "dist_cv": 0.0,
+  "dist_seed": 0
+}

@@ -4,6 +4,7 @@ from config.constants import AGVSpec, KittingStationSpec
 from simulation_engine import dispatcher
 from simulation_engine.entities import (
     AGV,
+    AGVStatus,
     DispatchCandidate,
     KittingStation,
     Position,
@@ -79,6 +80,13 @@ def agv_transport_process(
     agv.update_position(agv.target_storage_position)
     agv.finish_task(env.now)
 
+    # 사건형 교란: 작업을 마친 뒤 고장이 나면 일정 시간 쉬었다가 복귀한다
+    downtime = disturbance.breakdown_after_task(agv.agv_id, env.now) if disturbance else 0.0
+    if downtime > 0:
+        agv.status = AGVStatus.DOWN
+        yield env.timeout(downtime)
+        agv.status = AGVStatus.IDLE
+
     dispatcher.notify()
 
 
@@ -141,7 +149,7 @@ def kit_replacement_process(
     metrics: Metrics | None,
     old_kit_id: str,
 ):
-    new_kit = station.order_manager.pop_next_kit()
+    new_kit = station.order_manager.pop_next_kit(env.now)
     if new_kit is None:
         if station.order_manager.is_all_completed():
             print(f"All kits completed at t={env.now}.")

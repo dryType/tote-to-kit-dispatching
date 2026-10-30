@@ -44,6 +44,11 @@ class Dispatcher:
         if not idle_agvs:
             return False
 
+        # 정책이 스테이션별 AGV 상한을 상황에 따라 바꾸는 경우 (기본 정책에는 없음)
+        update_caps = getattr(self.policy, "update_station_caps", None)
+        if update_caps is not None:
+            update_caps(self.world_state, self.env.now)
+
         tote_to_kit_candidates = generate_candidates(
             list(self.world_state.stations.values()),
             list(self.world_state.totes.values()),

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tote-Kit Dispatch Trace</title>
+    <meta name="description" content="Interactive trace of AMR tote-to-kit dispatching: station timeline, congestion, kit progress and SKU spread." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%23F5F3EE'/%3E%3Crect x='2' y='4' width='9' height='3' fill='%232D63A8'/%3E%3Crect x='11' y='4' width='3' height='3' fill='%23C2610F'/%3E%3Crect x='2' y='9' width='3' height='3' fill='%2316213A'/%3E%3Crect x='6' y='9' width='3' height='3' fill='%2316213A'/%3E%3Crect x='10' y='9' width='3' height='3' fill='%2316213A'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="title-block">
+        <h1>Tote-Kit Dispatch Trace</h1>
+        <div id="shift-info" class="shift-info">Loading…</div>
+      </div>
+      <div class="controls">
+        <label class="ctl">
+          <span class="ctl-label">Run</span>
+          <select id="dataset-select" aria-label="Simulation run (policy and load)"></select>
+        </label>
+        <label class="ctl toggle">
+          <input type="checkbox" id="late-only" />
+          <span class="switch" aria-hidden="true"></span>
+          <span>Late kits only</span>
+        </label>
+        <label class="ctl">
+          <span class="ctl-label">Station</span>
+          <select id="station-select" aria-label="Station filter"><option value="all">All</option></select>
+        </label>
+        <button id="reset-all" type="button" class="btn">Reset all</button>
+      </div>
+    </header>
+
+    <div id="error" class="error" hidden></div>
+
+    <main class="layout">
+      <section class="card v1" aria-labelledby="v1-title">
+        <div class="card-head">
+          <h2 id="v1-title"><span class="tag">V1</span>Station timeline</h2>
+          <p class="hint">Kit bars (orange = past deadline, tick = deadline) and docked trips per station. Drag the overview or scroll to zoom; click a kit to trace it.</p>
+          <div class="head-right">
+            <span id="window-label" class="window-label">Whole shift</span>
+            <button id="v1-reset" type="button" class="btn small" disabled>Reset zoom</button>
+          </div>
+        </div>
+        <div id="v1-body" class="card-body"></div>
+      </section>
+
+      <div class="row2">
+        <section class="card v2" aria-labelledby="v2-title">
+          <div class="card-head">
+            <h2 id="v2-title"><span class="tag">V2</span>Congestion heatmap</h2>
+            <p class="hint">Shade = share of the bin the dock (or the AMR fleet) was busy · dot = average AMRs waiting for the dock</p>
+          </div>
+          <div id="v2-body" class="card-body"></div>
+        </section>
+        <section class="card v3" aria-labelledby="v3-title">
+          <div class="card-head">
+            <h2 id="v3-title"><span class="tag">V3</span>Kit trace</h2>
+            <p class="hint">Fill progress of one kit against its deadline, with one glyph per trip.</p>
+          </div>
+          <div id="v3-body" class="card-body"></div>
+        </section>
+        <section class="card v4" aria-labelledby="v4-title">
+          <div class="card-head">
+            <h2 id="v4-title"><span class="tag">V4</span>SKU spread</h2>
+            <p class="hint">Does spreading an SKU across more totes raise trips per carton?</p>
+            <label class="ctl head-right">
+              <span class="ctl-label">Min cartons needed</span>
+              <input type="number" id="v4-min-cartons" class="num-input" min="0" step="1" inputmode="numeric" aria-describedby="v4-title" />
+            </label>
+          </div>
+          <div id="v4-body" class="card-body"></div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <span id="footer-run"></span>
+      <span>Times are h:mm from shift start. Discrete-event simulation of fixed-station kitting with AMRs.</span>
+    </footer>
+
+    <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

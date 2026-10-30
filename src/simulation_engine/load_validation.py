@@ -53,9 +53,22 @@ def make_policy(name: str):
     )
 
 
-def build_simulator(data: dict, policy, disturbance: Disturbance | None = None) -> Simulator:
-    layout = gen3.load_json(gen3.LAYOUT_PATH)
-    agv_rows = gen3.load_json(gen3.DEFAULT_AGV_TEMPLATE)
+# 키트 투입 규칙 기본값: 여유 순 (납기 − 예상 작업 시간이 작은 키트 먼저, 같으면 번호 순).
+# release_rule="edd" 또는 None이면 예전 방식(납기 순, 같은 납기는 번호 순)이다.
+DEFAULT_RELEASE = "slack"
+
+
+def build_simulator(data: dict, policy, disturbance: Disturbance | None = None,
+                    release_rule="default") -> Simulator:
+    if release_rule == "default":
+        release_rule = DEFAULT_RELEASE
+    if isinstance(release_rule, str):
+        from simulation_engine.kit_release import make_release_rule
+
+        release_rule = None if release_rule == "edd" else make_release_rule(data, release_rule)
+    # 인스턴스에 레이아웃이 없으면(예전 생성기) 공용 레이아웃을 쓴다
+    layout = data.get("layout") or gen3.load_json(gen3.LAYOUT_PATH)
+    agv_rows = data.get("agvs") or gen3.load_json(gen3.DEFAULT_AGV_TEMPLATE)
     totes = [Tote.from_dict(json.loads(json.dumps(t))) for t in data["totes"]]
     kits = [Kit.from_dict(json.loads(json.dumps(k))) for k in data["kits"]]
     stations = [KittingStation.from_dict(s) for s in layout["kitting_stations"]]
@@ -64,7 +77,7 @@ def build_simulator(data: dict, policy, disturbance: Disturbance | None = None) 
         agvs=agvs,
         stations=stations,
         totes=totes,
-        order_manager=OrderManager(pending_kits=kits),
+        order_manager=OrderManager(pending_kits=kits, release_rule=release_rule),
         policy=policy,
         sim_time_limit=SIM_TIME_LIMIT,
         disturbance=disturbance,

@@ -15,9 +15,15 @@ BOM/생산계획을 파라미터로 생성하고, 토트는 다음 입고 규칙
 모든 납기에 같은 배율을 곱한다. 작업량은 그대로이고 처리 능력은 시간에 비례하므로
 배율을 s로 하면 모든 납기의 부하가 정확히 1/s배가 된다.
 
+레이아웃은 자동창고 레인 × 칼럼 구조로 만들어 시나리오와 함께 저장한다 (LayoutConfig).
+셔틀이 토트를 칼럼 1층 버퍼로 내려 주고 AMR은 버퍼에서 가져간다. 셔틀 시간과 버퍼 충돌은
+다루지 않고, AMR은 통로와 무관하게 자유롭게 이동한다 (맨해튼 거리).
+GeneratorConfig.layout = None 이면 예전 공용 레이아웃(master_data/layout.json, 18곳)을 쓴다.
+
 사용 예:
     python data/dataset_generator3.py --preset medium --seed 42 --load 0.8
     python data/dataset_generator3.py --preset small --seed 1 --name my_small
+    python data/dataset_generator3.py --preset medium --seed 42 --legacy-layout
 """
 
 from __future__ import annotations
@@ -26,7 +32,6 @@ import argparse
 import json
 import math
 import random
-import shutil
 import sys
 from dataclasses import asdict, dataclass, replace
 from pathlib import Path
@@ -54,9 +59,25 @@ LAYOUT_PATH = MASTER_DIR / "layout.json"
 AGV_CONFIG_DIR = MASTER_DIR / "agv_configs"
 DEFAULT_AGV_TEMPLATE = AGV_CONFIG_DIR / "agv_custom.json"
 
-GENERATOR_REVISION = 2  # 2: 누적 부하 기준 납기, 잔량 토트 보충 제거, 잔량 토트 부품은 오늘 필요한 부품만
+GENERATOR_REVISION = 3
+# 2: 누적 부하 기준 납기, 잔량 토트 보충 제거, 잔량 토트 부품은 오늘 필요한 부품만
+# 3: 레인 × 칼럼 레이아웃을 시나리오별로 생성·저장
 
 LOT_SIZE_CHOICES = [5, 10, 12, 15, 20, 25, 30, 40, 50, 100]
+
+
+@dataclass(frozen=True)
+class LayoutConfig:
+    """자동창고 레인 레이아웃. 레인은 스테이션 쪽으로 세로로 놓이고, 칼럼마다 1층 버퍼가 픽업 위치다."""
+
+    n_lanes: int = 6
+    n_columns: int = 60  # 레인당 칼럼 수
+    n_levels: int = 20  # 1층은 버퍼, 나머지 층이 저장 칸 (공동 창고)
+    column_pitch_m: float = 0.5  # 토트(60×40 cm) 긴 변이 레인과 수직
+    lane_spacing_m: float = 5.0
+    station_gap_m: float = 5.0  # 레인 끝 칼럼 ~ 스테이션
+    n_stations: int = 4
+    depot_offset_m: float = 5.0  # 레인 영역 오른쪽 끝 ~ AGV 대기소
 
 
 @dataclass(frozen=True)
@@ -85,6 +106,17 @@ class GeneratorConfig:
     remnant_full_cartons: tuple[int, int]  # 잔량 토트의 SKU당 꽉 찬 카톤 수
     # 보관 위치 배정: "random" (자동창고 임의 보관) 또는 "sequential"
     storage_assignment: str = "random"
+    # None 이면 예전 공용 레이아웃(master_data/layout.json)
+    layout: LayoutConfig | None = LayoutConfig()
+    # 시간대별 부하 패턴: ((시간 비율, 상대 강도), ...). None 이면 고른 기준 일정 그대로.
+    # 강도가 높은 구간은 같은 양의 일이 짧은 시간에 납기가 몰리고(빡빡), 낮은 구간은 넓게 퍼진다(널널)
+    load_profile: tuple[tuple[float, float], ...] | None = None
+    # 납기 방식: "lot" = lot 시작 시각이 그 lot 키트의 납기, "common" = 모든 키트가 같은 마감 (창고 간 이동 등)
+    deadline_mode: str = "lot"
+    # 납기 시각 단위(초). 예: 1800이면 30분 단위로 반올림하고, 반올림 후 부하가 목표에 가장 가깝도록 배율을 다시 찾는다
+    deadline_grid_sec: float | None = None
+    # AGV 대수 (None이면 기본 템플릿의 9대)
+    n_agvs: int | None = None
 
 
 PRESETS: dict[str, GeneratorConfig] = {
@@ -315,6 +347,32 @@ def build_prod_plan(
     return plan
 
 
+def warp_deadlines(plan: list[dict[str, Any]], profile: tuple[tuple[float, float], ...]) -> None:
+    """기준 일정의 시간축을 부하 패턴에 맞게 바꾼다.
+
+    기준 일정은 일이 시간에 거의 고르게 분포한다. 기준 시각의 비율 p(= 그때까지 일의 비율)를
+    누적 강도 R(u) = p 가 되는 시간 비율 u 로 옮긴다. 강도가 높은 구간일수록 u 가 촘촘해진다.
+    """
+    total_frac = sum(f for f, _ in profile)
+    segs = [(f / total_frac, a) for f, a in profile]
+    total = sum(f * a for f, a in segs)
+    horizon = max(row["base_start"] for row in plan)
+
+    def inverse(p: float) -> float:
+        acc_r = acc_u = 0.0
+        for f, a in segs:
+            r = f * a / total
+            if p <= acc_r + r or (f, a) == segs[-1]:
+                return acc_u + (p - acc_r) / r * f if r > 0 else acc_u
+            acc_r += r
+            acc_u += f
+        return 1.0
+
+    for row in plan:
+        row["base_start"] = inverse(row["base_start"] / horizon) * horizon
+        row["start_time_sec"] = int(round(row["base_start"]))
+
+
 def compute_part_demand(
     products: dict[str, dict[str, Any]], plan: list[dict[str, Any]]
 ) -> dict[str, int]:
@@ -462,6 +520,23 @@ def _classify(builder: _ToteBuilder) -> str:
     return builder.tote_type
 
 
+def random_columns(n_totes: int, layout: dict[str, Any], rng: random.Random) -> list[int]:
+    """토트마다 칼럼을 무작위로 고른다. 칼럼당 저장 칸 수(column_capacity)를 넘지 않는다."""
+    cap = layout["column_capacity"]
+    n_columns = len(layout["storage_locations"])
+    if n_totes > cap * n_columns:
+        raise ValueError(f"토트 {n_totes}개가 저장 칸 {cap * n_columns}개를 넘는다")
+    counts = [0] * n_columns
+    columns = []
+    for _ in range(n_totes):
+        column = rng.randrange(n_columns)
+        while counts[column] >= cap:
+            column = rng.randrange(n_columns)
+        counts[column] += 1
+        columns.append(column)
+    return columns
+
+
 def finalize_totes(
     builders: list[_ToteBuilder],
     parts: dict[str, dict[str, Any]],
@@ -470,8 +545,12 @@ def finalize_totes(
     rng: random.Random,
 ) -> list[dict[str, Any]]:
     order = list(range(len(builders)))
+    columns = None
     if cfg.storage_assignment == "random":
-        rng.shuffle(order)
+        if "column_capacity" in layout:
+            columns = random_columns(len(order), layout, rng)
+        else:
+            rng.shuffle(order)
 
     totes: list[dict[str, Any]] = []
     for slot, index in enumerate(order):
@@ -488,10 +567,78 @@ def finalize_totes(
             "used_volume_cm3": used,
             "remaining_capacity_cm3": max(0, TOTE_VOLUME_CM3 - used),
         }
-        tote.update(assign_storage_location(slot, layout))
+        if columns is None:
+            tote.update(assign_storage_location(slot, layout))
+        else:
+            location = layout["storage_locations"][columns[slot]]
+            tote.update(
+                location_id=location["location_id"],
+                position_x=location["position_x"],
+                position_y=location["position_y"],
+            )
         totes.append(tote)
     totes.sort(key=lambda t: t["tote_id"])
     return totes
+
+
+# ---------------------------------------------------------------------------
+# 레이아웃
+# ---------------------------------------------------------------------------
+
+
+def build_lane_layout(lc: LayoutConfig, n_agvs: int) -> dict[str, Any]:
+    """레인은 x 방향으로 늘어서고, 칼럼은 y 방향으로 이어진다. 스테이션은 레인 끝(y 최대) 앞에 있다."""
+    width = (lc.n_lanes - 1) * lc.lane_spacing_m
+    depth = (lc.n_columns - 1) * lc.column_pitch_m
+    station_y = round(depth + lc.station_gap_m, 3)
+    storage = [
+        {
+            "location_id": f"lane{lane + 1}_col{col + 1:02d}",
+            "position_x": round(lane * lc.lane_spacing_m, 3),
+            "position_y": round(col * lc.column_pitch_m, 3),
+        }
+        for lane in range(lc.n_lanes)
+        for col in range(lc.n_columns)
+    ]
+    stations = [
+        {
+            "station_id": f"station_{i + 1}",
+            "position_x": round(width * (2 * i + 1) / (2 * lc.n_stations), 3),
+            "position_y": station_y,
+        }
+        for i in range(lc.n_stations)
+    ]
+    # 대기소: 레인 영역 오른쪽, 스테이션 높이부터 2 m 간격으로 6칸씩
+    depots = [
+        {
+            "depot_id": f"depot_{i + 1}",
+            "position_x": round(width + lc.depot_offset_m + 2 * (i // 6), 3),
+            "position_y": round(station_y - 2 * (i % 6), 3),
+        }
+        for i in range(n_agvs)
+    ]
+
+    def manhattan(a: dict[str, Any], b: dict[str, Any]) -> float:
+        return abs(a["position_x"] - b["position_x"]) + abs(a["position_y"] - b["position_y"])
+
+    corners = [storage[0], storage[lc.n_columns - 1], storage[-lc.n_columns], storage[-1]]
+    max_ss = max(manhattan(a, b) for a in corners for b in corners)
+    max_st = max(manhattan(a, s) for a in corners for s in stations)
+    return {
+        "storage_locations": storage,
+        "kitting_stations": stations,
+        "map_bounds": {
+            "min_x": 0,
+            "max_x": max(d["position_x"] for d in depots),
+            "min_y": 0,
+            "max_y": station_y,
+        },
+        "agv_depots": depots,
+        # 예전 거리 지표의 정규화 상수: 가장 먼 빈 이동 + 2 × 가장 먼 토트-스테이션
+        "agv_max_distance": round(max_ss + 2 * max_st, 3),
+        "column_capacity": lc.n_levels - 1,
+        "layout_config": asdict(lc),
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -529,10 +676,13 @@ def estimate_instance_load(
 
 
 def apply_deadline_scale(
-    plan: list[dict[str, Any]], kits: list[dict[str, Any]], scale: float
+    plan: list[dict[str, Any]], kits: list[dict[str, Any]], scale: float, grid: float | None = None
 ) -> None:
     for row in plan:
-        row["start_time_sec"] = max(1, int(round(row["base_start"] * scale)))
+        if grid:
+            row["start_time_sec"] = int(max(grid, round(row["base_start"] * scale / grid) * grid))
+        else:
+            row["start_time_sec"] = max(1, int(round(row["base_start"] * scale)))
     for kit in kits:
         kit["deadline_time_sec"] = plan[kit["source_plan_index"] - 1]["start_time_sec"]
 
@@ -564,6 +714,9 @@ def summarize(
     stock_volume = sum(q * parts[p]["v_part"] for p, q in stock.items())
     mixed = sum(1 for t in totes if len(t["contents"]) > 1)
     deadlines = [r["start_time_sec"] for r in plan]
+    per_location: dict[str, int] = {}
+    for tote in totes:
+        per_location[tote["location_id"]] = per_location.get(tote["location_id"], 0) + 1
 
     return {
         "n_skus": len(parts),
@@ -580,6 +733,8 @@ def summarize(
         "shortage_parts": shortage,
         "deadline_min_sec": min(deadlines),
         "deadline_max_sec": max(deadlines),
+        "locations_used": len(per_location),
+        "max_totes_per_location": max(per_location.values()),
         "load": {
             "peak": round(load["peak"], 4),
             "bottleneck": load["bottleneck"],
@@ -596,13 +751,26 @@ def summarize(
 
 def generate(cfg: GeneratorConfig, seed: int) -> dict[str, Any]:
     rng = random.Random(seed)
-    layout = load_json(LAYOUT_PATH)
+    agv_rows = load_json(DEFAULT_AGV_TEMPLATE)
+    if cfg.n_agvs is not None:
+        agv_rows = [{"agv_id": f"AGV_{i + 1:02d}"} for i in range(cfg.n_agvs)]
+    n_agvs = len(agv_rows)
+    if cfg.layout is None:
+        layout = load_json(LAYOUT_PATH)
+    else:
+        layout = build_lane_layout(cfg.layout, n_agvs)
+        agv_rows = [
+            {**row, "initial_position_x": str(depot["position_x"]),
+             "initial_position_y": str(depot["position_y"])}
+            for row, depot in zip(agv_rows, layout["agv_depots"])
+        ]
     n_stations = len(layout.get("kitting_stations", [])) or 1
-    n_agvs = len(load_json(DEFAULT_AGV_TEMPLATE))
 
     parts = build_parts(cfg, rng)
     products = build_products(cfg, parts, rng)
     plan = build_prod_plan(cfg, products, parts, n_stations, rng)
+    if cfg.load_profile is not None:
+        warp_deadlines(plan, cfg.load_profile)
     demand = compute_part_demand(products, plan)
 
     # 잔량 토트 수는 입고 토트 수를 먼저 가늠한 뒤 비율로 정한다
@@ -631,9 +799,30 @@ def generate(cfg: GeneratorConfig, seed: int) -> dict[str, Any]:
     for kit in kits:
         kit["line_type"] = plan[kit["source_plan_index"] - 1]["line_type"]
 
+    if cfg.deadline_mode == "common":
+        # 모든 키트를 기준 일정의 마지막 시각에 맞춘 뒤, 아래에서 같은 방식으로 배율을 정한다
+        horizon = max(row["base_start"] for row in plan)
+        for row in plan:
+            row["base_start"] = horizon
+        apply_deadline_scale(plan, kits, 1.0)
+    elif cfg.deadline_mode != "lot":
+        raise ValueError(f"알 수 없는 납기 방식: {cfg.deadline_mode}")
+
     # 기준 모양의 최대 누적 부하 L0 → 모든 납기에 L0 / 목표 부하를 곱한다
     base_load = estimate_instance_load(kits, totes, layout, parts, n_agvs)
-    apply_deadline_scale(plan, kits, base_load["peak"] / cfg.target_load)
+    scale = base_load["peak"] / cfg.target_load
+    grid = cfg.deadline_grid_sec
+    if grid:
+        # 납기를 단위 시각으로 반올림하면 부하가 달라지므로, 반올림 후 부하가 목표에 가장 가까운 배율을 찾는다
+        best = None
+        for i in range(-30, 61):
+            s = scale * (1 + 0.005 * i)
+            apply_deadline_scale(plan, kits, s, grid)
+            err = abs(estimate_instance_load(kits, totes, layout, parts, n_agvs)["peak"] - cfg.target_load)
+            if best is None or err < best[0] - 1e-12:
+                best = (err, s)
+        scale = best[1]
+    apply_deadline_scale(plan, kits, scale, grid)
     load = estimate_instance_load(kits, totes, layout, parts, n_agvs)
     for row in plan:
         del row["base_start"]
@@ -643,6 +832,8 @@ def generate(cfg: GeneratorConfig, seed: int) -> dict[str, Any]:
         "plan": plan,
         "totes": totes,
         "kits": kits,
+        "layout": layout,
+        "agvs": agv_rows,
         "summary": summarize(parts, products, plan, kits, totes, demand, load),
     }
 
@@ -662,11 +853,10 @@ def save(name: str, cfg: GeneratorConfig, seed: int, preset: str, data: dict) ->
     save_json(out_dir / "kits.json", {"meta": meta, "kits": data["kits"]})
     save_json(out_dir / "bom.json", data["bom"])
     save_json(out_dir / "prod_plan.json", data["plan"])
+    save_json(out_dir / "layout.json", data["layout"])
 
     # dataset_loader 는 master_data/agv_configs/agv_<name>.json 을 찾는다
-    agv_path = AGV_CONFIG_DIR / f"agv_{name}.json"
-    if not agv_path.exists():
-        shutil.copyfile(DEFAULT_AGV_TEMPLATE, agv_path)
+    save_json(AGV_CONFIG_DIR / f"agv_{name}.json", data["agvs"])
     return out_dir
 
 
@@ -677,6 +867,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--load", type=float, help="목표 최대 누적 부하 덮어쓰기")
     parser.add_argument("--name", help="시나리오 이름 (기본: gen3_<preset>_s<seed>_L<부하×100>)")
     parser.add_argument("--remnant-ratio", type=float, help="이전 잔량 토트 비율 덮어쓰기")
+    parser.add_argument("--legacy-layout", action="store_true", help="예전 공용 레이아웃(18곳) 사용")
     parser.add_argument("--dry-run", action="store_true", help="저장하지 않고 요약만 출력")
     return parser.parse_args()
 
@@ -688,6 +879,8 @@ def main() -> None:
         cfg = replace(cfg, remnant_tote_ratio=args.remnant_ratio)
     if args.load is not None:
         cfg = replace(cfg, target_load=args.load)
+    if args.legacy_layout:
+        cfg = replace(cfg, layout=None)
 
     data = generate(cfg, args.seed)
     print(json.dumps(data["summary"], ensure_ascii=False, indent=2))

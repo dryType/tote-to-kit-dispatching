@@ -362,6 +362,7 @@ class KittingStation:
     station_id: str
     position: Position | None = None
     assigned_agv_count: int = 0
+    agv_cap: int = 2  # 동시에 배정할 수 있는 AGV 수 (정책이 상황에 따라 바꿀 수 있다)
     status: str = StationStatus.IDLE
     assigned_kit: Kit | None = None
     completed_kits: list[Kit] = field(default_factory=list)
@@ -443,9 +444,9 @@ class KittingStation:
         return max(0.0, 1.0 - self.get_dock_occupied_ratio())
 
     def increment_agv_count(self) -> None:
-        if self.assigned_agv_count >= 2:
+        if self.assigned_agv_count >= self.agv_cap:
             raise ValueError(
-                f"Station {self.station_id} cannot have more than 2 AGVs assigned."
+                f"Station {self.station_id} cannot have more than {self.agv_cap} AGVs assigned."
             )
         self.assigned_agv_count += 1
 
@@ -457,7 +458,7 @@ class KittingStation:
         self.assigned_agv_count -= 1
 
     def can_accept_agv(self) -> bool:
-        return self.assigned_agv_count < 2
+        return self.assigned_agv_count < self.agv_cap
 
     def has_active_kit(self) -> bool:
         return self.assigned_kit is not None
@@ -469,6 +470,7 @@ class KittingStation:
 
 class AGVStatus:
     IDLE = "idle"
+    DOWN = "down"  # 사건형 교란: 고장으로 정지
     MOVING_TO_STORAGE = "moving_to_storage"
     MOVING_TO_STATION = "moving_to_station"
     WAITING = "waiting"

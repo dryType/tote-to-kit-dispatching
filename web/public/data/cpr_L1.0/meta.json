@@ -1,0 +1,127 @@
+{
+  "label": "cpr",
+  "policy": "CPR Top-1 Policy",
+  "n_totes": 787,
+  "n_kits": 39,
+  "n_stations": 4,
+  "n_agvs": 9,
+  "n_sku": 80,
+  "makespan": 18721.58333333335,
+  "n_dispatch": 1470,
+  "total_agv_move_distance": 93385.0,
+  "n_decisions": 1470,
+  "n_candidate_rows": 271496,
+  "completed_kits": 39,
+  "tardy_kits": 25,
+  "total_tardiness": 32681.331,
+  "totes_touched": 787,
+  "totes_opened_left": 62,
+  "totes_emptied": 725,
+  "frag_index_init": 0.034154644042072566,
+  "frag_index_final": 0.023790129094310327,
+  "check_metrics_frag_init": 0.03415464404207248,
+  "check_metrics_frag_final": 0.02379012909431032,
+  "size": "medium",
+  "seed": 42,
+  "target_load": 1.0,
+  "dist_cv": 0.0,
+  "dist_seed": 0,
+  "dataset": "cpr_L1.0",
+  "policy_key": "cpr",
+  "policy_name": "CPR Top-1 Policy",
+  "source_dir": "vis_data/medium_s42_L1/cpr",
+  "bin_sec": 300,
+  "t_end": 18752.5,
+  "stations": [
+    "station_1",
+    "station_2",
+    "station_3",
+    "station_4"
+  ],
+  "n_trips": 1470,
+  "n_late_kits": 25,
+  "n_skus_plotted": 80,
+  "definitions": {
+    "wait_start": "AGV.start_waiting() 호출 시각 (스테이션 대기 위치 도착), s",
+    "dock_grant": "station.dock.request() 가 허락된 시각, s",
+    "dock_wait": "dock_grant - wait_start = kitting_start - wait_start - (대기 위치 -> 도킹 위치 이동시간), s",
+    "partial_picks": "그 트립의 matched_parts 중 qty % lot_size != 0 인 부품 수",
+    "cartons_needed": "qty_required / lot_size (올림하지 않은 실수)",
+    "t_dock": "kitting_start (도킹 위치 도착, 스테이션 도크 점유 시작), s",
+    "t_end": "마지막 AGV 반납 시각 = max(makespan, t_return). makespan 은 마지막 키트 완료 시각",
+    "late": "tardiness > 1e-06",
+    "progress": "[t, 누적 matched_qty / qty_required], 트립의 kitting_end 마다. 첫 점은 [start, 0]",
+    "slip_start": "늦은 키트만: 선형 목표 진행선 (t-start)/(deadline-start) 아래로 내려간 뒤 회복하지 못한 첫 시각. 납기 뒤에 투입된 키트(released_late)는 start",
+    "released_late": "start >= deadline (스테이션에 걸릴 때 이미 납기가 지났다)",
+    "busy_bins": "스테이션: 구간 안 도킹 점유 시간 / 구간 길이. AMR fleet: 구간 안 트립 중 AGV 시간 합 / (AGV 수 x 구간 길이). 마지막 구간은 t_end 에서 끊긴 길이로 나눈다",
+    "queue": "스테이션 행만: 평균 대기 AMR 수 = 구간과 겹치는 [t_wait, t_dock] 시간 합 / 구간 길이. 도크 허락 뒤 도킹 위치까지 이동(1.33 s)이 포함된다",
+    "max_queue": "스테이션 행만: 구간 안에서 동시에 [t_wait, t_dock] 에 있던 AMR 수의 최댓값",
+    "partial_share": "그 SKU 를 꺼낸 (트립, SKU) 중 qty % lot_size != 0 인 비율",
+    "trips_per_carton": "n_trips / cartons_needed. cartons_needed 가 0 이면 null"
+  },
+  "source_checks": {
+    "dispatch_rows_equal_n_dispatch": {
+      "ok": true,
+      "rows": 1470,
+      "n_dispatch": 1470
+    },
+    "dock_wait_nonnegative": {
+      "ok": true,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 152.833
+    },
+    "kit_sku_sum_equals_kits_qty_required": {
+      "ok": true,
+      "mismatched_kits": []
+    },
+    "dock_move_time_residual": {
+      "nominal_sec": [
+        1.333333
+      ],
+      "max_abs_residual_sec": 0.000667,
+      "note": "교란(dist_cv>0)이 있으면 이동시간이 바뀌므로 0이 아닐 수 있다"
+    }
+  },
+  "build_checks": {
+    "busy_values_in_0_1": {
+      "ok": true,
+      "min": 0.0,
+      "max": 0.999907
+    },
+    "completed_kits_progress_ends_at_1": {
+      "ok": true
+    },
+    "progress_last_time_equals_kit_end": {
+      "ok": true
+    },
+    "slip_start_only_for_late_kits": {
+      "ok": true
+    },
+    "slip_start_within_start_and_max_start_deadline": {
+      "ok": true
+    },
+    "trip_distance_sum_equals_metrics": {
+      "ok": true,
+      "trips_sum": 93385.0,
+      "metrics": 93385.0
+    },
+    "station_dock_time_equals_stations_csv": {
+      "ok": true
+    },
+    "sku_n_trips_le_total_trips": {
+      "ok": true
+    },
+    "queue_nonnegative": {
+      "ok": true,
+      "min": 0.0
+    },
+    "queue_time_equals_sum_t_dock_minus_t_wait": {
+      "ok": true,
+      "max_abs_diff_sec": 0.007
+    },
+    "max_queue_ge_ceil_mean_queue": {
+      "ok": true
+    }
+  }
+}

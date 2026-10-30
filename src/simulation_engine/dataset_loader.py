@@ -109,7 +109,10 @@ def load_entities_from_scenario(scenario_name: str) -> ScenarioEntities:
     totes_path = dataset_dir / "totes.json"
     kits_path = dataset_dir / "kits.json"
     agv_config_path = _scenario_agv_config_path(scenario_name)
-    layout_path = _layout_path()
+    # 시나리오 폴더에 레이아웃이 있으면(generator3 revision 3 이후) 그것을, 없으면 공용 레이아웃을 쓴다
+    layout_path = dataset_dir / "layout.json"
+    if not layout_path.exists():
+        layout_path = _layout_path()
 
     if not totes_path.exists():
         raise FileNotFoundError(f"Tote file not found: {totes_path}")

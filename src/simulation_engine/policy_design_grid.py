@@ -59,7 +59,18 @@ def config_label(cfg: dict) -> str:
             label += f"|fk={cfg['future_kits']}"
         if cfg.get("rho_hi") is not None:
             label += f"|rho={cfg['rho_lo']:g}-{cfg['rho_hi']:g}"
+        if cfg.get("fit_sigma") is not None:
+            label += f"|fs={cfg['fit_sigma']:g}"
+        if cfg.get("d", 1.0) != 1.0:
+            label += f"|d={cfg['d']:g}"
+        if cfg.get("urgency_mode") is not None:
+            label += f"|urg={cfg['urgency_mode']},m={cfg.get('urgency_margin', 1200):g},a={cfg.get('alpha', 0):g}"
         return label
+    if cfg["policy"] == "adaptive":
+        return f"adapt|{cfg['rule']}|" + ",".join(f"{v:g}" for v in cfg.get("params", ()))
+    if cfg["policy"] == "cap_cpr":
+        label = f"cap|{cfg['mode']}|th={cfg['threshold']:g}|hi={cfg.get('cap_hi', 3)}"
+        return label + (f"|lo={cfg['lower']:g}" if cfg["mode"] == "band" else "")
     if cfg["policy"] == "atc_kit":
         return f"atc_kit|k={cfg['kappa']:g}"
     if cfg["policy"] == "cpr_alpha":
@@ -89,8 +100,16 @@ def make(cfg: dict):
         from policy.cpr.new_cpr_policy import NewCPRPolicy
 
         keys = ("kappa", "c", "c_x", "holder_rule", "holder_sticky", "relax_sigma", "relax_rho",
-                "future_kits", "rho_lo", "rho_hi")
+                "future_kits", "rho_lo", "rho_hi", "fit_sigma", "d", "urgency_mode", "urgency_margin", "alpha")
         return NewCPRPolicy(**{k: cfg[k] for k in keys if k in cfg})
+    if cfg["policy"] == "cap_cpr":
+        from policy.cpr.cap_adaptive_policy import CapAdaptiveCPRPolicy
+
+        return CapAdaptiveCPRPolicy(cfg["mode"], cfg["threshold"], cfg.get("cap_hi", 3), cfg.get("lower", -5.0))
+    if cfg["policy"] == "adaptive":
+        from policy.cpr.adaptive_cpr_policy import AdaptiveCPRPolicy
+
+        return AdaptiveCPRPolicy(cfg["rule"], tuple(cfg.get("params", ())))
     if cfg["policy"] == "atc_kit":
         from policy.atc.atc_kit_policy import ATCKitPolicy
 

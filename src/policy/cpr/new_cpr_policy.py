@@ -22,6 +22,13 @@
 - rho_lo, rho_hi  보관 토트 벌점을 ρ(t)에 따라 연속으로 줄인다:
                c_x × clip((rho_hi - ρ) / (rho_hi - rho_lo), 0, 1)  (ρ ≤ rho_lo이면 c_x 전부, ρ ≥ rho_hi이면 0)
 - future_kits  미래 벌점을 계산할 때 볼 대기 키트 수 (None이면 남은 키트 전부, 진행 중 키트는 항상 포함)
+- fit_sigma    남은 작업을 뺀 여유(디스패치 단위)가 이 값 이하인 키트는 미래 궁합 항을 쓰지 않음
+- d            효율 분모(AGV 시간)의 지수. 1보다 크면 가까운 토트를 더 선호한다
+- urgency_mode 키트 긴급도 u_k(0~1)가 그 키트의 토트 선택 기준을 바꾼다 (기존 CPR 긴급도 곡선 차용)
+               "time": 여유 = 납기 − 현재,  "work": 여유 = 납기 − 현재 − 남은 작업 예상 시간
+               x = urgency_margin − 여유 (초),  u = (1 − exp(−λ·x))^p (x > 0), 0 (x ≤ 0)
+               log 점수 = … − (1 − α·u)·d·log(AGV 시간) + (1 − u)·c·F − (1 − u)·c_x·위반
+               급할수록 미래 궁합·잔량 항이 꺼지고 거리 비중이 α만큼 줄어 진행(해결량) 중심이 된다
 """
 
 from __future__ import annotations
@@ -57,6 +64,13 @@ class NewCPRPolicy(BasePolicy):
         future_kits: int | None = None,
         rho_lo: float | None = None,
         rho_hi: float | None = None,
+        fit_sigma: float | None = None,
+        d: float = 1.0,
+        urgency_mode: str | None = None,
+        urgency_margin: float = 1200.0,
+        alpha: float = 0.0,
+        urgency_lambda: float = 0.006,
+        urgency_p: float = 2.0,
     ):
         self.kappa = kappa
         self.c = c
@@ -68,6 +82,15 @@ class NewCPRPolicy(BasePolicy):
         self.future_kits = future_kits
         self.rho_lo = rho_lo
         self.rho_hi = rho_hi
+        self.fit_sigma = fit_sigma
+        self.d = d
+        self.urgency_mode = urgency_mode
+        self.urgency_margin = urgency_margin
+        self.alpha = alpha
+        self.urgency_lambda = urgency_lambda
+        self.urgency_p = urgency_p
+        # 진단용: 결정 수, 긴급 모드(u > 0.5) 키트가 있었던 결정 수, u를 무시했을 때와 선택이 달라진 결정 수
+        self.stats = {"decisions": 0, "urgent": 0, "changed": 0}
         self._distances: tuple[float, float] | None = None
         self._station_distance: dict[str, float] = {}
         self._holders: dict[str, str] = {}
@@ -253,7 +276,7 @@ class NewCPRPolicy(BasePolicy):
         if excess_on:
             holders = self._assign_holders(state, self._excess(state, stock))
 
-        kits: dict[str, tuple[dict[str, int], float, bool]] = {}
+        kits: dict[str, tuple[dict[str, int], float, bool, bool, float]] = {}
         for candidate in candidates:
             kit = candidate.kit
             if kit.kit_id in kits:
@@ -262,16 +285,28 @@ class NewCPRPolicy(BasePolicy):
             deadline = float(kit.deadline_time_sec)
             log_u = -max(0.0, (deadline - now) / tau_bar) / self.kappa
             relaxed = False
-            if excess_on and self.relax_sigma is not None:
+            fit_on = bool(self.c)
+            need_relax = excess_on and self.relax_sigma is not None
+            sigma = None
+            if need_relax or (fit_on and self.fit_sigma is not None) or self.urgency_mode == "work":
                 sigma = self._sigma_work(remaining, now, deadline, qbar, lot,
                                          empty_m, tote_station_m, tau_bar)
-                relaxed = sigma <= self.relax_sigma
-            kits[kit.kit_id] = (remaining, log_u, relaxed)
+                relaxed = need_relax and sigma <= self.relax_sigma
+                if self.fit_sigma is not None:
+                    fit_on = fit_on and sigma > self.fit_sigma
+            urg = 0.0
+            if self.urgency_mode is not None:
+                slack_sec = deadline - now if self.urgency_mode == "time" else sigma * tau_bar
+                x = self.urgency_margin - slack_sec
+                if x > 0:
+                    urg = (1.0 - math.exp(-self.urgency_lambda * x)) ** self.urgency_p
+            kits[kit.kit_id] = (remaining, log_u, relaxed, fit_on, urg)
 
         fit_cache: dict[str, float] = {}
         best: tuple[float, DispatchCandidate, AGV] | None = None
+        plain_best: tuple[float, DispatchCandidate] | None = None  # u를 무시한 점수의 최선 (진단용)
         for candidate in candidates:
-            remaining, log_u, relaxed = kits[candidate.kit.kit_id]
+            remaining, log_u, relaxed, fit_on, urg = kits[candidate.kit.kit_id]
             delta = 0.0
             for part_id, x in candidate.matched_parts.items():
                 r = remaining.get(part_id, 0)
@@ -284,16 +319,24 @@ class NewCPRPolicy(BasePolicy):
             agv = min(idle_agvs, key=lambda a: a.position.manhattan_distance_to(candidate.tote.position))
             travel = agv.position.manhattan_distance_to(candidate.tote.position) + \
                 2 * candidate.tote.position.manhattan_distance_to(candidate.station.position)
-            log_score = log_u + math.log(delta) - math.log(PICK_PUT_SEC + travel / speed)
-            if self.c:
-                log_score += self.c * self._future_fit(candidate, remaining, future, fit_cache)
-            if holders and not relaxed:
-                log_score -= c_x * self._violations(candidate, holders)
+            log_time = math.log(PICK_PUT_SEC + travel / speed)
+            fit_term = self.c * self._future_fit(candidate, remaining, future, fit_cache) if fit_on else 0.0
+            hold_term = c_x * self._violations(candidate, holders) if holders and not relaxed else 0.0
+            log_score = (log_u + math.log(delta) - (1.0 - self.alpha * urg) * self.d * log_time
+                         + (1.0 - urg) * (fit_term - hold_term))
 
             if best is None or log_score > best[0]:
                 best = (log_score, candidate, agv)
+            if self.urgency_mode is not None:
+                plain = log_u + math.log(delta) - self.d * log_time + fit_term - hold_term
+                if plain_best is None or plain > plain_best[0]:
+                    plain_best = (plain, candidate)
 
         if best is None:
             return None, None
+        if self.urgency_mode is not None:
+            self.stats["decisions"] += 1
+            self.stats["urgent"] += any(v[4] > 0.5 for v in kits.values())
+            self.stats["changed"] += plain_best[1] is not best[1]
         log_score, candidate, agv = best
         return replace(candidate, score_info={"log_score": log_score}), agv
